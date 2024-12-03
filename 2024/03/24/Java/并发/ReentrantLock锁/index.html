@@ -26,11 +26,6 @@
 <meta property="og:site_name" content="文文的短发">
 <meta property="og:description" content="关于reentrantLock锁的一些问题">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403251906294.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403251935720.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403251938892.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403251944422.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403251944878.png">
 <meta property="article:published_time" content="2024-03-24T08:47:34.000Z">
 <meta property="article:modified_time" content="2024-03-25T13:57:13.095Z">
 <meta property="article:author" content="文文的短发">
@@ -38,7 +33,6 @@
 <meta property="article:tag" content="八股">
 <meta property="article:tag" content="并发">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403251906294.png">
 
 
 <link rel="canonical" href="http://www.justinchoi.top/2024/03/24/Java/%E5%B9%B6%E5%8F%91/ReentrantLock%E9%94%81/">
@@ -151,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ReentrantLock%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-text">ReentrantLock是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CAS"><span class="nav-text">CAS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0CAS%E9%A6%96%E5%85%88%E4%BA%86%E8%A7%A3%E4%BB%80%E4%B9%88%E6%98%AF%E5%8E%9F%E5%AD%90%E7%B1%BB"><span class="nav-text">学习CAS首先了解什么是原子类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CAS%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-text">CAS是什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CAS%E6%98%AF%E4%BB%80%E4%B9%88-1"><span class="nav-text">CAS是什么</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CAS%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="nav-text">CAS的缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ABA%E9%97%AE%E9%A2%98"><span class="nav-text">ABA问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E6%97%B6%E9%97%B4%E9%95%BF%E5%BC%80%E9%94%80%E5%BE%88%E5%A4%A7"><span class="nav-text">循环时间长开销很大</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AA%E8%83%BD%E4%BF%9D%E8%AF%81%E4%B8%80%E4%B8%AA%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F%E7%9A%84%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C"><span class="nav-text">只能保证一个共享变量的原子操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AQS"><span class="nav-text">AQS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AQS%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">AQS是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AQS%E7%9A%84%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86"><span class="nav-text">AQS的底层原理</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#reentrantlock%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-text">ReentrantLock是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cas"><span class="nav-text">CAS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0cas%E9%A6%96%E5%85%88%E4%BA%86%E8%A7%A3%E4%BB%80%E4%B9%88%E6%98%AF%E5%8E%9F%E5%AD%90%E7%B1%BB"><span class="nav-text">学习CAS首先了解什么是原子类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cas%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-text">CAS是什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cas%E6%98%AF%E4%BB%80%E4%B9%88-1"><span class="nav-text">CAS是什么</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cas%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="nav-text">CAS的缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#aba%E9%97%AE%E9%A2%98"><span class="nav-text">ABA问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E6%97%B6%E9%97%B4%E9%95%BF%E5%BC%80%E9%94%80%E5%BE%88%E5%A4%A7"><span class="nav-text">循环时间长开销很大</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AA%E8%83%BD%E4%BF%9D%E8%AF%81%E4%B8%80%E4%B8%AA%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F%E7%9A%84%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C"><span class="nav-text">只能保证一个共享变量的原子操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#aqs"><span class="nav-text">AQS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#aqs%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-text">AQS是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aqs%E7%9A%84%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86"><span class="nav-text">AQS的底层原理</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -295,35 +289,50 @@
 <p>关于reentrantLock锁的一些问题</p>
 </blockquote>
 <span id="more"></span>
-
-<h1 id="ReentrantLock是什么"><a href="#ReentrantLock是什么" class="headerlink" title="ReentrantLock是什么"></a>ReentrantLock是什么</h1><p><code>ReentrantLock</code> 实现了 <code>Lock</code> 接口，是一个可重入且独占式的锁，和 <code>synchronized</code> 关键字类似。不过，<code>ReentrantLock</code> 更灵活、更强大，增加了轮询、超时、中断、公平锁和非公平锁等高级功能。</p>
+<h1 id="reentrantlock是什么">ReentrantLock是什么</h1>
+<p><code>ReentrantLock</code> 实现了 <code>Lock</code>
+接口，是一个可重入且独占式的锁，和 <code>synchronized</code>
+关键字类似。不过，<code>ReentrantLock</code>
+更灵活、更强大，增加了轮询、超时、中断、公平锁和非公平锁等高级功能。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReentrantLock</span> <span class="keyword">implements</span> <span class="title class_">Lock</span>, java.io.Serializable &#123;&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>ReentrantLock</code> 里面有一个内部类 <code>Sync</code>，<code>Sync</code> 继承 AQS（<code>AbstractQueuedSynchronizer</code>），添加锁和释放锁的大部分操作实际上都是在 <code>Sync</code> 中实现的。<code>Sync</code> 有公平锁 <code>FairSync</code> 和非公平锁 <code>NonfairSync</code> 两个子类。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403251906294.png"></p>
-<p><code>ReentrantLock</code> 的特点是<strong>可重入</strong>，支持公平锁和非公平锁两种方式，从其构造方法就能看出，在传入参数为<code>true</code>时，<code>ReentrantLock</code>为公平锁，默认为非公平锁。</p>
+<p><code>ReentrantLock</code> 里面有一个内部类
+<code>Sync</code>，<code>Sync</code> 继承
+AQS（<code>AbstractQueuedSynchronizer</code>），添加锁和释放锁的大部分操作实际上都是在
+<code>Sync</code> 中实现的。<code>Sync</code> 有公平锁
+<code>FairSync</code> 和非公平锁 <code>NonfairSync</code> 两个子类。</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403251906294.png" /></p>
+<p><code>ReentrantLock</code>
+的特点是<strong>可重入</strong>，支持公平锁和非公平锁两种方式，从其构造方法就能看出，在传入参数为<code>true</code>时，<code>ReentrantLock</code>为公平锁，默认为非公平锁。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">ReentrantLock</span><span class="params">()</span> &#123;</span><br><span class="line">    sync = <span class="keyword">new</span> <span class="title class_">NonfairSync</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//基于参数,创建FairSync还是NonFairSync</span></span><br><span class="line"><span class="keyword">public</span> <span class="title function_">ReentrantLock</span><span class="params">(<span class="type">boolean</span> fair)</span> &#123;</span><br><span class="line">    sync = fair ? <span class="keyword">new</span> <span class="title class_">FairSync</span>() : <span class="keyword">new</span> <span class="title class_">NonfairSync</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>阅读<code>ReentrantLock</code>代码可知，它主要利用<code>CAS</code>+<code>AQS</code> 队列来实现。以非公平锁为例，当线程竞争锁时首先使用<code>CAS</code>抢占锁，成功则返回，失败则进入<code>AQS</code>队列并且挂起线程；当锁被释放时，唤醒<code>AQS</code>中的某个线程，从被挂起处再次尝试获取锁（当<code>AQS</code>队列头节点的下一个节点不为空时，直接唤醒该节点；否则从队尾向前遍历，找到最后一个不为空的节点并唤醒），获取锁失败则再次进入队尾。</p>
-<h1 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h1><h2 id="学习CAS首先了解什么是原子类"><a href="#学习CAS首先了解什么是原子类" class="headerlink" title="学习CAS首先了解什么是原子类"></a>学习CAS首先了解什么是原子类</h2><p>即为java.util.concurrent.atomic包下的所有相关类和API</p>
+<p>阅读<code>ReentrantLock</code>代码可知，它主要利用<code>CAS</code>+<code>AQS</code>
+队列来实现。以非公平锁为例，当线程竞争锁时首先使用<code>CAS</code>抢占锁，成功则返回，失败则进入<code>AQS</code>队列并且挂起线程；当锁被释放时，唤醒<code>AQS</code>中的某个线程，从被挂起处再次尝试获取锁（当<code>AQS</code>队列头节点的下一个节点不为空时，直接唤醒该节点；否则从队尾向前遍历，找到最后一个不为空的节点并唤醒），获取锁失败则再次进入队尾。</p>
+<h1 id="cas">CAS</h1>
+<h2 id="学习cas首先了解什么是原子类">学习CAS首先了解什么是原子类</h2>
+<p>即为java.util.concurrent.atomic包下的所有相关类和API</p>
 <ul>
 <li><p>没有CAS之前</p>
-<p>多线程环境不使用原子类保证线程安全i++（基本数据类型）<br>常用synchronized锁，但是它比较重 ，牵扯到了用户态和内核态的切换,效率不高。</p>
-</li>
+<p>多线程环境不使用原子类保证线程安全i++（基本数据类型）
+常用synchronized锁，但是它比较重
+，牵扯到了用户态和内核态的切换,效率不高。</p></li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">T3</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">volatile</span> <span class="type">int</span> <span class="variable">number</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//读取</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getNumber</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> number;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//写入加锁保证原子性</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">setNumber</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        number++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><p>使用CAS之后</p>
-<p>多线程情况下使用原子类保证线程安全（基本数据类型）</p>
-</li>
+<p>多线程情况下使用原子类保证线程安全（基本数据类型）</p></li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">T3</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">volatile</span> <span class="type">int</span> <span class="variable">number</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//读取</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getNumber</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> number;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//写入加锁保证原子性</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">setNumber</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        number++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//=================================</span></span><br><span class="line">    <span class="comment">//下面是新版本</span></span><br><span class="line">    <span class="comment">//=================================</span></span><br><span class="line">    <span class="type">AtomicInteger</span> <span class="variable">atomicInteger</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AtomicInteger</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAtomicInteger</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> atomicInteger.get();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAtomicInteger</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        atomicInteger.getAndIncrement();<span class="comment">//先读再加</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="CAS是什么"><a href="#CAS是什么" class="headerlink" title="CAS是什么"></a>CAS是什么</h2><h3 id="CAS是什么-1"><a href="#CAS是什么-1" class="headerlink" title="CAS是什么"></a>CAS是什么</h3><p>CAS 的全称是 <strong>Compare And Swap（比较与交换）</strong> ，用于实现乐观锁，被广泛应用于各大框架中。CAS 的思想很简单，就是用一个预期值和要更新的变量值进行比较，两值相等才会进行更新。</p>
-<p>执行CAS操作的时候，将内存位置的值与预期原值比较：<br>如果相匹配，那么处理器会自动将该位置值更新为新值，<br>如果不匹配，处理器不做任何操作，多个线程同时执行CAS操作只有一个会成功。</p>
+<h2 id="cas是什么">CAS是什么</h2>
+<h3 id="cas是什么-1">CAS是什么</h3>
+<p>CAS 的全称是 <strong>Compare And Swap（比较与交换）</strong>
+，用于实现乐观锁，被广泛应用于各大框架中。CAS
+的思想很简单，就是用一个预期值和要更新的变量值进行比较，两值相等才会进行更新。</p>
+<p>执行CAS操作的时候，将内存位置的值与预期原值比较：
+如果相匹配，那么处理器会自动将该位置值更新为新值，
+如果不匹配，处理器不做任何操作，多个线程同时执行CAS操作只有一个会成功。</p>
 <blockquote>
-<p><strong>原子操作</strong> 即最小不可拆分的操作，也就是说操作一旦开始，就不能被打断，直到操作完成。</p>
+<p><strong>原子操作</strong>
+即最小不可拆分的操作，也就是说操作一旦开始，就不能被打断，直到操作完成。</p>
 </blockquote>
 <p>CAS 涉及到三个操作数：</p>
 <ul>
@@ -331,31 +340,71 @@
 <li><strong>E</strong>：预期值(Expected)</li>
 <li><strong>N</strong>：拟写入的新值(New)</li>
 </ul>
-<p>当且仅当 V 的值等于 E 时，CAS 通过原子方式用新值 N 来更新 V 的值。如果不等，说明已经有其它线程更新了 V，则当前线程放弃更新。</p>
-<h2 id="CAS的缺点"><a href="#CAS的缺点" class="headerlink" title="CAS的缺点"></a>CAS的缺点</h2><h3 id="ABA问题"><a href="#ABA问题" class="headerlink" title="ABA问题"></a>ABA问题</h3><p>CAS算法实现一个重要前提需要取出内存中某时刻的数据并在当下时刻比较并替换，那么在这个时间差类会导致数据的变化。</p>
+<p>当且仅当 V 的值等于 E 时，CAS 通过原子方式用新值 N 来更新 V
+的值。如果不等，说明已经有其它线程更新了 V，则当前线程放弃更新。</p>
+<h2 id="cas的缺点">CAS的缺点</h2>
+<h3 id="aba问题">ABA问题</h3>
+<p>CAS算法实现一个重要前提需要取出内存中某时刻的数据并在当下时刻比较并替换，那么在这个时间差类会导致数据的变化。</p>
 <p>比如说一个线程one从内存位置V中取出A，这时候另一个线程two也从内存中取出A，并且线程two进行了一些操作将值变成了B，然后线程two又将V位置的数据变成A，这时候线程one进行CAS操作发现内存中仍然是A，然后线程one操作成功。</p>
-<p>尽管线程one的CAS操作成功，但是不代表这个过程就是没有问题的，因为在这段时间它的值可能被改为其他值，然后又改回 A，那 CAS 操作就会误认为它从来没有被修改过。这个问题被称为 CAS 操作的 <strong>“ABA”问题。</strong>ABA 问题的解决思路是在变量前面追加上<strong>版本号或者时间戳</strong>。JDK 1.5 以后的 <code>AtomicStampedReference</code> 类就是用来解决 ABA 问题的，其中的 <code>compareAndSet()</code> 方法就是首先检查当前引用是否等于预期引用，并且当前标志是否等于预期标志，如果全部相等，则以原子方式将该引用和该标志的值设置为给定的更新值。</p>
-<h3 id="循环时间长开销很大"><a href="#循环时间长开销很大" class="headerlink" title="循环时间长开销很大"></a>循环时间长开销很大</h3><p>CAS 经常会用到自旋操作来进行重试，也就是不成功就一直循环执行直到成功。如果长时间不成功，会给 CPU 带来非常大的执行开销。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403251935720.png"></p>
-<h3 id="只能保证一个共享变量的原子操作"><a href="#只能保证一个共享变量的原子操作" class="headerlink" title="只能保证一个共享变量的原子操作"></a>只能保证一个共享变量的原子操作</h3><p>CAS 只对单个共享变量有效，当操作涉及跨多个共享变量时 CAS 无效。但是从 JDK 1.5 开始，提供了<code>AtomicReference</code>类来保证引用对象之间的原子性，你可以把多个变量放在一个对象里来进行 CAS 操作.所以我们可以使用锁或者利用<code>AtomicReference</code>类把多个共享变量合并成一个共享变量来操作。</p>
-<h1 id="AQS"><a href="#AQS" class="headerlink" title="AQS"></a>AQS</h1><h2 id="AQS是什么？"><a href="#AQS是什么？" class="headerlink" title="AQS是什么？"></a>AQS是什么？</h2><p>AQS 的全称为 <code>AbstractQueuedSynchronizer</code> ，翻译过来的意思就是抽象队列同步器。这个类在 <code>java.util.concurrent.locks</code> 包下面。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403251938892.png"></p>
+<p>尽管线程one的CAS操作成功，但是不代表这个过程就是没有问题的，因为在这段时间它的值可能被改为其他值，然后又改回
+A，那 CAS 操作就会误认为它从来没有被修改过。这个问题被称为 CAS 操作的
+<strong>"ABA"问题。</strong>ABA
+问题的解决思路是在变量前面追加上<strong>版本号或者时间戳</strong>。JDK
+1.5 以后的 <code>AtomicStampedReference</code> 类就是用来解决 ABA
+问题的，其中的 <code>compareAndSet()</code>
+方法就是首先检查当前引用是否等于预期引用，并且当前标志是否等于预期标志，如果全部相等，则以原子方式将该引用和该标志的值设置为给定的更新值。</p>
+<h3 id="循环时间长开销很大">循环时间长开销很大</h3>
+<p>CAS
+经常会用到自旋操作来进行重试，也就是不成功就一直循环执行直到成功。如果长时间不成功，会给
+CPU 带来非常大的执行开销。</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403251935720.png" /></p>
+<h3
+id="只能保证一个共享变量的原子操作">只能保证一个共享变量的原子操作</h3>
+<p>CAS 只对单个共享变量有效，当操作涉及跨多个共享变量时 CAS 无效。但是从
+JDK 1.5
+开始，提供了<code>AtomicReference</code>类来保证引用对象之间的原子性，你可以把多个变量放在一个对象里来进行
+CAS
+操作.所以我们可以使用锁或者利用<code>AtomicReference</code>类把多个共享变量合并成一个共享变量来操作。</p>
+<h1 id="aqs">AQS</h1>
+<h2 id="aqs是什么">AQS是什么？</h2>
+<p>AQS 的全称为 <code>AbstractQueuedSynchronizer</code>
+，翻译过来的意思就是抽象队列同步器。这个类在
+<code>java.util.concurrent.locks</code> 包下面。</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403251938892.png" /></p>
 <p>AQS 就是一个抽象类，主要用来构建锁和同步器。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">AbstractQueuedSynchronizer</span> <span class="keyword">extends</span> <span class="title class_">AbstractOwnableSynchronizer</span> <span class="keyword">implements</span> <span class="title class_">java</span>.io.Serializable &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>AQS 为构建锁和同步器提供了一些通用功能的实现，因此，使用 AQS 能简单且高效地构造出应用广泛的大量的同步器，比如我们提到的 <code>ReentrantLock</code>，<code>Semaphore</code>，其他的诸如 <code>ReentrantReadWriteLock</code>，<code>SynchronousQueue</code>等等皆是基于 AQS 的。</p>
-<h2 id="AQS的底层原理"><a href="#AQS的底层原理" class="headerlink" title="AQS的底层原理"></a>AQS的底层原理</h2><p>AQS 核心思想是，如果被请求的共享资源空闲，则将当前请求资源的线程设置为有效的工作线程，并且将共享资源设置为锁定状态。如果被请求的共享资源被占用，那么就需要一套线程阻塞等待以及被唤醒时锁分配的机制，这个机制 AQS 是用 <strong>CLH 队列锁</strong> 实现的，即将暂时获取不到锁的线程加入到队列中。</p>
-<p>CLH(Craig,Landin,and Hagersten) 队列是一个虚拟的双向队列（虚拟的双向队列即不存在队列实例，仅存在结点之间的关联关系）。AQS 是将每条请求共享资源的线程封装成一个 CLH 锁队列的一个结点（Node）来实现锁的分配。在 CLH 同步队列中，一个节点表示一个线程，它保存着线程的引用（thread）、 当前节点在队列中的状态（waitStatus）、前驱节点（prev）、后继节点（next）。</p>
+<p>AQS 为构建锁和同步器提供了一些通用功能的实现，因此，使用 AQS
+能简单且高效地构造出应用广泛的大量的同步器，比如我们提到的
+<code>ReentrantLock</code>，<code>Semaphore</code>，其他的诸如
+<code>ReentrantReadWriteLock</code>，<code>SynchronousQueue</code>等等皆是基于
+AQS 的。</p>
+<h2 id="aqs的底层原理">AQS的底层原理</h2>
+<p>AQS
+核心思想是，如果被请求的共享资源空闲，则将当前请求资源的线程设置为有效的工作线程，并且将共享资源设置为锁定状态。如果被请求的共享资源被占用，那么就需要一套线程阻塞等待以及被唤醒时锁分配的机制，这个机制
+AQS 是用 <strong>CLH 队列锁</strong>
+实现的，即将暂时获取不到锁的线程加入到队列中。</p>
+<p>CLH(Craig,Landin,and Hagersten)
+队列是一个虚拟的双向队列（虚拟的双向队列即不存在队列实例，仅存在结点之间的关联关系）。AQS
+是将每条请求共享资源的线程封装成一个 CLH
+锁队列的一个结点（Node）来实现锁的分配。在 CLH
+同步队列中，一个节点表示一个线程，它保存着线程的引用（thread）、
+当前节点在队列中的状态（waitStatus）、前驱节点（prev）、后继节点（next）。</p>
 <p>CLH 队列结构如下图所示：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403251944422.png"></p>
-<p>AQS(<code>AbstractQueuedSynchronizer</code>)的核心原理图（图源<a target="_blank" rel="noopener" href="https://www.cnblogs.com/waterystone/p/4920797.html">Java 并发之 AQS 详解open in new window</a>）如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403251944878.png"></p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403251944422.png" /></p>
+<p>AQS(<code>AbstractQueuedSynchronizer</code>)的核心原理图（图源<a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/waterystone/p/4920797.html">Java 并发之
+AQS 详解open in new window</a>）如下：</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403251944878.png" /></p>
 <ul>
 <li>AQS使用一个int成员变量来表示同步状态</li>
 <li>使用Node实现FIFO队列，可以用于构建锁或者其他同步装置</li>
 <li>AQS资源共享方式：独占Exclusive（排它锁模式）和共享Share（共享锁模式）</li>
 </ul>
-<hr>
+<hr />
 <p>待续。。。</p>
 
     </div>
