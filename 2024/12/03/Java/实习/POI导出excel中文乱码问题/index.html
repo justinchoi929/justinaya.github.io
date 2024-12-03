@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/aya.JPG">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/aya.JPG">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/aya.JPG">
+  <link rel="mask-icon" href="/images/aya.JPG" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.justinchoi.top","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="在实习中遇到的关于excel导出的问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="POI导出excel中文乱码问题">
+<meta property="og:url" content="http://www.justinchoi.top/2024/12/03/Java/%E5%AE%9E%E4%B9%A0/POI%E5%AF%BC%E5%87%BAexcel%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="文文的短发">
+<meta property="og:description" content="在实习中遇到的关于excel导出的问题">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241202154353127.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241202151910288.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241202152237069.png">
+<meta property="article:published_time" content="2024-12-03T02:47:27.000Z">
+<meta property="article:modified_time" content="2024-12-03T02:57:28.877Z">
+<meta property="article:author" content="文文的短发">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="实习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241202154353127.png">
+
+
+<link rel="canonical" href="http://www.justinchoi.top/2024/12/03/Java/%E5%AE%9E%E4%B9%A0/POI%E5%AF%BC%E5%87%BAexcel%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.justinchoi.top/2024/12/03/Java/%E5%AE%9E%E4%B9%A0/POI%E5%AF%BC%E5%87%BAexcel%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/","path":"2024/12/03/Java/实习/POI导出excel中文乱码问题/","title":"POI导出excel中文乱码问题"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>POI导出excel中文乱码问题 | 文文的短发</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">文文的短发</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#POI%E5%AF%BC%E5%87%BAexcel%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98"><span class="nav-text">POI导出excel中文乱码问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5poi%E4%BE%9D%E8%B5%96"><span class="nav-text">导入poi依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E5%86%99ExcelUtil%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="nav-text">编写ExcelUtil工具类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E4%B8%9A%E5%8A%A1%E5%B1%82%E4%B8%AD%E5%AF%BC%E5%87%BAexcel"><span class="nav-text">在业务层中导出excel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98"><span class="nav-text">中文乱码问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E5%85%A5OSS%E5%AD%98%E5%82%A8%E6%A1%B6"><span class="nav-text">引入OSS存储桶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E6%95%B0%E6%8D%AE%E5%AD%98%E5%88%B0%E5%89%8D%E7%AB%AF"><span class="nav-text">将数据存到前端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E5%AF%BC%E5%87%BA%E6%8C%89%E9%92%AE%E7%9A%84%E6%8E%A5%E5%8F%A3%E7%9A%84%E7%BD%91%E7%BB%9C%E6%94%B9%E6%88%90%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9B%B4%E8%BF%9E"><span class="nav-text">将导出按钮的接口的网络改成浏览器直连</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%BD%AC%E5%8F%91%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-text">修改服务端转发的方式</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="文文的短发"
+      src="/img/headimg.JPG">
+  <p class="site-author-name" itemprop="name">文文的短发</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/JUSTINAYA" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;JUSTINAYA" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:justinchoi929@gmail.com" title="E-Mail → mailto:justinchoi929@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://github.com/bingxueailin" title="https:&#x2F;&#x2F;github.com&#x2F;bingxueailin" rel="noopener" target="_blank">软软萌萌的[冰雪艾琳]</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://wonz.wang/" title="http:&#x2F;&#x2F;wonz.wang&#x2F;" rel="noopener" target="_blank">厉害的[Wonz]学长的Blog</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.cnblogs.com/Asaka-QianXiang/" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;Asaka-QianXiang&#x2F;" rel="noopener" target="_blank">绩点高的[药佬]的Blog</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.justinchoi.top/2024/12/03/Java/%E5%AE%9E%E4%B9%A0/POI%E5%AF%BC%E5%87%BAexcel%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/headimg.JPG">
+      <meta itemprop="name" content="文文的短发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="文文的短发">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="POI导出excel中文乱码问题 | 文文的短发">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          POI导出excel中文乱码问题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-12-03 10:47:27 / 修改时间：10:57:28" itemprop="dateCreated datePublished" datetime="2024-12-03T10:47:27+08:00">2024-12-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java/%E9%97%AE%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">问题</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>在实习中遇到的关于excel导出的问题</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="POI导出excel中文乱码问题"><a href="#POI导出excel中文乱码问题" class="headerlink" title="POI导出excel中文乱码问题"></a>POI导出excel中文乱码问题</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在工作中遇到这样一个场景，需要将表格内容导出成 excel 在浏览器中下载</p>
+<p><img src="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241202154353127.png" alt="表格场景"></p>
+<p>这里因为目前表格是分页的，导出的时候需要根据查询字段作全量查询，然后转换成 excel 表格导出，这里我使用了 apache 的 poi 组件去做这件事</p>
+<h2 id="导入poi依赖"><a href="#导入poi依赖" class="headerlink" title="导入poi依赖"></a>导入poi依赖</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 导入poi依赖 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.poi<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>poi-ooxml<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.poi<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>poi<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<ul>
+<li>poi 不同版本中方法有些不一样，需要检查一下</li>
+<li>poi-ooxml 和 poi 版本需要保持一致</li>
+</ul>
+<h2 id="编写ExcelUtil工具类"><a href="#编写ExcelUtil工具类" class="headerlink" title="编写ExcelUtil工具类"></a>编写ExcelUtil工具类</h2><p>在这个工具类中我目前就写了三个方法，此外还自定义了一个注解用来定义表头名称：</p>
+<p>注解：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.FIELD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> ExcelHeaderName &#123;</span><br><span class="line"></span><br><span class="line">    String <span class="title function_">value</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>获取表头：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;String&gt; <span class="title function_">getHeaderNames</span><span class="params">(Class&lt;?&gt; clazz)</span> &#123;</span><br><span class="line">        List&lt;String&gt; headerNames = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        Field[] declaredFields = clazz.getDeclaredFields();</span><br><span class="line">        <span class="keyword">for</span> (Field field : declaredFields) &#123;</span><br><span class="line">            <span class="keyword">if</span> (field.isAnnotationPresent(ExcelHeaderName.class)) &#123;</span><br><span class="line">                <span class="type">ExcelHeaderName</span> <span class="variable">annotation</span> <span class="operator">=</span> field.getAnnotation(ExcelHeaderName.class);</span><br><span class="line"><span class="comment">//                String headerName = new String(annotation.value().getBytes(), StandardCharsets.UTF_8);</span></span><br><span class="line">                headerNames.add(annotation.value());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> headerNames;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>获取属性值：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;Object&gt; <span class="title function_">getFieldValues</span><span class="params">(Object obj)</span> &#123;</span><br><span class="line">    List&lt;Object&gt; fieldValues = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    Field[] declaredFields = obj.getClass().getDeclaredFields();</span><br><span class="line">    <span class="keyword">for</span> (Field field : declaredFields) &#123;</span><br><span class="line">        field.setAccessible(<span class="literal">true</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (field.get(obj) != <span class="literal">null</span>) &#123;</span><br><span class="line">                fieldValues.add(field.get(obj));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                fieldValues.add(<span class="string">&quot;&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">            LogUtil.error(e, LOGGER, <span class="string">&quot;获取字段值失败:&#123;0&#125; &quot;</span>, e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fieldValues;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>excel导出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">exportExcel</span><span class="params">(Workbook workbook, HttpServletResponse httpServletResponse)</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="type">SimpleDateFormat</span> <span class="variable">df</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy_MM_dd_HH_mm_ss&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">fileName</span> <span class="operator">=</span> df.format(<span class="keyword">new</span> <span class="title class_">Date</span>()) + <span class="string">&quot;.xls&quot;</span>;</span><br><span class="line">        <span class="comment">//清空response</span></span><br><span class="line">        httpServletResponse.reset();</span><br><span class="line">        <span class="comment">//设置response的Header</span></span><br><span class="line">        httpServletResponse.addHeader(<span class="string">&quot;Content-Disposition&quot;</span>, <span class="string">&quot;attachment;filename=&quot;</span> + URLEncoder.encode(fileName, <span class="string">&quot;UTF-8&quot;</span>));</span><br><span class="line">        httpServletResponse.setCharacterEncoding(<span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">        httpServletResponse.setContentType(<span class="string">&quot;application/vnd.ms-excel&quot;</span>);</span><br><span class="line">        <span class="type">ServletOutputStream</span> <span class="variable">out</span> <span class="operator">=</span> httpServletResponse.getOutputStream();</span><br><span class="line">        <span class="comment">// 关闭输出流和工作簿对象</span></span><br><span class="line">        workbook.write(out);</span><br><span class="line">        out.flush();</span><br><span class="line">        out.close();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        LogUtil.error(e, LOGGER, <span class="string">&quot;导出文档失败:&#123;0&#125; &quot;</span>, e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="在业务层中导出excel"><a href="#在业务层中导出excel" class="headerlink" title="在业务层中导出excel"></a>在业务层中导出excel</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">userExport</span><span class="params">(UserDetailExportRequest request, HttpServletResponse httpServletResponse)</span> &#123;</span><br><span class="line">    List&lt;ModelCallDetailDO&gt; modelCallDetailDOList = modelCallDetailStoreService.userDetailList(request.getProject_id(), request.getModel_id());</span><br><span class="line">    List&lt;UserDetailExportResponse&gt; userDetailExportResponseList = modelCallDetailDOList.stream().map(ModelCallConvertor::userExcelConvertor).collect(Collectors.toList());</span><br><span class="line">    <span class="type">Workbook</span> <span class="variable">workbook</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HSSFWorkbook</span>();</span><br><span class="line">    <span class="type">Sheet</span> <span class="variable">sheet</span> <span class="operator">=</span> workbook.createSheet();</span><br><span class="line">    <span class="type">Row</span> <span class="variable">header</span> <span class="operator">=</span> sheet.createRow(<span class="number">0</span>);</span><br><span class="line">    <span class="comment">// 表头赋值</span></span><br><span class="line">    List&lt;String&gt; headerNames = ExcelUtil.getHeaderNames(UserDetailExportResponse.class);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; headerNames.size(); i++) &#123;</span><br><span class="line">        <span class="type">Cell</span> <span class="variable">cell</span> <span class="operator">=</span> header.createCell(i);</span><br><span class="line">        cell.setCellValue(headerNames.get(i));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 写入数据</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; userDetailExportResponseList.size(); i++) &#123;</span><br><span class="line">        <span class="type">Row</span> <span class="variable">row</span> <span class="operator">=</span> sheet.createRow(i + <span class="number">1</span>);</span><br><span class="line">        <span class="type">UserDetailExportResponse</span> <span class="variable">userDetailExportResponse</span> <span class="operator">=</span> userDetailExportResponseList.get(i);</span><br><span class="line">        List&lt;Object&gt; fieldValues = ExcelUtil.getFieldValues(userDetailExportResponse);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; fieldValues.size(); j++) &#123;</span><br><span class="line">            <span class="type">Cell</span> <span class="variable">cell</span> <span class="operator">=</span> row.createCell(j);</span><br><span class="line">            <span class="type">Object</span> <span class="variable">value</span> <span class="operator">=</span> fieldValues.get(j);</span><br><span class="line">            <span class="keyword">if</span> (value <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">                <span class="type">String</span> <span class="variable">valueStr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(((String) value).getBytes(), StandardCharsets.UTF_8);</span><br><span class="line">                cell.setCellValue(valueStr);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                cell.setCellValue((Integer) fieldValues.get(j));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ExcelUtil.exportExcel(workbook, httpServletResponse);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (BusinessException be)&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">BusinessException</span>(ErrorCodeEnum.FAIL, be.getErrorMessage());</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">BusinessException</span>(ErrorCodeEnum.FAIL, e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>poi生成excel大致就分为三步：</p>
+<ol>
+<li>创建 workbook（Workbook workbook &#x3D; new HSSFWorkbook();）</li>
+<li>创建 sheet（Sheet sheet &#x3D; workbook.createSheet();）</li>
+<li>在 sheet 中创建行，并给行中的单元格赋值（sheet.createRow()，cell.setCellValue()）</li>
+</ol>
+<p>这里如果正常导出应该是下图中的结果：</p>
+<p><img src="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241202151910288.png" alt="excel导出数据"></p>
+<h2 id="中文乱码问题"><a href="#中文乱码问题" class="headerlink" title="中文乱码问题"></a>中文乱码问题</h2><p>在前后端联调时，我通过前端下载下来的文件出现了乱码：</p>
+<p><img src="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241202152237069.png" alt="文件乱码"></p>
+<p>是很经典的“锟斤拷”乱码问题，这个问题出现的原因一般是因为 UTF-8 和 GBK 两种编码互转，通过上网查询，都说是要设置 response 的 header：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">httpServletResponse.addHeader(<span class="string">&quot;Content-Disposition&quot;</span>, <span class="string">&quot;attachment;filename=&quot;</span> + URLEncoder.encode(fileName, <span class="string">&quot;UTF-8&quot;</span>));</span><br><span class="line">httpServletResponse.setCharacterEncoding(<span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">httpServletResponse.setContentType(<span class="string">&quot;application/vnd.ms-excel&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>但我设置完后还是一样乱码，通过前端的调试发现，从后端传来的字节流在进入下载函数前就以及乱码了，后来定位是服务转发的问题（坑）</p>
+<table>
+<thead>
+<tr>
+<th align="center">特性</th>
+<th align="center">浏览器直连</th>
+<th align="center">服务端转发</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">请求路径</td>
+<td align="center">浏览器直接请求目标服务器</td>
+<td align="center">浏览器请求中间服务器，中间服务器转发请求到目标服务器</td>
+</tr>
+<tr>
+<td align="center">优点</td>
+<td align="center">简单直接，实时性好，资源利用率高</td>
+<td align="center">解决跨域问题，提高安全性，缓存优化，统一处理</td>
+</tr>
+<tr>
+<td align="center">缺点</td>
+<td align="center">跨域限制，安全性问题，客户端复杂性高</td>
+<td align="center">增加延迟，服务器负载增加，系统复杂性高</td>
+</tr>
+<tr>
+<td align="center">应用场景</td>
+<td align="center">简单的单页应用，静态资源加载</td>
+<td align="center">跨域请求，安全需求高，负载均衡，API网关</td>
+</tr>
+</tbody></table>
+<p>结果应该是在转发的途中编码发生改变，导致乱码。。。</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><h3 id="引入OSS存储桶"><a href="#引入OSS存储桶" class="headerlink" title="引入OSS存储桶"></a>引入OSS存储桶</h3><p>OSS（Object Storage Service）存储桶是云存储服务中的一种基本存储单元，用于存储和管理对象数据。OSS 存储桶通常提供高可用性、高可靠性和大规模存储能力，适用于存储图片、视频、备份文件、日志等各种非结构化数据</p>
+<table>
+<thead>
+<tr>
+<th align="center">特性</th>
+<th align="center">优点</th>
+<th align="center">缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>高可用性和持久性</strong></td>
+<td align="center">提供高可用性和持久性，数据冗余存储，跨地域复制</td>
+<td align="center">需要额外配置和成本</td>
+</tr>
+<tr>
+<td align="center"><strong>无限扩展性</strong></td>
+<td align="center">支持大规模存储，几乎无限的存储容量</td>
+<td align="center">数据管理和组织可能变得复杂</td>
+</tr>
+<tr>
+<td align="center"><strong>成本效益</strong></td>
+<td align="center">按需付费，提供多种存储类型（标准存储、低频存储、归档存储）以优化成本</td>
+<td align="center">不同存储类型间的切换可能产生额外费用</td>
+</tr>
+<tr>
+<td align="center"><strong>安全性</strong></td>
+<td align="center">支持多种访问控制和加密机制，确保数据安全</td>
+<td align="center">配置复杂，错误配置可能导致安全漏洞</td>
+</tr>
+<tr>
+<td align="center"><strong>数据管理</strong></td>
+<td align="center">支持生命周期管理、版本控制、对象标签等，便于数据管理</td>
+<td align="center">需要熟悉和配置这些管理功能</td>
+</tr>
+<tr>
+<td align="center"><strong>全球访问</strong></td>
+<td align="center">提供全球访问能力，CDN加速，提高数据访问速度</td>
+<td align="center">需要考虑数据隐私和合规性问题</td>
+</tr>
+<tr>
+<td align="center"><strong>集成与兼容性</strong></td>
+<td align="center">提供丰富的API接口，易于集成到各种应用和服务中</td>
+<td align="center">需要开发人员具备相关技术知识</td>
+</tr>
+<tr>
+<td align="center"><strong>性能</strong></td>
+<td align="center">高并发访问，适用于大规模数据处理和分发</td>
+<td align="center">高性能需求下可能需要优化配置和额外成本</td>
+</tr>
+</tbody></table>
+<p>引入 OSS 就可以将生成的 excel 存入桶中并生成下载 URL 返回给前端，前端直接通过 URL 下载就行了，但这样做有几个问题：</p>
+<ol>
+<li>上传至 OSS 再下载会影响性能，耗时比较长，特别是还做了一次全量查询</li>
+<li>如果下载的次数多，OSS 中会有很多文件，查询字段稍微变一下就得上传一次</li>
+</ol>
+<h3 id="将数据存到前端"><a href="#将数据存到前端" class="headerlink" title="将数据存到前端"></a>将数据存到前端</h3><p>可以直接将查询的数据存到前端，再从前端生成 excel，这样就没有编码的问题，但这只适用于数据量小的场景下，一旦数据量大了，前端就有可能挂掉</p>
+<h3 id="将导出按钮的接口的网络改成浏览器直连"><a href="#将导出按钮的接口的网络改成浏览器直连" class="headerlink" title="将导出按钮的接口的网络改成浏览器直连"></a>将导出按钮的接口的网络改成浏览器直连</h3><p>其实将接口的网络改成浏览器直连就行，但这样又会导致安全问题</p>
+<h3 id="修改服务端转发的方式"><a href="#修改服务端转发的方式" class="headerlink" title="修改服务端转发的方式"></a>修改服务端转发的方式</h3><p>这应该是最好的方法了</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag"># 实习</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/12/03/2023/hello-world/" rel="prev" title="第一篇博客">
+                  <i class="fa fa-angle-left"></i> 第一篇博客
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">文文的短发</span>
+  </div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+    本站访客数：<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+
+  
+  <script type="text/javascript"
+  color="0,0,0" opacity='0.3' zIndex="-1" count="75" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+</body>
+</html>
