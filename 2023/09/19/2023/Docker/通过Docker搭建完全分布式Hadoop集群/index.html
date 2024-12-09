@@ -28,6 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202309201145415.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202309201145608.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202309201145588.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202309201145662.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202309201145278.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202309201145164.png">
@@ -150,7 +151,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E4%B8%BA%E9%9B%86%E7%BE%A4%E5%8D%95%E7%8B%AC%E6%9E%84%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C"><span class="nav-text">一、为集群单独构建虚拟网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E8%BF%9B%E5%85%A5%E4%B8%8A%E6%AC%A1%E6%90%AD%E5%BB%BA%E5%A5%BD%E7%9A%84%E5%AE%B9%E5%99%A8"><span class="nav-text">二、进入上次搭建好的容器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E9%85%8D%E7%BD%AEhadoop%E7%8E%AF%E5%A2%83"><span class="nav-text">三、配置Hadoop环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9core-site.xml"><span class="nav-text">1.修改core-site.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9hdfs-site.xml"><span class="nav-text">2.修改hdfs-site.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9mapred-site.xml"><span class="nav-text">3.修改mapred-site.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9yarn-site.xml"><span class="nav-text">4.修改yarn-site.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9workers"><span class="nav-text">5.修改workers</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E5%9C%A8docker%E4%B8%AD%E5%90%AF%E5%8A%A8%E9%9B%86%E7%BE%A4"><span class="nav-text">四、在Docker中启动集群</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E5%B0%86%E5%AE%B9%E5%99%A8%E5%AF%BC%E5%87%BA%E4%B8%BA%E9%95%9C%E5%83%8F"><span class="nav-text">1.先将容器导出为镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E4%B8%89%E4%B8%AA%E7%BB%88%E7%AB%AF"><span class="nav-text">2.启动三个终端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E4%B8%8B%E6%9D%A5%E5%9C%A8master%E4%B8%BB%E6%9C%BA%E4%B8%AD%E5%90%AF%E5%8A%A8hadoop%E9%9B%86%E7%BE%A4"><span class="nav-text">3.接下来在master主机中启动Hadoop集群</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E7%BD%91%E9%A1%B5%E8%AE%BF%E9%97%AE"><span class="nav-text">五、网页访问</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BF%E9%97%AE%E6%9C%AC%E6%9C%BA%E7%9A%849870%E7%AB%AF%E5%8F%A3"><span class="nav-text">1.浏览器访问本机的9870端口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BF%E9%97%AE%E6%9C%AC%E6%9C%BA%E7%9A%848088%E7%AB%AF%E5%8F%A3"><span class="nav-text">2.浏览器访问本机的8088端口</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%B8%BA%E9%9B%86%E7%BE%A4%E5%8D%95%E7%8B%AC%E6%9E%84%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C"><span class="nav-text">一、为集群单独构建虚拟网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E8%BF%9B%E5%85%A5%E4%B8%8A%E6%AC%A1%E6%90%AD%E5%BB%BA%E5%A5%BD%E7%9A%84%E5%AE%B9%E5%99%A8"><span class="nav-text">二、进入上次搭建好的容器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E9%85%8D%E7%BD%AEHadoop%E7%8E%AF%E5%A2%83"><span class="nav-text">三、配置Hadoop环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BF%AE%E6%94%B9core-site-xml"><span class="nav-text">1.修改core-site.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%BF%AE%E6%94%B9hdfs-site-xml"><span class="nav-text">2.修改hdfs-site.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%BF%AE%E6%94%B9mapred-site-xml"><span class="nav-text">3.修改mapred-site.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E4%BF%AE%E6%94%B9yarn-site-xml"><span class="nav-text">4.修改yarn-site.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E4%BF%AE%E6%94%B9workers"><span class="nav-text">5.修改workers</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%9C%A8Docker%E4%B8%AD%E5%90%AF%E5%8A%A8%E9%9B%86%E7%BE%A4"><span class="nav-text">四、在Docker中启动集群</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%85%88%E5%B0%86%E5%AE%B9%E5%99%A8%E5%AF%BC%E5%87%BA%E4%B8%BA%E9%95%9C%E5%83%8F"><span class="nav-text">1.先将容器导出为镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%90%AF%E5%8A%A8%E4%B8%89%E4%B8%AA%E7%BB%88%E7%AB%AF"><span class="nav-text">2.启动三个终端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%8E%A5%E4%B8%8B%E6%9D%A5%E5%9C%A8master%E4%B8%BB%E6%9C%BA%E4%B8%AD%E5%90%AF%E5%8A%A8Hadoop%E9%9B%86%E7%BE%A4"><span class="nav-text">3.接下来在master主机中启动Hadoop集群</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E7%BD%91%E9%A1%B5%E8%AE%BF%E9%97%AE"><span class="nav-text">五、网页访问</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BF%E9%97%AE%E6%9C%AC%E6%9C%BA%E7%9A%849870%E7%AB%AF%E5%8F%A3"><span class="nav-text">1.浏览器访问本机的9870端口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BF%E9%97%AE%E6%9C%AC%E6%9C%BA%E7%9A%848088%E7%AB%AF%E5%8F%A3"><span class="nav-text">2.浏览器访问本机的8088端口</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -294,95 +295,94 @@
 <p>基于上一篇博客进行拓展</p>
 </blockquote>
 <span id="more"></span>
-<h1 id="前言">前言</h1>
-<blockquote>
-<p><a
-href="https://www.justinchoi.top/2023/09/07/2023/Ubuntu%E9%85%8D%E7%BD%AEhadoop%EF%BC%88%E5%9F%BA%E4%BA%8EDocker%EF%BC%89/">上一次</a>我们搭建了基于Docker的伪分布式Hadoop集群，这次来搭建分布式的</p>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p><a href="https://www.justinchoi.top/2023/09/07/2023/Ubuntu%E9%85%8D%E7%BD%AEhadoop%EF%BC%88%E5%9F%BA%E4%BA%8EDocker%EF%BC%89/">上一次</a>我们搭建了基于Docker的伪分布式Hadoop集群，这次来搭建分布式的</p>
 </blockquote>
-<h1 id="一为集群单独构建虚拟网络">一、为集群单独构建虚拟网络</h1>
-<p>现在的 Docker 网络能够提供 DNS
-解析功能，我们可以使用如下命令为接下来的 Hadoop
-集群单独构建一个虚拟的网络：</p>
+<h1 id="一、为集群单独构建虚拟网络"><a href="#一、为集群单独构建虚拟网络" class="headerlink" title="一、为集群单独构建虚拟网络"></a>一、为集群单独构建虚拟网络</h1><p>现在的 Docker 网络能够提供 DNS 解析功能，我们可以使用如下命令为接下来的 Hadoop 集群单独构建一个虚拟的网络：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker network create --driver=bridge hadoop</span><br></pre></td></tr></table></figure>
-<p>使用下面这个命令查看 Docker 中的网络，可以看到刚刚创建的名为 hadoop
-的虚拟桥接网络：</p>
+
+<p>使用下面这个命令查看 Docker 中的网络，可以看到刚刚创建的名为 hadoop 的虚拟桥接网络：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker network ls</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202309201145415.png" alt="image-20230919201453731" style="zoom: 67%;" /></p>
-<h1 id="二进入上次搭建好的容器">二、进入上次搭建好的容器</h1>
-<p>我们通过上次制作的镜像启动一个容器：</p>
+
+<img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202309201145415.png" alt="image-20230919201453731" style="zoom: 67%;" />
+
+<h1 id="二、进入上次搭建好的容器"><a href="#二、进入上次搭建好的容器" class="headerlink" title="二、进入上次搭建好的容器"></a>二、进入上次搭建好的容器</h1><p>我们通过上次制作的镜像启动一个容器：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -dit --name=master --hostname=master hdp</span><br></pre></td></tr></table></figure>
+
 <p>我们进入<code>master</code>容器中</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it master /bin/bash</span><br></pre></td></tr></table></figure>
-<h1 id="三配置hadoop环境">三、配置Hadoop环境</h1>
-<p>在上一次我们已经配置了一个伪分布式的Hadoop环境，接下来我们需要对那些文件再进一步修改。</p>
-<h2 id="修改core-site.xml">1.修改<code>core-site.xml</code></h2>
-<p>打开<code>/usr/local/hadoop-3.3.1/etc/hadoop</code>路径下的<code>core-site.xml</code>:</p>
+
+<h1 id="三、配置Hadoop环境"><a href="#三、配置Hadoop环境" class="headerlink" title="三、配置Hadoop环境"></a>三、配置Hadoop环境</h1><p>在上一次我们已经配置了一个伪分布式的Hadoop环境，接下来我们需要对那些文件再进一步修改。</p>
+<h2 id="1-修改core-site-xml"><a href="#1-修改core-site-xml" class="headerlink" title="1.修改core-site.xml"></a>1.修改<code>core-site.xml</code></h2><p>打开<code>/usr/local/hadoop-3.3.1/etc/hadoop</code>路径下的<code>core-site.xml</code>:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/hadoop-3.3.1</span><br><span class="line">cd etc/hadoop</span><br><span class="line">vim core-site.xml</span><br></pre></td></tr></table></figure>
+
 <p>修改后是这样的：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">　　&lt;!--指定nameNode的地址--&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;hdfs://master:8020&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">　　&lt;!--指定Hadoop数据的存储目录--&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/usr/local/hadoop/data&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">　　&lt;!--配置HDFS网页登陆使用的静态用户，配置这个之后才有权限可以在网页端删除文件、文件夹--&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;hadoop.http.staticuser.user&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;root&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="修改hdfs-site.xml">2.修改<code>hdfs-site.xml</code></h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim hdfs-site.xml</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-修改hdfs-site-xml"><a href="#2-修改hdfs-site-xml" class="headerlink" title="2.修改hdfs-site.xml"></a>2.修改<code>hdfs-site.xml</code></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim hdfs-site.xml</span><br></pre></td></tr></table></figure>
+
 <p>修改后：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">　　&lt;!--文件的存储个数--&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;3&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">　　&lt;!--nn web端访问地址，使用网页访问HDFS文件系统就是这个端口--&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.http-address&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;master:9870&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">　　&lt;!--2nn web端访问地址--&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.secondary.http-address&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;master:9868&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">　　&lt;!--网页查看HDFS文件内容，出现Couldn‘t preview the file报错，需要配置的参数--&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.webhdfs.enabled&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="修改mapred-site.xml">3.修改<code>mapred-site.xml</code></h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim mapred-site.xml</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-修改mapred-site-xml"><a href="#3-修改mapred-site-xml" class="headerlink" title="3.修改mapred-site.xml"></a>3.修改<code>mapred-site.xml</code></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim mapred-site.xml</span><br></pre></td></tr></table></figure>
+
 <p>修改后：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">　　&lt;!--指定MapReduce程序运行在Yarn上--&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="修改yarn-site.xml">4.修改<code>yarn-site.xml</code></h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim yarn-site.xml</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-修改yarn-site-xml"><a href="#4-修改yarn-site-xml" class="headerlink" title="4.修改yarn-site.xml"></a>4.修改<code>yarn-site.xml</code></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim yarn-site.xml</span><br></pre></td></tr></table></figure>
+
 <p>修改后：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">　　&lt;!--指定MR走 shuffle--&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">　　&lt;!--指定ResourceManager的地址--&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;h01&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">　　&lt;!--环境变量的继承--&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.nodemanager.env-whitelist&lt;/name&gt;         </span><br><span class="line">        &lt;value&gt;JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="修改workers">5.修改<code>workers</code></h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim workers</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-修改workers"><a href="#5-修改workers" class="headerlink" title="5.修改workers"></a>5.修改<code>workers</code></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim workers</span><br></pre></td></tr></table></figure>
+
 <p>修改后：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">master</span><br><span class="line">slave1</span><br><span class="line">slave2</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>注意：master这些后面不要有空格！slave2后面，不要有空的行！自己准备起多少集群，就在这里写几个，要是准备起5个集群，就写到slave4。</p>
 </blockquote>
-<h1 id="四在docker中启动集群">四、在Docker中启动集群</h1>
-<h2 id="先将容器导出为镜像">1.先将容器导出为镜像</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit master nethdp</span><br></pre></td></tr></table></figure>
-<h2 id="启动三个终端">2.启动三个终端</h2>
-<ul>
+<h1 id="四、在Docker中启动集群"><a href="#四、在Docker中启动集群" class="headerlink" title="四、在Docker中启动集群"></a>四、在Docker中启动集群</h1><h2 id="1-先将容器导出为镜像"><a href="#1-先将容器导出为镜像" class="headerlink" title="1.先将容器导出为镜像"></a>1.先将容器导出为镜像</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit master nethdp</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-启动三个终端"><a href="#2-启动三个终端" class="headerlink" title="2.启动三个终端"></a>2.启动三个终端</h2><ul>
 <li><p>第一条命令启动的是<code>master</code>做<code>master</code>节点的，所以要开放一些端口，用来访问web页面</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -dit --network hadoop --hostname=master --name=master -p 9870:9870 -p 8088:8088 nethdp /bin/bash</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -dit --network hadoop --hostname=master --name=master -p 9870:9870 -p 8088:8088 nethdp /bin/bash</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>后面几条命令都类似，只要注意修改名字和主机名就行</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -dit --network hadoop -hostname=slave1 --name=slave1 nethdp /bin/bash</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -dit --network hadoop -hostname=slave1 --name=slave1 nethdp /bin/bash</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>第三条命令</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -dit --network hadoop -hostname=slave2 --name=slave2 nethdp /bin/bash</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h2
-id="接下来在master主机中启动hadoop集群">3.接下来在<code>master</code>主机中启动Hadoop集群</h2>
-<p>先在hadoop安装目录进行格式化操作，不格式化操作，hdfs起不来（<strong>只有第一次启动</strong>的时候需要初始化，以后启动就不需要了，先删除所有机器的
-data和logs目录，然后再进行格式化）：</p>
+<h2 id="3-接下来在master主机中启动Hadoop集群"><a href="#3-接下来在master主机中启动Hadoop集群" class="headerlink" title="3.接下来在master主机中启动Hadoop集群"></a>3.接下来在<code>master</code>主机中启动Hadoop集群</h2><p>先在hadoop安装目录进行格式化操作，不格式化操作，hdfs起不来（<strong>只有第一次启动</strong>的时候需要初始化，以后启动就不需要了，先删除所有机器的 data和logs目录，然后再进行格式化）：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/hdfs namenode -format</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202309201145608.png" alt="image-20230919205754453" style="zoom:80%;" /></p>
+
+<img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202309201145608.png" alt="image-20230919205754453" style="zoom:80%;" />
+
 <p>然后启动HDFS集群：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./sbin/start-dfs.sh</span><br></pre></td></tr></table></figure>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202309201145588.png"
-alt="image-20230919210507605" />
-<figcaption aria-hidden="true">image-20230919210507605</figcaption>
-</figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202309201145588.png" alt="image-20230919210507605"></p>
 <p>最后，启动yarn集群管理节点：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./sbin/start-yarn.sh</span><br></pre></td></tr></table></figure>
+
 <p>都启动完成后，使用 jps 命令查看：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jps</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202309201145662.png" alt="image-20230919210554410" style="zoom:80%;" /></p>
-<p>可以看到，除了Jps，一共有5个进程，因为这里没有将
-nameNode、ResourceManager、SecondaryNameNode分开部署，所以都在
-h01这一台机器上，实际生产中，应该是需要分开部署的。</p>
+
+<img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202309201145662.png" alt="image-20230919210554410" style="zoom:80%;" />
+
+<p>可以看到，除了Jps，一共有5个进程，因为这里没有将 nameNode、ResourceManager、SecondaryNameNode分开部署，所以都在 h01这一台机器上，实际生产中，应该是需要分开部署的。</p>
 <p>至此，Hadoop 集群已经构建好了。</p>
-<h1 id="五网页访问">五、网页访问</h1>
-<h2 id="浏览器访问本机的9870端口">1.浏览器访问本机的9870端口</h2>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202309201145278.png" alt="image-20230919210729977" style="zoom: 67%;" /></p>
-<h2 id="浏览器访问本机的8088端口">2.浏览器访问本机的8088端口</h2>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202309201145164.png" alt="image-20230919210811664" style="zoom:67%;" /></p>
+<h1 id="五、网页访问"><a href="#五、网页访问" class="headerlink" title="五、网页访问"></a>五、网页访问</h1><h2 id="1-浏览器访问本机的9870端口"><a href="#1-浏览器访问本机的9870端口" class="headerlink" title="1.浏览器访问本机的9870端口"></a>1.浏览器访问本机的9870端口</h2><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202309201145278.png" alt="image-20230919210729977" style="zoom: 67%;" />
+
+<h2 id="2-浏览器访问本机的8088端口"><a href="#2-浏览器访问本机的8088端口" class="headerlink" title="2.浏览器访问本机的8088端口"></a>2.浏览器访问本机的8088端口</h2><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202309201145164.png" alt="image-20230919210811664" style="zoom:67%;" />
+
+
+
 <blockquote>
 <p>参考：</p>
-<p><a
-target="_blank" rel="noopener" href="https://www.cnblogs.com/luo-c/p/15831441.html">https://www.cnblogs.com/luo-c/p/15831441.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/luo-c/p/15831441.html">https://www.cnblogs.com/luo-c/p/15831441.html</a></p>
 </blockquote>
 
     </div>
