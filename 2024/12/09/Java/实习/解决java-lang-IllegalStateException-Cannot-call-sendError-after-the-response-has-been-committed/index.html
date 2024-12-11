@@ -26,18 +26,12 @@
 <meta property="og:site_name" content="文文的短发">
 <meta property="og:description" content="解决在文件导出的过程中出现了异常">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241209105716524.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241209110110696.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241209110225191.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241209110401106.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241209113614678.png">
 <meta property="article:published_time" content="2024-12-09T02:48:23.000Z">
-<meta property="article:modified_time" content="2024-12-09T03:36:41.180Z">
+<meta property="article:modified_time" content="2024-12-10T00:59:20.356Z">
 <meta property="article:author" content="文文的短发">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="实习">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241209105716524.png">
 
 
 <link rel="canonical" href="http://www.justinchoi.top/2024/12/09/Java/%E5%AE%9E%E4%B9%A0/%E8%A7%A3%E5%86%B3java-lang-IllegalStateException-Cannot-call-sendError-after-the-response-has-been-committed/">
@@ -150,7 +144,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3java-lang-IllegalStateException-Cannot-call-sendError-after-the-response-has-been-committed"><span class="nav-text">解决java.lang.IllegalStateException: Cannot call sendError() after the response  has been committed</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%AF%BB%E5%9B%A0"><span class="nav-text">问题寻因</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90"><span class="nav-text">原因分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="nav-text">问题解决</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3java.lang.illegalstateexception-cannot-call-senderror-after-the-response-has-been-committed"><span class="nav-text">解决java.lang.IllegalStateException:
+Cannot call sendError() after the response has been committed</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%AF%BB%E5%9B%A0"><span class="nav-text">问题寻因</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90"><span class="nav-text">原因分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="nav-text">问题解决</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -165,7 +160,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -257,9 +252,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-12-09 10:48:23 / 修改时间：11:36:41" itemprop="dateCreated datePublished" datetime="2024-12-09T10:48:23+08:00">2024-12-09</time>
+      <time title="创建时间：2024-12-09 10:48:23" itemprop="dateCreated datePublished" datetime="2024-12-09T10:48:23+08:00">2024-12-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-12-10 08:59:20" itemprop="dateModified" datetime="2024-12-10T08:59:20+08:00">2024-12-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -288,24 +289,63 @@
 <p>解决在文件导出的过程中出现了异常</p>
 </blockquote>
 <span id="more"></span>
-
-<h1 id="解决java-lang-IllegalStateException-Cannot-call-sendError-after-the-response-has-been-committed"><a href="#解决java-lang-IllegalStateException-Cannot-call-sendError-after-the-response-has-been-committed" class="headerlink" title="解决java.lang.IllegalStateException: Cannot call sendError() after the response  has been committed"></a>解决java.lang.IllegalStateException: Cannot call sendError() after the response  has been committed</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在做文件导出业务时我遇到了这么个异常：</p>
-<p><img src="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241209105716524.png" alt="异常信息"></p>
-<p>文件是可以正常导出的，这个异常也没法在下面的 at 定位是具体哪个类发生了异常，于是我先去定位是前端还是后端的问题，在前端的返回值那边<code>console.log()</code>了一下：</p>
-<p><img src="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241209110110696.png" alt="前端代码"></p>
-<p><img src="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241209110225191.png" alt="返回值"></p>
-<p>可以发现就返回了文件的 base64 码但没有返回统一的 response，类似于这样的：</p>
-<p><img src="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241209110401106.png" alt="统一response"></p>
-<h2 id="问题寻因"><a href="#问题寻因" class="headerlink" title="问题寻因"></a>问题寻因</h2><p>在将异常信息丢到 gpt 后，我就懂了，返回的信息：</p>
-<p>从你的日志中可以看出，出现了一个 <code>IllegalStateException</code>，并且错误消息为 <code>Cannot call sendError() after the response has been committed</code>。这个错误通常发生在尝试发送错误响应时，HTTP 响应已经被提交的情况下。以下是一些可能的原因和解决方案：</p>
-<h3 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h3><ol>
+<h1
+id="解决java.lang.illegalstateexception-cannot-call-senderror-after-the-response-has-been-committed">解决java.lang.IllegalStateException:
+Cannot call sendError() after the response has been committed</h1>
+<h2 id="前言">前言</h2>
+<p>在做文件导出业务时我遇到了这么个异常：</p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241209105716524.png"
+alt="异常信息" />
+<figcaption aria-hidden="true">异常信息</figcaption>
+</figure>
+<p>文件是可以正常导出的，这个异常也没法在下面的 at
+定位是具体哪个类发生了异常，于是我先去定位是前端还是后端的问题，在前端的返回值那边<code>console.log()</code>了一下：</p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241209110110696.png"
+alt="前端代码" />
+<figcaption aria-hidden="true">前端代码</figcaption>
+</figure>
+<figure>
+<img
+src="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241209110225191.png"
+alt="返回值" />
+<figcaption aria-hidden="true">返回值</figcaption>
+</figure>
+<p>可以发现就返回了文件的 base64 码但没有返回统一的
+response，类似于这样的：</p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241209110401106.png"
+alt="统一response" />
+<figcaption aria-hidden="true">统一response</figcaption>
+</figure>
+<h2 id="问题寻因">问题寻因</h2>
+<p>在将异常信息丢到 gpt 后，我就懂了，返回的信息：</p>
+<p>从你的日志中可以看出，出现了一个
+<code>IllegalStateException</code>，并且错误消息为
+<code>Cannot call sendError() after the response has been committed</code>。这个错误通常发生在尝试发送错误响应时，HTTP
+响应已经被提交的情况下。以下是一些可能的原因和解决方案：</p>
+<h3 id="原因分析">原因分析</h3>
+<ol type="1">
 <li><strong>重复提交响应</strong>：在代码中可能有多个地方试图提交响应。</li>
 <li><strong>过滤器或拦截器中处理逻辑冲突</strong>：在请求处理过程中，某些过滤器或拦截器可能已经提交了响应，但控制流继续下去，又试图再次提交响应。</li>
 <li><strong>异常处理导致的问题</strong>：在异常处理过程中，试图发送错误响应，但响应已经被提交。</li>
 </ol>
-<p>这里说明代码中可能有多个地方试图提交响应，而且按前端只返回了文件流来看，应该是传完流关闭了 HttpServletResponse 导致 controller 层的 response 没法返回至前端，导致了异常</p>
-<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>只需要将 controller 层的导出方法返回 null 或者直接改成 void 方法就行：</p>
-<p><img src="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241209113614678.png" alt="controller层代码"></p>
+<p>这里说明代码中可能有多个地方试图提交响应，而且按前端只返回了文件流来看，应该是传完流关闭了
+HttpServletResponse 导致 controller 层的 response
+没法返回至前端，导致了异常</p>
+<h2 id="问题解决">问题解决</h2>
+<p>只需要将 controller 层的导出方法返回 null 或者直接改成 void
+方法就行：</p>
+<figure>
+<img
+src="../../../../../../Users/xiancui/Desktop/image-20241209113614678.png"
+alt="controller层代码" />
+<figcaption aria-hidden="true">controller层代码</figcaption>
+</figure>
 
     </div>
 
@@ -328,6 +368,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2024/12/11/Java/%E5%AE%9E%E4%B9%A0/%E8%A7%A3%E5%86%B3SpringBoot%E9%9B%86%E6%88%90actuator%E5%92%8CPrometheus%E8%AE%BF%E9%97%AE%E6%8A%A5404/" rel="next" title="解决SpringBoot集成actuator和Prometheus访问报404">
+                  解决SpringBoot集成actuator和Prometheus访问报404 <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>

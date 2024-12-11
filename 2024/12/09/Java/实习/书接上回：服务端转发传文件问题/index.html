@@ -26,15 +26,12 @@
 <meta property="og:site_name" content="文文的短发">
 <meta property="og:description" content="在实习中遇到的关于excel导出的问题解决">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/img_v3_02ha_3e8905e1-94f3-4087-bbb2-ff3ab28cebnh.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241209092404782.png">
 <meta property="article:published_time" content="2024-12-09T01:03:06.000Z">
 <meta property="article:modified_time" content="2024-12-09T01:27:24.007Z">
 <meta property="article:author" content="文文的短发">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="实习">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/img_v3_02ha_3e8905e1-94f3-4087-bbb2-ff3ab28cebnh.jpg">
 
 
 <link rel="canonical" href="http://www.justinchoi.top/2024/12/09/Java/%E5%AE%9E%E4%B9%A0/%E4%B9%A6%E6%8E%A5%E4%B8%8A%E5%9B%9E%EF%BC%9A%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%BD%AC%E5%8F%91%E4%BC%A0%E6%96%87%E4%BB%B6%E9%97%AE%E9%A2%98/">
@@ -147,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B9%A6%E6%8E%A5%E4%B8%8A%E5%9B%9E%EF%BC%9A%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%BD%AC%E5%8F%91%E4%BC%A0%E6%96%87%E4%BB%B6%E9%97%AE%E9%A2%98"><span class="nav-text">书接上回：服务端转发传文件问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86excel%E6%96%87%E4%BB%B6%E8%BD%AC%E6%88%90base64"><span class="nav-text">将excel文件转成base64</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B9%A6%E6%8E%A5%E4%B8%8A%E5%9B%9E%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%BD%AC%E5%8F%91%E4%BC%A0%E6%96%87%E4%BB%B6%E9%97%AE%E9%A2%98"><span class="nav-text">书接上回：服务端转发传文件问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86excel%E6%96%87%E4%BB%B6%E8%BD%AC%E6%88%90base64"><span class="nav-text">将excel文件转成base64</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -162,7 +159,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -285,15 +282,30 @@
 <p>在实习中遇到的关于excel导出的问题解决</p>
 </blockquote>
 <span id="more"></span>
-
-<h1 id="书接上回：服务端转发传文件问题"><a href="#书接上回：服务端转发传文件问题" class="headerlink" title="书接上回：服务端转发传文件问题"></a>书接上回：服务端转发传文件问题</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><a href="https://www.justinchoi.top/2024/12/03/Java/%E5%AE%9E%E4%B9%A0/POI%E5%AF%BC%E5%87%BAexcel%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/">POI导出excel中文乱码问题 | 文文的短发</a>在上一篇博客中我讲到在公司低代码的前端通过输出流传excel会导致中文乱码的问题，后来在我的尝试下这个问题有了一个新的解决方案。</p>
-<h2 id="将excel文件转成base64"><a href="#将excel文件转成base64" class="headerlink" title="将excel文件转成base64"></a>将excel文件转成base64</h2><p>在后续功能开发中，我又遇到了需要在输出流中传文件的需求，在此之中我发现从后端传JSON格式的数据，从前端直接使用下载工具函数下载是不会乱码的，而JSON实际就是字符串。</p>
+<h1
+id="书接上回服务端转发传文件问题">书接上回：服务端转发传文件问题</h1>
+<h2 id="前言">前言</h2>
+<p><a
+href="https://www.justinchoi.top/2024/12/03/Java/实习/POI导出excel中文乱码问题/">POI导出excel中文乱码问题
+|
+文文的短发</a>在上一篇博客中我讲到在公司低代码的前端通过输出流传excel会导致中文乱码的问题，后来在我的尝试下这个问题有了一个新的解决方案。</p>
+<h2 id="将excel文件转成base64">将excel文件转成base64</h2>
+<p>在后续功能开发中，我又遇到了需要在输出流中传文件的需求，在此之中我发现从后端传JSON格式的数据，从前端直接使用下载工具函数下载是不会乱码的，而JSON实际就是字符串。</p>
 <p>于是我就想，我先在后端将excel文件转成base64编码的字符串再放进流中传输是不是就不会乱码了</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">base64</span> <span class="operator">=</span> Base64.getEncoder().encodeToString(FileUtil.fileToByteArray(file));</span><br><span class="line">FileUtil.export(response, fileName, base64.getBytes(StandardCharsets.UTF_8));</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/img_v3_02ha_3e8905e1-94f3-4087-bbb2-ff3ab28cebnh.jpg" alt="前端代码"></p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/img_v3_02ha_3e8905e1-94f3-4087-bbb2-ff3ab28cebnh.jpg"
+alt="前端代码" />
+<figcaption aria-hidden="true">前端代码</figcaption>
+</figure>
 <p>下载！</p>
-<p><img src="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241209092404782.png" alt="导出excel"></p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241209092404782.png"
+alt="导出excel" />
+<figcaption aria-hidden="true">导出excel</figcaption>
+</figure>
 <p>终于是可以了。。。</p>
 
     </div>

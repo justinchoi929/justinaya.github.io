@@ -19,30 +19,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.justinchoi.top","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.18.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="关于volatile关键字的一些问题">
+    <meta name="description" content="在搭建actuator+Prometheus监控时遇到的问题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="volatile关键字">
-<meta property="og:url" content="http://www.justinchoi.top/2024/03/23/Java/%E5%B9%B6%E5%8F%91/volatile%E5%85%B3%E9%94%AE%E5%AD%97/index.html">
+<meta property="og:title" content="解决SpringBoot集成actuator和Prometheus访问报404">
+<meta property="og:url" content="http://www.justinchoi.top/2024/12/11/Java/%E5%AE%9E%E4%B9%A0/%E8%A7%A3%E5%86%B3SpringBoot%E9%9B%86%E6%88%90actuator%E5%92%8CPrometheus%E8%AE%BF%E9%97%AE%E6%8A%A5404/index.html">
 <meta property="og:site_name" content="文文的短发">
-<meta property="og:description" content="关于volatile关键字的一些问题">
+<meta property="og:description" content="在搭建actuator+Prometheus监控时遇到的问题">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-23T12:15:24.000Z">
-<meta property="article:modified_time" content="2024-03-28T10:21:50.634Z">
+<meta property="article:published_time" content="2024-12-11T01:10:35.000Z">
+<meta property="article:modified_time" content="2024-12-11T01:32:46.351Z">
 <meta property="article:author" content="文文的短发">
 <meta property="article:tag" content="Java">
-<meta property="article:tag" content="八股">
-<meta property="article:tag" content="并发">
+<meta property="article:tag" content="实习">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://www.justinchoi.top/2024/03/23/Java/%E5%B9%B6%E5%8F%91/volatile%E5%85%B3%E9%94%AE%E5%AD%97/">
+<link rel="canonical" href="http://www.justinchoi.top/2024/12/11/Java/%E5%AE%9E%E4%B9%A0/%E8%A7%A3%E5%86%B3SpringBoot%E9%9B%86%E6%88%90actuator%E5%92%8CPrometheus%E8%AE%BF%E9%97%AE%E6%8A%A5404/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.justinchoi.top/2024/03/23/Java/%E5%B9%B6%E5%8F%91/volatile%E5%85%B3%E9%94%AE%E5%AD%97/","path":"2024/03/23/Java/并发/volatile关键字/","title":"volatile关键字"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://www.justinchoi.top/2024/12/11/Java/%E5%AE%9E%E4%B9%A0/%E8%A7%A3%E5%86%B3SpringBoot%E9%9B%86%E6%88%90actuator%E5%92%8CPrometheus%E8%AE%BF%E9%97%AE%E6%8A%A5404/","path":"2024/12/11/Java/实习/解决SpringBoot集成actuator和Prometheus访问报404/","title":"解决SpringBoot集成actuator和Prometheus访问报404"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>volatile关键字 | 文文的短发</title>
+<title>解决SpringBoot集成actuator和Prometheus访问报404 | 文文的短发</title>
   
 
 
@@ -145,7 +144,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-text">Java内存模型是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#volatile%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-text">volatile关键字的作用</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3spring-boot%E9%9B%86%E6%88%90actuator%E5%92%8Cprometheus%E8%AE%BF%E9%97%AE%E6%8A%A5404"><span class="nav-text">解决Spring
+Boot集成actuator和Prometheus访问报404</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%AF%BB%E5%9B%A0"><span class="nav-text">问题寻因</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96"><span class="nav-text">依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3"><span class="nav-text">问题解决</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -224,7 +224,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.justinchoi.top/2024/03/23/Java/%E5%B9%B6%E5%8F%91/volatile%E5%85%B3%E9%94%AE%E5%AD%97/">
+    <link itemprop="mainEntityOfPage" href="http://www.justinchoi.top/2024/12/11/Java/%E5%AE%9E%E4%B9%A0/%E8%A7%A3%E5%86%B3SpringBoot%E9%9B%86%E6%88%90actuator%E5%92%8CPrometheus%E8%AE%BF%E9%97%AE%E6%8A%A5404/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/headimg.JPG">
@@ -237,12 +237,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="volatile关键字 | 文文的短发">
+      <meta itemprop="name" content="解决SpringBoot集成actuator和Prometheus访问报404 | 文文的短发">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          volatile关键字
+          解决SpringBoot集成actuator和Prometheus访问报404
         </h1>
 
         <div class="post-meta-container">
@@ -252,15 +252,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2024-03-23 20:15:24" itemprop="dateCreated datePublished" datetime="2024-03-23T20:15:24+08:00">2024-03-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-03-28 18:21:50" itemprop="dateModified" datetime="2024-03-28T18:21:50+08:00">2024-03-28</time>
+      <time title="创建时间：2024-12-11 09:10:35 / 修改时间：09:32:46" itemprop="dateCreated datePublished" datetime="2024-12-11T09:10:35+08:00">2024-12-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -268,11 +262,11 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Java%E5%85%AB%E8%82%A1/" itemprop="url" rel="index"><span itemprop="name">Java八股</span></a>
+          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
         </span>
           ，
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Java%E5%85%AB%E8%82%A1/%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">并发</span></a>
+          <a href="/categories/Java/%E9%97%AE%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">问题</span></a>
         </span>
     </span>
 
@@ -286,34 +280,59 @@
     
     
     <div class="post-body" itemprop="articleBody"><blockquote>
-<p>关于volatile关键字的一些问题</p>
+<p>在搭建actuator+Prometheus监控时遇到的问题</p>
 </blockquote>
 <span id="more"></span>
-<h1 id="java内存模型是什么">Java内存模型是什么</h1>
-<p>如下面两张图所示（这里JavaGuide画的图就很好，直接拿来了，侵删），变量是放在主存中的，每个线程都有自己的工作内存（本地内存），线程运行时将主存中的数据复制到工作内存当中，对数据的任何操作都是基于自己的工作内存进行的，之后再将更新后的数据刷新到主存。</p>
-<p><strong>当前线程不能直接操作主存和其他线程工作内存中的数据。</strong></p>
+<h1 id="解决spring-boot集成actuator和prometheus访问报404">解决Spring
+Boot集成actuator和Prometheus访问报404</h1>
+<h2 id="前言">前言</h2>
+<p>最近在尝试搭建 spring actuator + Prometheus
+的接口健康监测系统，在测试 actuator 的时候遇到了一个问题，就是访问 <a
+target="_blank" rel="noopener" href="http://localhost:8088/api/actuator/health">localhost:8088/api/actuator/health</a>
+是正常的，但是访问 <a
+target="_blank" rel="noopener" href="http://localhost:8088/api/actuator/prometheus">localhost:8088/api/actuator/prometheus</a>
+页面就会<code>404</code>：</p>
 <figure>
 <img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232024135.png"
-alt="JMM(Java 内存模型)" />
-<figcaption aria-hidden="true">JMM(Java 内存模型)</figcaption>
+src="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241211091832871.png"
+alt="404页面" />
+<figcaption aria-hidden="true">404页面</figcaption>
 </figure>
+<h2 id="问题寻因">问题寻因</h2>
+<h3 id="依赖">依赖</h3>
+<p>我先检查了依赖是否导入的正确</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.7.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.micrometer<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>micrometer-registry-prometheus<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.12.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>看起来没什么问题，这里需要导入两个依赖，一个是<code>spring-boot-starter-actuator</code>还有就是<code>micrometer-registry-prometheus</code></p>
+<h3 id="配置文件">配置文件</h3>
+<p>application.yaml:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#spring actuator配置</span></span><br><span class="line"><span class="attr">management:</span></span><br><span class="line">  <span class="attr">endpoints:</span></span><br><span class="line">    <span class="attr">web:</span></span><br><span class="line">      <span class="attr">exposure:</span></span><br><span class="line">        <span class="attr">include:</span> <span class="string">&#x27;*&#x27;</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">endpoint:</span></span><br><span class="line">    <span class="attr">health:</span></span><br><span class="line">      <span class="attr">show-details:</span> <span class="string">always</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">metrics:</span></span><br><span class="line">    <span class="attr">tags:</span></span><br><span class="line">      <span class="attr">application:</span> <span class="string">actuator-demo</span></span><br></pre></td></tr></table></figure>
+<p>好像也没什么问题，这里为了方便把所有端口都暴露了，实际在生产环境中应该仔细选择要暴露的端口，不然会有安全问题</p>
+<h2 id="问题解决">问题解决</h2>
+<p>那好像都没什么问题啊，后来通过一顿搜索，终于发现是依赖版本的原因</p>
+<p>项目使用的 spring boot 版本是<code>2.7.9</code>：</p>
 <figure>
 <img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232024275.png"
-alt="JMM(Java 内存模型)强制在主存中进行读取" />
-<figcaption aria-hidden="true">JMM(Java
-内存模型)强制在主存中进行读取</figcaption>
+src="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241211092818604.png"
+alt="项目依赖" />
+<figcaption aria-hidden="true">项目依赖</figcaption>
 </figure>
-<h1 id="volatile关键字的作用">volatile关键字的作用</h1>
-<p><strong>volatile关键字保证了变量的立即可见性</strong></p>
-<p><code>线程A</code>与<code>线程B</code>并发运行时可能出现这种情况，如果<code>线程A</code>修改了工作内存中的数据且还未同步到主存，那么<code>线程B</code>读取的主存中的数据就不是最新值。当变量被volatile关键字修饰后，任何线程对它的写操作都会强制将工作内存中的最新值刷新到主存，同时使其他线程工作内存中的变量缓存无效，这样其他线程使用缓存时就会重新到主存中读取最新值。</p>
-<p>即如果我们将变量声明为 <strong><code>volatile</code></strong>
-，这就指示
-JVM，这个变量是共享且不稳定的，每次使用它都到主存中进行读取。</p>
-<p><strong><code>volatile</code>
-关键字能保证数据的可见性，但不能保证数据的原子性。<code>synchronized</code>
-关键字两者都能保证。</strong></p>
+<p>而 Spring Boot 2.7
+对应的<code>Micrometer</code>版本是<code>1.9</code>：</p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241211092956054.png"
+alt="release-notes" />
+<figcaption aria-hidden="true">release-notes</figcaption>
+</figure>
+<p>这在<a
+target="_blank" rel="noopener" href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.7-Release-Notes">Spring
+Boot 2.7 Release Notes · spring-projects/spring-boot
+Wiki</a>可以查询</p>
+<p>修改好后再访问<a
+target="_blank" rel="noopener" href="http://localhost:8088/api/actuator/prometheus">localhost:8088/api/actuator/prometheus</a>：</p>
+<p><img
+src="https://raw.githubusercontent.com/justinchoi929/My-ImgHost/main/img/image-20241211093152533.png" /></p>
+<p>就可以看到正常输出了以 Prometheus 的标准形式输出的项目信息</p>
 
     </div>
 
@@ -324,22 +343,18 @@ JVM，这个变量是共享且不稳定的，每次使用它都到主存中进�
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Java/" rel="tag"># Java</a>
-              <a href="/tags/%E5%85%AB%E8%82%A1/" rel="tag"># 八股</a>
-              <a href="/tags/%E5%B9%B6%E5%8F%91/" rel="tag"># 并发</a>
+              <a href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag"># 实习</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2024/03/23/Java/%E5%B9%B6%E5%8F%91/Java%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%96%B9%E5%BC%8F/" rel="prev" title="Java创建线程的方式">
-                  <i class="fa fa-angle-left"></i> Java创建线程的方式
+                <a href="/2024/12/09/Java/%E5%AE%9E%E4%B9%A0/%E8%A7%A3%E5%86%B3java-lang-IllegalStateException-Cannot-call-sendError-after-the-response-has-been-committed/" rel="prev" title="解决java.lang.IllegalStateException: Cannot call sendError() after the response has been committed">
+                  <i class="fa fa-angle-left"></i> 解决java.lang.IllegalStateException: Cannot call sendError() after the response has been committed
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/03/23/Java/%E5%B9%B6%E5%8F%91/synchronized%E5%85%B3%E9%94%AE%E5%AD%97/" rel="next" title="synchronized关键字">
-                  synchronized关键字 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>

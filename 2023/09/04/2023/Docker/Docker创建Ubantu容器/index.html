@@ -159,7 +159,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -288,40 +288,39 @@
 <p>为Docker创建一个Ubantu容器</p>
 </blockquote>
 <span id="more"></span>
-
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>今天上了<code>大数据挖掘</code>和<code>Linux程序设计</code>的第一课，发现老师都要求在电脑上搞个虚拟机方便以后的操作，所以我准备使用安装Ubantu的Docker容器来作为虚拟机使用。</p>
-<h1 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h1><h2 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run [option] 镜像名 [像容器中传入的命令]</span><br></pre></td></tr></table></figure>
-
-<h3 id="常用可选说明"><a href="#常用可选说明" class="headerlink" title="常用可选说明"></a>常用可选说明</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">-</span>i 表示以“交互模式”运行容器</span><br><span class="line"> <span class="operator">-</span>t 表示容器启动后会进入其命令行。加入这两个参数后，容器创建就能登录进去。即 分配一个伪终端。</span><br><span class="line"> <span class="comment">--name 为创建的容器命名</span></span><br><span class="line"> <span class="operator">-</span>v 表示目录映射关系(前者是宿主机目录，后者是映射到宿主机上的目录，即 宿主机目录:容器中目录)，可以使 用多个<span class="operator">-</span>v 做多个目录或文件映射。注意:最好做目录映射，在宿主机上做修改，然后 共享到容器上。</span><br><span class="line"> <span class="operator">-</span>d 在run后面加上<span class="operator">-</span>d参数,则会创建一个守护式容器在后台运行(这样创建容器后不 会自动登录容器，如果只加<span class="operator">-</span>i <span class="operator">-</span>t 两个参数，        创建后就会自动进去容器)。</span><br><span class="line"> <span class="operator">-</span>p 表示端口映射，前者是宿主机端口，后者是容器内的映射端口。可以使用多个<span class="operator">-</span>p 做多个端口映射</span><br><span class="line"> <span class="operator">-</span>e 为容器设置环境变量</span><br><span class="line"> <span class="comment">--network=host 表示将主机的网络环境映射到容器中，容器的网络与主机相同</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="交互式容器"><a href="#交互式容器" class="headerlink" title="交互式容器"></a>交互式容器</h3><p>例如，创建一个交互式容器，并命名为myubuntu</p>
+<h1 id="前言">前言</h1>
+<p>今天上了<code>大数据挖掘</code>和<code>Linux程序设计</code>的第一课，发现老师都要求在电脑上搞个虚拟机方便以后的操作，所以我准备使用安装Ubantu的Docker容器来作为虚拟机使用。</p>
+<h1 id="操作">操作</h1>
+<h2 id="基础命令">基础命令</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run [option] 镜像名 [像容器中传入的命令]</span><br></pre></td></tr></table></figure>
+<h3 id="常用可选说明">常用可选说明</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">-</span>i 表示以“交互模式”运行容器</span><br><span class="line"> <span class="operator">-</span>t 表示容器启动后会进入其命令行。加入这两个参数后，容器创建就能登录进去。即 分配一个伪终端。</span><br><span class="line"> <span class="comment">--name 为创建的容器命名</span></span><br><span class="line"> <span class="operator">-</span>v 表示目录映射关系(前者是宿主机目录，后者是映射到宿主机上的目录，即 宿主机目录:容器中目录)，可以使 用多个<span class="operator">-</span>v 做多个目录或文件映射。注意:最好做目录映射，在宿主机上做修改，然后 共享到容器上。</span><br><span class="line"> <span class="operator">-</span>d 在run后面加上<span class="operator">-</span>d参数,则会创建一个守护式容器在后台运行(这样创建容器后不 会自动登录容器，如果只加<span class="operator">-</span>i <span class="operator">-</span>t 两个参数，        创建后就会自动进去容器)。</span><br><span class="line"> <span class="operator">-</span>p 表示端口映射，前者是宿主机端口，后者是容器内的映射端口。可以使用多个<span class="operator">-</span>p 做多个端口映射</span><br><span class="line"> <span class="operator">-</span>e 为容器设置环境变量</span><br><span class="line"> <span class="comment">--network=host 表示将主机的网络环境映射到容器中，容器的网络与主机相同</span></span><br></pre></td></tr></table></figure>
+<h3 id="交互式容器">交互式容器</h3>
+<p>例如，创建一个交互式容器，并命名为myubuntu</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --name=myubuntu ubuntu /bin/bash</span><br></pre></td></tr></table></figure>
-
 <p>在容器中可以随意执行linux命令，就是一个ubuntu的环境，当执行exit命令退出时，该容器也随之停止</p>
-<h3 id="守护式容器"><a href="#守护式容器" class="headerlink" title="守护式容器"></a>守护式容器</h3><p>创建一个守护式容器:如果对于一个需要长期运行的容器来说，我们可以创建一个守护式容器。在容器内部exit退出时，容器也不会停止。</p>
+<h3 id="守护式容器">守护式容器</h3>
+<p>创建一个守护式容器:如果对于一个需要长期运行的容器来说，我们可以创建一个守护式容器。在容器内部exit退出时，容器也不会停止。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -dit --name=myubuntu2 ubuntu</span><br></pre></td></tr></table></figure>
-
-<h3 id="进入已运行的容器"><a href="#进入已运行的容器" class="headerlink" title="进入已运行的容器"></a>进入已运行的容器</h3><p>docker exec -it 容器名或容器id 进入后执行的第一个命令</p>
+<h3 id="进入已运行的容器">进入已运行的容器</h3>
+<p>docker exec -it 容器名或容器id 进入后执行的第一个命令</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it myubuntu2 /bin/bash</span><br></pre></td></tr></table></figure>
-
-<h3 id="查看容器"><a href="#查看容器" class="headerlink" title="查看容器"></a>查看容器</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 列出本机正在运行的容器</span><br><span class="line">docker container ls</span><br><span class="line"></span><br><span class="line"># 列出本机所有容器，包括已经终止运行的</span><br><span class="line">docker container ls --all</span><br></pre></td></tr></table></figure>
-
-<h3 id="停止与启动容器"><a href="#停止与启动容器" class="headerlink" title="停止与启动容器"></a>停止与启动容器</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 停止一个已经在运行的容器</span><br><span class="line">docker container stop 容器名或容器id</span><br><span class="line"></span><br><span class="line"># 启动一个已经停止的容器</span><br><span class="line">docker container start 容器名或容器id</span><br><span class="line"></span><br><span class="line"># kill掉一个已经在运行的容器</span><br><span class="line">docker container kill 容器名或容器id</span><br></pre></td></tr></table></figure>
-
-<h3 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container rm 容器名或容器id</span><br></pre></td></tr></table></figure>
-
-<h3 id="将容器保存为镜像"><a href="#将容器保存为镜像" class="headerlink" title="将容器保存为镜像"></a>将容器保存为镜像</h3><p>我们可以通过如下命令将容器保存为镜像</p>
+<h3 id="查看容器">查看容器</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 列出本机正在运行的容器</span><br><span class="line">docker container ls</span><br><span class="line"></span><br><span class="line"># 列出本机所有容器，包括已经终止运行的</span><br><span class="line">docker container ls --all</span><br></pre></td></tr></table></figure>
+<h3 id="停止与启动容器">停止与启动容器</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 停止一个已经在运行的容器</span><br><span class="line">docker container stop 容器名或容器id</span><br><span class="line"></span><br><span class="line"># 启动一个已经停止的容器</span><br><span class="line">docker container start 容器名或容器id</span><br><span class="line"></span><br><span class="line"># kill掉一个已经在运行的容器</span><br><span class="line">docker container kill 容器名或容器id</span><br></pre></td></tr></table></figure>
+<h3 id="删除容器">删除容器</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container rm 容器名或容器id</span><br></pre></td></tr></table></figure>
+<h3 id="将容器保存为镜像">将容器保存为镜像</h3>
+<p>我们可以通过如下命令将容器保存为镜像</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit 容器名 镜像名</span><br></pre></td></tr></table></figure>
-
-<h3 id="镜像备份与迁移"><a href="#镜像备份与迁移" class="headerlink" title="镜像备份与迁移"></a>镜像备份与迁移</h3><p>我们可以通过save命令将镜像打包成文件，拷贝给别人使用</p>
+<h3 id="镜像备份与迁移">镜像备份与迁移</h3>
+<p>我们可以通过save命令将镜像打包成文件，拷贝给别人使用</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker save -o 保存的文件名 镜像名</span><br></pre></td></tr></table></figure>
-
 <p>如:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker save -o ./ubuntu.tar ubuntu</span><br></pre></td></tr></table></figure>
-
 <p>在拿到镜像文件后，可以通过load方法，将镜像加载到本地</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load -i ./ubuntu.tar</span><br></pre></td></tr></table></figure>
-
 
     </div>
 
