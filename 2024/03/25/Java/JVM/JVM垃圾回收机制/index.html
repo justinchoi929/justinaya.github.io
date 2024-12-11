@@ -26,6 +26,28 @@
 <meta property="og:site_name" content="文文的短发">
 <meta property="og:description" content="关于JVM的垃圾回收机制的一些问题">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403252244399.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403252253483.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403272045933.JPG">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403272046857.JPG">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261010174.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261011679.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261227494.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261230609.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261235085.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261332145.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261345866.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261354107.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261355917.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261355182.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261355479.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403271557685.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403271557105.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403271557827.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403271557352.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403271600752.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403271600601.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403271600269.png">
 <meta property="article:published_time" content="2024-03-25T12:11:43.000Z">
 <meta property="article:modified_time" content="2024-03-27T12:46:19.357Z">
 <meta property="article:author" content="文文的短发">
@@ -33,6 +55,7 @@
 <meta property="article:tag" content="八股">
 <meta property="article:tag" content="JVM">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403252244399.png">
 
 
 <link rel="canonical" href="http://www.justinchoi.top/2024/03/25/Java/JVM/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/">
@@ -145,7 +168,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%9E%83%E5%9C%BE"><span class="nav-text">什么样的对象是垃圾？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E5%9E%83%E5%9C%BE%E5%9E%83%E5%9C%BE%E5%88%A4%E6%96%AD%E7%AE%97%E6%B3%95"><span class="nav-text">如何判断垃圾（垃圾判断算法）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E6%B3%95"><span class="nav-text">引用计数法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95"><span class="nav-text">可达性分析算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E4%BD%9C%E4%B8%BAgc-roots%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="nav-text">可作为GC Roots的对象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#stop-the-world"><span class="nav-text">Stop The World</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%A0%87%E8%AE%B0%E9%9C%80%E8%A6%81%E5%9B%9E%E6%94%B6%E7%9A%84%E5%9E%83%E5%9C%BE%E4%B8%89%E8%89%B2%E6%A0%87%E8%AE%B0%E7%AE%97%E6%B3%95"><span class="nav-text">如何标记需要回收的垃圾（三色标记算法）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E8%89%B2%E6%A0%87%E8%AE%B0%E7%AE%97%E6%B3%95%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-text">三色标记算法是什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%89%E8%89%B2"><span class="nav-text">什么是三色</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E8%89%B2%E6%A0%87%E8%AE%B0%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="nav-text">三色标记的步骤</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9B%9E%E6%94%B6%E5%9E%83%E5%9C%BE%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95"><span class="nav-text">如何回收垃圾（垃圾收集算法）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95"><span class="nav-text">标记-清除算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95"><span class="nav-text">复制算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0-%E6%95%B4%E7%90%86%E7%AE%97%E6%B3%95"><span class="nav-text">标记-整理算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E4%BB%A3%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95"><span class="nav-text">分代收集算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B0%E7%94%9F%E4%BB%A3%E5%92%8C%E8%80%81%E5%B9%B4%E4%BB%A3"><span class="nav-text">新生代和老年代</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#eden%E5%8C%BA"><span class="nav-text">Eden区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#survivor%E5%8C%BA"><span class="nav-text">Survivor区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81survivor%E5%8C%BA"><span class="nav-text">1、为什么需要Survivor区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#survivor-%E5%8C%BA%E4%B8%BA%E5%95%A5%E5%88%92%E5%88%86%E4%B8%BA%E4%B8%A4%E5%9D%97"><span class="nav-text">2、Survivor 区为啥划分为两块？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#old%E5%8C%BA"><span class="nav-text">Old区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E5%AF%B9%E8%B1%A1"><span class="nav-text">1、大对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%BF%E6%9C%9F%E5%AD%98%E6%B4%BB%E5%AF%B9%E8%B1%A1"><span class="nav-text">2、长期存活对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%AF%B9%E8%B1%A1%E5%B9%B4%E9%BE%84"><span class="nav-text">3、动态对象年龄</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8"><span class="nav-text">垃圾收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E4%BB%A3%E6%94%B6%E9%9B%86%E5%99%A8"><span class="nav-text">分代收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cms"><span class="nav-text">CMS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%8C%BA%E6%94%B6%E9%9B%86%E5%99%A8"><span class="nav-text">分区收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#g1"><span class="nav-text">G1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zgc"><span class="nav-text">ZGC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E9%92%88%E6%9F%93%E8%89%B2"><span class="nav-text">指针染色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%BB%E5%B1%8F%E9%9A%9C"><span class="nav-text">读屏障</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#zgc-%E7%9A%84%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B"><span class="nav-text">ZGC 的工作过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#stop-the-world-%E6%9A%82%E5%81%9C%E9%98%B6%E6%AE%B5"><span class="nav-text">Stop-The-World 暂停阶段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E9%98%B6%E6%AE%B5"><span class="nav-text">并发阶段</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%9E%83%E5%9C%BE%EF%BC%9F"><span class="nav-text">什么样的对象是垃圾？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E5%9E%83%E5%9C%BE%EF%BC%88%E5%9E%83%E5%9C%BE%E5%88%A4%E6%96%AD%E7%AE%97%E6%B3%95%EF%BC%89"><span class="nav-text">如何判断垃圾（垃圾判断算法）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E6%B3%95"><span class="nav-text">引用计数法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95"><span class="nav-text">可达性分析算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E4%BD%9C%E4%B8%BAGC-Roots%E7%9A%84%E5%AF%B9%E8%B1%A1"><span class="nav-text">可作为GC Roots的对象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Stop-The-World"><span class="nav-text">Stop The World</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%A0%87%E8%AE%B0%E9%9C%80%E8%A6%81%E5%9B%9E%E6%94%B6%E7%9A%84%E5%9E%83%E5%9C%BE%EF%BC%88%E4%B8%89%E8%89%B2%E6%A0%87%E8%AE%B0%E7%AE%97%E6%B3%95%EF%BC%89"><span class="nav-text">如何标记需要回收的垃圾（三色标记算法）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E8%89%B2%E6%A0%87%E8%AE%B0%E7%AE%97%E6%B3%95%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-text">三色标记算法是什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%89%E8%89%B2"><span class="nav-text">什么是三色</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E8%89%B2%E6%A0%87%E8%AE%B0%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="nav-text">三色标记的步骤</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%9B%9E%E6%94%B6%E5%9E%83%E5%9C%BE%EF%BC%88%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95%EF%BC%89"><span class="nav-text">如何回收垃圾（垃圾收集算法）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95"><span class="nav-text">标记-清除算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95"><span class="nav-text">复制算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0-%E6%95%B4%E7%90%86%E7%AE%97%E6%B3%95"><span class="nav-text">标记-整理算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E4%BB%A3%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95"><span class="nav-text">分代收集算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B0%E7%94%9F%E4%BB%A3%E5%92%8C%E8%80%81%E5%B9%B4%E4%BB%A3"><span class="nav-text">新生代和老年代</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Eden%E5%8C%BA"><span class="nav-text">Eden区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Survivor%E5%8C%BA"><span class="nav-text">Survivor区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81Survivor%E5%8C%BA"><span class="nav-text">1、为什么需要Survivor区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81Survivor-%E5%8C%BA%E4%B8%BA%E5%95%A5%E5%88%92%E5%88%86%E4%B8%BA%E4%B8%A4%E5%9D%97%EF%BC%9F"><span class="nav-text">2、Survivor 区为啥划分为两块？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Old%E5%8C%BA"><span class="nav-text">Old区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81%E5%A4%A7%E5%AF%B9%E8%B1%A1"><span class="nav-text">1、大对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E9%95%BF%E6%9C%9F%E5%AD%98%E6%B4%BB%E5%AF%B9%E8%B1%A1"><span class="nav-text">2、长期存活对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E5%8A%A8%E6%80%81%E5%AF%B9%E8%B1%A1%E5%B9%B4%E9%BE%84"><span class="nav-text">3、动态对象年龄</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8"><span class="nav-text">垃圾收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E4%BB%A3%E6%94%B6%E9%9B%86%E5%99%A8"><span class="nav-text">分代收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CMS"><span class="nav-text">CMS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%8C%BA%E6%94%B6%E9%9B%86%E5%99%A8"><span class="nav-text">分区收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#G1"><span class="nav-text">G1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZGC"><span class="nav-text">ZGC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E9%92%88%E6%9F%93%E8%89%B2"><span class="nav-text">指针染色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%BB%E5%B1%8F%E9%9A%9C"><span class="nav-text">读屏障</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ZGC-%E7%9A%84%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B"><span class="nav-text">ZGC 的工作过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Stop-The-World-%E6%9A%82%E5%81%9C%E9%98%B6%E6%AE%B5"><span class="nav-text">Stop-The-World 暂停阶段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E9%98%B6%E6%AE%B5"><span class="nav-text">并发阶段</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -166,7 +189,7 @@
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -289,329 +312,138 @@
 <p>关于JVM的垃圾回收机制的一些问题</p>
 </blockquote>
 <span id="more"></span>
-<h1 id="什么样的对象是垃圾">什么样的对象是垃圾？</h1>
-<p>如果一个对象不会再被引用了，那么这个对象就是垃圾。</p>
-<h1 id="如何判断垃圾垃圾判断算法">如何判断垃圾（垃圾判断算法）</h1>
-<h2 id="引用计数法">引用计数法</h2>
-<p>引用计数法为每个对象引入计数器，当对象被引用时计数器加1，当引用失效时计数器减1，计数器为0的话则表示这个对象不可达，即为垃圾。</p>
+
+<h1 id="什么样的对象是垃圾？"><a href="#什么样的对象是垃圾？" class="headerlink" title="什么样的对象是垃圾？"></a>什么样的对象是垃圾？</h1><p>如果一个对象不会再被引用了，那么这个对象就是垃圾。</p>
+<h1 id="如何判断垃圾（垃圾判断算法）"><a href="#如何判断垃圾（垃圾判断算法）" class="headerlink" title="如何判断垃圾（垃圾判断算法）"></a>如何判断垃圾（垃圾判断算法）</h1><h2 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h2><p>引用计数法为每个对象引入计数器，当对象被引用时计数器加1，当引用失效时计数器减1，计数器为0的话则表示这个对象不可达，即为垃圾。</p>
 <p><strong>这个方法实现简单，效率高，但是目前主流的虚拟机中并没有选择这个算法来管理内存，其最主要的原因是它很难解决对象之间循环引用的问题。</strong></p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403252244399.png"
-alt="对象之间循环引用" />
-<figcaption aria-hidden="true">对象之间循环引用</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403252244399.png" alt="对象之间循环引用"></p>
 <p>这样其他对象都不会引用这两个对象，但因为这两个对象互相引用，所以计数器永远不会为0，垃圾无法被回收，所以我们一般不使用这个回收算法。</p>
-<h2 id="可达性分析算法">可达性分析算法</h2>
-<p>这个算法的基本思想就是通过一系列的称为 <strong>“GC Roots”</strong>
-的对象作为起点，从这些节点开始向下搜索，节点所走过的路径称为引用链，当一个对象到
-GC Roots
-没有任何引用链相连的话，则证明此对象是不可用的，需要被回收。</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403252253483.png"
-alt="可达性分析算法" />
-<figcaption aria-hidden="true">可达性分析算法</figcaption>
-</figure>
+<h2 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h2><p>这个算法的基本思想就是通过一系列的称为 <strong>“GC Roots”</strong> 的对象作为起点，从这些节点开始向下搜索，节点所走过的路径称为引用链，当一个对象到 GC Roots 没有任何引用链相连的话，则证明此对象是不可用的，需要被回收。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403252253483.png" alt="可达性分析算法"></p>
 <p>如上图土黄色的对象就是<code>GC Roots</code>可达的，绿色标记的对象间虽然有引用关系，但它们，<code>GC Roots</code>不可达，所以需要被回收。</p>
-<h3 id="可作为gc-roots的对象">可作为GC Roots的对象</h3>
-<ul>
+<h3 id="可作为GC-Roots的对象"><a href="#可作为GC-Roots的对象" class="headerlink" title="可作为GC Roots的对象"></a>可作为GC Roots的对象</h3><ul>
 <li>虚拟机栈引用的对象</li>
 <li>本地方法栈引用的对象</li>
 <li>静态成员引用的对象</li>
 <li>常量引用的对象</li>
 </ul>
-<p>引用类型总结请看<a target="_blank" rel="noopener" href="https://javaguide.cn/">JavaGuide</a>的总结<a
-target="_blank" rel="noopener" href="https://javaguide.cn/java/jvm/jvm-garbage-collection.html#%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95">引用类型总结</a></p>
-<h1 id="stop-the-world">Stop The World</h1>
-<p>"Stop The World"是 Java 垃圾收集中的一个重要概念，通常简写为
-<strong>STW</strong>。在垃圾收集过程中，JVM
-会暂停所有的用户线程，这种暂停被称为"Stop The World"事件。</p>
+<p>引用类型总结请看<a target="_blank" rel="noopener" href="https://javaguide.cn/">JavaGuide</a>的总结<a target="_blank" rel="noopener" href="https://javaguide.cn/java/jvm/jvm-garbage-collection.html#%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95">引用类型总结</a></p>
+<h1 id="Stop-The-World"><a href="#Stop-The-World" class="headerlink" title="Stop The World"></a>Stop The World</h1><p>“Stop The World”是 Java 垃圾收集中的一个重要概念，通常简写为 <strong>STW</strong>。在垃圾收集过程中，JVM 会暂停所有的用户线程，这种暂停被称为”Stop The World”事件。</p>
 <p>这么做的主要原因是为了防止在垃圾收集过程中，用户线程修改了堆中的对象，导致垃圾收集器无法准确地收集垃圾。</p>
-<p>值得注意的是，"Stop The World"事件会对 Java
-应用的性能产生影响。如果停顿时间过长，就会导致应用的响应时间变长，对于对实时性要求较高的应用，如交易系统、游戏服务器等，这种情况是不能接受的。</p>
-<p>因此，在选择和调优垃圾收集器时，需要考虑其停顿时间。Java
-中的一些垃圾收集器，如 G1 和 ZGC，都会尽可能地减少了"Stop The
-World"的时间，通过并发的垃圾收集，提高应用的响应性能。</p>
-<p>总的来说，"Stop The World"是 Java
-垃圾收集中必须面对的一个挑战，其目标是在保证内存的有效利用和应用的响应性能之间找到一个平衡。</p>
-<h1
-id="如何标记需要回收的垃圾三色标记算法">如何标记需要回收的垃圾（三色标记算法）</h1>
-<h2 id="三色标记算法是什么">三色标记算法是什么</h2>
-<p>三色标记算法是一种常见的垃圾收集的标记算法，属于根可达算法的一个分支，垃圾收集器CMS，G1在标记垃圾过程中就使用该算法。</p>
-<h3 id="什么是三色">什么是三色</h3>
-<p>三色指的是白色，灰色，黑色（white，gray，black）。抽象的理解，可以认为垃圾收集器在标记阶段将对象染成不同的颜色，根据不同的颜色做不同处理。那么三种染色的对象分别指什么呢？</p>
+<p>值得注意的是，”Stop The World”事件会对 Java 应用的性能产生影响。如果停顿时间过长，就会导致应用的响应时间变长，对于对实时性要求较高的应用，如交易系统、游戏服务器等，这种情况是不能接受的。</p>
+<p>因此，在选择和调优垃圾收集器时，需要考虑其停顿时间。Java 中的一些垃圾收集器，如 G1 和 ZGC，都会尽可能地减少了”Stop The World”的时间，通过并发的垃圾收集，提高应用的响应性能。</p>
+<p>总的来说，”Stop The World”是 Java 垃圾收集中必须面对的一个挑战，其目标是在保证内存的有效利用和应用的响应性能之间找到一个平衡。</p>
+<h1 id="如何标记需要回收的垃圾（三色标记算法）"><a href="#如何标记需要回收的垃圾（三色标记算法）" class="headerlink" title="如何标记需要回收的垃圾（三色标记算法）"></a>如何标记需要回收的垃圾（三色标记算法）</h1><h2 id="三色标记算法是什么"><a href="#三色标记算法是什么" class="headerlink" title="三色标记算法是什么"></a>三色标记算法是什么</h2><p>三色标记算法是一种常见的垃圾收集的标记算法，属于根可达算法的一个分支，垃圾收集器CMS，G1在标记垃圾过程中就使用该算法。</p>
+<h3 id="什么是三色"><a href="#什么是三色" class="headerlink" title="什么是三色"></a>什么是三色</h3><p>三色指的是白色，灰色，黑色（white，gray，black）。抽象的理解，可以认为垃圾收集器在标记阶段将对象染成不同的颜色，根据不同的颜色做不同处理。那么三种染色的对象分别指什么呢？</p>
 <ul>
 <li>白色：未被扫描到的对象，可达性分析后最终为白色的对象就是垃圾对象（在标记开始时堆内存中的对象都白色的）</li>
 <li>灰色：对象本身被扫描（根可达对象），但该对象的子对象未完成扫描；灰色是一个<code>过渡色</code>，最终都会被标记为<code>黑色</code>。</li>
 <li>黑色：根对象或者该对象与它的子对象均被扫描（存活的对象，不会被清理）</li>
 </ul>
-<h2 id="三色标记的步骤">三色标记的步骤</h2>
-<p><img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403272045933.JPG" /></p>
-<p><img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403272046857.JPG" /></p>
-<h1 id="如何回收垃圾垃圾收集算法">如何回收垃圾（垃圾收集算法）</h1>
-<h2 id="标记-清除算法">标记-清除算法</h2>
-<p>标记-清除（Mark-and-Sweep）算法分为“标记（Mark）”和“清除（Sweep）”阶段：首先标记出所有需要回收的对象（用可达性算法），在标记完成后统一回收掉这些对象。</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261010174.png"
-alt="算法演示" />
-<figcaption aria-hidden="true">算法演示</figcaption>
-</figure>
+<h2 id="三色标记的步骤"><a href="#三色标记的步骤" class="headerlink" title="三色标记的步骤"></a>三色标记的步骤</h2><p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403272045933.JPG"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403272046857.JPG"></p>
+<h1 id="如何回收垃圾（垃圾收集算法）"><a href="#如何回收垃圾（垃圾收集算法）" class="headerlink" title="如何回收垃圾（垃圾收集算法）"></a>如何回收垃圾（垃圾收集算法）</h1><h2 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h2><p>标记-清除（Mark-and-Sweep）算法分为“标记（Mark）”和“清除（Sweep）”阶段：首先标记出所有需要回收的对象（用可达性算法），在标记完成后统一回收掉这些对象。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261010174.png" alt="算法演示"></p>
 <p>它是最基础的收集算法，后续的算法都是对其不足进行改进得到。这种垃圾收集算法会带来两个明显的问题：</p>
-<ol type="1">
+<ol>
 <li><strong>效率问题</strong>：标记和清除两个过程效率都不高。</li>
 <li><strong>空间问题</strong>：标记清除后会产生大量不连续的内存碎片。</li>
 </ol>
-<h2 id="复制算法">复制算法</h2>
-<p>复制算法（Copying）是在标记清除算法上演化而来的，用于解决标记清除算法的内存碎片问题。它将可用内存按容量划分为大小相等的两块，每次只使用其中的一块。</p>
+<h2 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h2><p>复制算法（Copying）是在标记清除算法上演化而来的，用于解决标记清除算法的内存碎片问题。它将可用内存按容量划分为大小相等的两块，每次只使用其中的一块。</p>
 <p>当这一块的内存用完了，就将还存活着的对象复制到另外一块上面，然后再把已使用过的内存空间一次清理掉。这样就保证了内存的连续性，逻辑清晰，运行高效。</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261011679.png"
-alt="算法演示" />
-<figcaption aria-hidden="true">算法演示</figcaption>
-</figure>
+<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261011679.png" alt="算法演示"></p>
 <p>虽然改进了标记-清除算法，但依然存在下面这些问题：</p>
 <ul>
 <li><strong>可用内存变小</strong>：可用内存缩小为原来的一半。</li>
 <li><strong>不适合老年代</strong>：如果存活对象数量比较大，复制性能会变得很差。</li>
 </ul>
-<h2 id="标记-整理算法">标记-整理算法</h2>
-<p>标记整理算法（Mark-Compact），标记过程仍然与标记清除算法一样，但后续步骤不是直接对可回收对象进行清理，而是让所有存活的对象都向一端移动，再清理掉端边界以外的内存区域。</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261227494.png"
-alt="算法演示" />
-<figcaption aria-hidden="true">算法演示</figcaption>
-</figure>
+<h2 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记-整理算法</h2><p>标记整理算法（Mark-Compact），标记过程仍然与标记清除算法一样，但后续步骤不是直接对可回收对象进行清理，而是让所有存活的对象都向一端移动，再清理掉端边界以外的内存区域。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261227494.png" alt="算法演示"></p>
 <p>标记整理算法一方面在标记-清除算法上做了升级，解决了内存碎片的问题，也规避了复制算法只能利用一半内存区域的弊端。看起来很美好，但内存变动更频繁，需要整理所有存活对象的引用地址，在效率上比复制算法差很多。</p>
-<h2 id="分代收集算法">分代收集算法</h2>
-<p>当前虚拟机的垃圾收集都采用分代收集算法，分代收集算法（Generational
-Collection）严格来说并不是一种思想或理论，而是融合上述 3
-种基础的算法思想，而产生的针对不同情况所采用不同算法的一套组合拳。</p>
-<p>根据对象存活周期的不同会将内存划分为几块，一般是把 Java
-堆分为新生代和老年代，这样就可以根据各个年代的特点采用最适当的收集算法。</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261230609.png"
-alt="新生代和老年代" />
-<figcaption aria-hidden="true">新生代和老年代</figcaption>
-</figure>
+<h2 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h2><p>当前虚拟机的垃圾收集都采用分代收集算法，分代收集算法（Generational Collection）严格来说并不是一种思想或理论，而是融合上述 3 种基础的算法思想，而产生的针对不同情况所采用不同算法的一套组合拳。</p>
+<p>根据对象存活周期的不同会将内存划分为几块，一般是把 Java 堆分为新生代和老年代，这样就可以根据各个年代的特点采用最适当的收集算法。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261230609.png" alt="新生代和老年代"></p>
 <p>在新生代中，每次垃圾收集时都发现有大批对象死去，只有少量存活，那就选用复制算法，只需要付出少量存活对象的复制成本就可以完成收集。</p>
 <p>老年代中因为对象存活率高、没有额外空间对它进行分配担保，就必须使用标记清理或者标记整理算法来进行回收。</p>
-<h1 id="新生代和老年代">新生代和老年代</h1>
-<p>堆（Heap）是 JVM
-中最大的一块内存区域，也是垃圾收集器管理的主要区域。</p>
-<figure>
-<img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261235085.png"
-alt="新生代和老年代" />
-<figcaption aria-hidden="true">新生代和老年代</figcaption>
-</figure>
-<p>堆主要分为 2 个区域，年轻代与老年代，其中年轻代又分 Eden 区和
-Survivor 区，其中 Survivor 区又分 From 和 To 两个区。</p>
-<h2 id="eden区">Eden区</h2>
-<p>据 IBM 公司之前的研究表明，有将近 98%
-的对象是朝生夕死，所以针对这一现状，大多数情况下，对象会在新生代 Eden
-区中进行分配，当 Eden 区没有足够空间进行分配时，JVM 会发起一次 Minor
-GC，Minor GC 相比 Major GC 更频繁，回收速度也更快。</p>
-<p>通过 Minor GC 之后，Eden
-区中绝大部分对象会被回收，而那些无需回收的存活对象，将会进到 Survivor 的
-From 区，如果 From 区不够，则直接进入 To 区。、</p>
+<h1 id="新生代和老年代"><a href="#新生代和老年代" class="headerlink" title="新生代和老年代"></a>新生代和老年代</h1><p>堆（Heap）是 JVM 中最大的一块内存区域，也是垃圾收集器管理的主要区域。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261235085.png" alt="新生代和老年代"></p>
+<p>堆主要分为 2 个区域，年轻代与老年代，其中年轻代又分 Eden 区和 Survivor 区，其中 Survivor 区又分 From 和 To 两个区。</p>
+<h2 id="Eden区"><a href="#Eden区" class="headerlink" title="Eden区"></a>Eden区</h2><p>据 IBM 公司之前的研究表明，有将近 98% 的对象是朝生夕死，所以针对这一现状，大多数情况下，对象会在新生代 Eden 区中进行分配，当 Eden 区没有足够空间进行分配时，JVM 会发起一次 Minor GC，Minor GC 相比 Major GC 更频繁，回收速度也更快。</p>
+<p>通过 Minor GC 之后，Eden 区中绝大部分对象会被回收，而那些无需回收的存活对象，将会进到 Survivor 的 From 区，如果 From 区不够，则直接进入 To 区。、</p>
 <p><code>Eden</code>区一般占8份，<code>SurvivorFrom</code>和<code>SurvivorTo</code>一般分别占一份</p>
-<h2 id="survivor区">Survivor区</h2>
-<p>Survivor 区相当于是 Eden 区和 Old
-区的一个缓冲，类似于我们交通灯中的黄灯。</p>
-<h3 id="为什么需要survivor区">1、为什么需要Survivor区</h3>
-<p>不就是新生代到老年代吗，直接 Eden 到 Old
-不好了吗，为啥要这么复杂。</p>
-<p>如果没有 Survivor 区，Eden 区每进行一次 Minor
-GC，存活的对象就会被送到老年代，老年代很快就会被填满。而有很多对象虽然一次
-Minor GC
-没有消灭，但其实也并不会蹦跶多久，或许第二次，第三次就需要被清除。</p>
+<h2 id="Survivor区"><a href="#Survivor区" class="headerlink" title="Survivor区"></a>Survivor区</h2><p>Survivor 区相当于是 Eden 区和 Old 区的一个缓冲，类似于我们交通灯中的黄灯。</p>
+<h3 id="1、为什么需要Survivor区"><a href="#1、为什么需要Survivor区" class="headerlink" title="1、为什么需要Survivor区"></a>1、为什么需要Survivor区</h3><p>不就是新生代到老年代吗，直接 Eden 到 Old 不好了吗，为啥要这么复杂。</p>
+<p>如果没有 Survivor 区，Eden 区每进行一次 Minor GC，存活的对象就会被送到老年代，老年代很快就会被填满。而有很多对象虽然一次 Minor GC 没有消灭，但其实也并不会蹦跶多久，或许第二次，第三次就需要被清除。</p>
 <p>这时候移入老年区，很明显不是一个明智的决定。</p>
-<p>所以，Survivor 的存在意义就是减少被送到老年代的对象，进而减少 Major
-GC 的发生。Survivor 的预筛选保证，只有经历 16 次 Minor GC
-还能在新生代中存活的对象，才会被送到老年代。</p>
-<h3 id="survivor-区为啥划分为两块">2、Survivor 区为啥划分为两块？</h3>
-<p>设置两个 Survivor
-区最大的好处就是解决内存碎片化，我们先假设一下，Survivor
-只有一个区域会怎样。</p>
-<p>Minor GC 执行后，Eden 区被清空，存活的对象放到了 Survivor 区，而之前
-Survivor
-区中的对象，可能也有一些是需要被清除的。那么问题来了，这时候我们怎么清除它们？</p>
+<p>所以，Survivor 的存在意义就是减少被送到老年代的对象，进而减少 Major GC 的发生。Survivor 的预筛选保证，只有经历 16 次 Minor GC 还能在新生代中存活的对象，才会被送到老年代。</p>
+<h3 id="2、Survivor-区为啥划分为两块？"><a href="#2、Survivor-区为啥划分为两块？" class="headerlink" title="2、Survivor 区为啥划分为两块？"></a>2、Survivor 区为啥划分为两块？</h3><p>设置两个 Survivor 区最大的好处就是解决内存碎片化，我们先假设一下，Survivor 只有一个区域会怎样。</p>
+<p>Minor GC 执行后，Eden 区被清空，存活的对象放到了 Survivor 区，而之前 Survivor 区中的对象，可能也有一些是需要被清除的。那么问题来了，这时候我们怎么清除它们？</p>
 <p>在这种场景下，我们只能标记清除，而我们知道标记清除最大的问题就是内存碎片，在新生代这种经常会消亡的区域，采用标记清除必然会让内存产生严重的碎片化。</p>
-<p>但因为 Survivor 有 2 个区域，所以每次 Minor GC，会将之前 Eden 区和
-From 区中的存活对象复制到 To 区域。第二次 Minor GC 时，From 与 To
-职责兑换，这时候会将 Eden 区和 To 区中的存活对象再复制到 From
-区域，以此反复。</p>
-<p>这种机制最大的好处就是，整个过程中，永远有一个 Survivor space
-是空的，另一个非空的 Survivor space 是无碎片的。</p>
+<p>但因为 Survivor 有 2 个区域，所以每次 Minor GC，会将之前 Eden 区和 From 区中的存活对象复制到 To 区域。第二次 Minor GC 时，From 与 To 职责兑换，这时候会将 Eden 区和 To 区中的存活对象再复制到 From 区域，以此反复。</p>
+<p>这种机制最大的好处就是，整个过程中，永远有一个 Survivor space 是空的，另一个非空的 Survivor space 是无碎片的。</p>
 <p>那么，Survivor 为什么不分更多块呢？比方说分成三个、四个、五个？</p>
-<p>显然，如果 Survivor 区再细分下去，每一块的空间就会比较小，容易导致
-Survivor 区满，两块 Survivor 区可能是经过权衡之后的最佳方案。</p>
-<h2 id="old区">Old区</h2>
-<p>老年代占据着 2/3 的堆内存空间，只有在 Major GC
-的时候才会进行清理，每次 GC 都会触发“Stop-The-World”。内存越大，STW
-的时间也越长，所以内存也不仅仅是越大就越好。</p>
+<p>显然，如果 Survivor 区再细分下去，每一块的空间就会比较小，容易导致 Survivor 区满，两块 Survivor 区可能是经过权衡之后的最佳方案。</p>
+<h2 id="Old区"><a href="#Old区" class="headerlink" title="Old区"></a>Old区</h2><p>老年代占据着 2&#x2F;3 的堆内存空间，只有在 Major GC 的时候才会进行清理，每次 GC 都会触发“Stop-The-World”。内存越大，STW 的时间也越长，所以内存也不仅仅是越大就越好。</p>
 <p>由于复制算法在对象存活率较高的老年代会进行很多次的复制操作，效率很低，所以老年代这里采用的是标记整理算法。</p>
 <p>除了上述所说，在内存担保机制下，无法安置的对象会直接进到老年代，以下几种情况也会进入老年代。</p>
-<h3 id="大对象">1、大对象</h3>
-<p>大对象指需要大量连续内存空间的对象，这部分对象不管是不是“朝生夕死”，都会直接进到老年代。这样做主要是为了避免在
-Eden 区及 2 个 Survivor
-区之间发生大量的内存复制。当你的系统有非常多“朝生夕死”的大对象时，得注意了。</p>
-<h3 id="长期存活对象">2、长期存活对象</h3>
-<p>虚拟机给每个对象定义了一个对象年龄（Age）计数器。正常情况下对象会不断的在
-<code>Survivor</code> 的 <code>From</code> 区与 <code>To</code>
-区之间移动，对象在 <code>Survivor</code> 区中每经历一次
-<code>Minor GC</code>，年龄就增加 1 岁。当年龄增加到 15
-岁时，这时候就会被转移到老年代。当然，这里的 15，JVM 也支持进行特殊设置
-<code>-XX:MaxTenuringThreshold=10</code>。</p>
-<p>可通过
-<code>java -XX:+PrintFlagsFinal -version | grep MaxTenuringThreshold</code>
-查看默认的阈值。</p>
-<p><img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261332145.png" /></p>
-<h3 id="动态对象年龄">3、动态对象年龄</h3>
-<p>JVM 并不强制要求对象年龄必须到 15 岁才会放入老年区，如果 Survivor
-空间中某个年龄段的对象总大小超过了 Survivor
-空间的一半，那么该年龄段及以上年龄段的所有对象都会在下一次垃圾回收时被晋升到老年代，无需等你“成年”。</p>
+<h3 id="1、大对象"><a href="#1、大对象" class="headerlink" title="1、大对象"></a>1、大对象</h3><p>大对象指需要大量连续内存空间的对象，这部分对象不管是不是“朝生夕死”，都会直接进到老年代。这样做主要是为了避免在 Eden 区及 2 个 Survivor 区之间发生大量的内存复制。当你的系统有非常多“朝生夕死”的大对象时，得注意了。</p>
+<h3 id="2、长期存活对象"><a href="#2、长期存活对象" class="headerlink" title="2、长期存活对象"></a>2、长期存活对象</h3><p>虚拟机给每个对象定义了一个对象年龄（Age）计数器。正常情况下对象会不断的在 <code>Survivor</code> 的 <code>From</code> 区与 <code>To</code> 区之间移动，对象在 <code>Survivor</code> 区中每经历一次 <code>Minor GC</code>，年龄就增加 1 岁。当年龄增加到 15 岁时，这时候就会被转移到老年代。当然，这里的 15，JVM 也支持进行特殊设置 <code>-XX:MaxTenuringThreshold=10</code>。</p>
+<p>可通过 <code>java -XX:+PrintFlagsFinal -version | grep MaxTenuringThreshold</code> 查看默认的阈值。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261332145.png"></p>
+<h3 id="3、动态对象年龄"><a href="#3、动态对象年龄" class="headerlink" title="3、动态对象年龄"></a>3、动态对象年龄</h3><p>JVM 并不强制要求对象年龄必须到 15 岁才会放入老年区，如果 Survivor 空间中某个年龄段的对象总大小超过了 Survivor 空间的一半，那么该年龄段及以上年龄段的所有对象都会在下一次垃圾回收时被晋升到老年代，无需等你“成年”。</p>
 <p>有点类似于负载均衡，轮询是负载均衡的一种，保证每台机器都分得同样的请求。看似很均衡，但每台机器的硬件不同，健康状况不同，所以我们可以基于每台机器接收的请求数、响应时间等，来调整负载均衡算法。</p>
 <p>这种动态调整机制有助于优化内存使用和减少垃圾收集的频率，特别是在处理大量短生命周期对象的应用程序时。</p>
-<h1 id="垃圾收集器">垃圾收集器</h1>
-<p><strong>如果说收集算法是内存回收的方法论，那么垃圾收集器就是内存回收的具体实现。</strong></p>
-<p>虽然我们对各个收集器进行比较，但并非要挑选出一个最好的收集器。因为直到现在为止还没有最好的垃圾收集器出现，更加没有万能的垃圾收集器，<strong>我们能做的就是根据具体应用场景选择适合自己的垃圾收集器</strong>。试想一下：如果有一种四海之内、任何场景下都适用的完美收集器存在，那么我们的
-HotSpot 虚拟机就不会实现那么多不同的垃圾收集器了。</p>
-<p>JDK 默认垃圾收集器（使用
-<code>java -XX:+PrintCommandLineFlags -version</code> 命令查看）：</p>
+<h1 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h1><p><strong>如果说收集算法是内存回收的方法论，那么垃圾收集器就是内存回收的具体实现。</strong></p>
+<p>虽然我们对各个收集器进行比较，但并非要挑选出一个最好的收集器。因为直到现在为止还没有最好的垃圾收集器出现，更加没有万能的垃圾收集器，<strong>我们能做的就是根据具体应用场景选择适合自己的垃圾收集器</strong>。试想一下：如果有一种四海之内、任何场景下都适用的完美收集器存在，那么我们的 HotSpot 虚拟机就不会实现那么多不同的垃圾收集器了。</p>
+<p>JDK 默认垃圾收集器（使用 <code>java -XX:+PrintCommandLineFlags -version</code> 命令查看）：</p>
 <ul>
 <li>JDK 8：Parallel Scavenge（新生代）+ Parallel Old（老年代）</li>
 <li>JDK 9 ~ JDK20: G1</li>
 </ul>
-<p>关于一些老的收集器直接去看JavaGuide中的介绍：<a
-target="_blank" rel="noopener" href="https://javaguide.cn/java/jvm/jvm-garbage-collection.html#parallel-scavenge-%E6%94%B6%E9%9B%86%E5%99%A8">收集器</a></p>
-<h2 id="分代收集器">分代收集器</h2>
-<h3 id="cms">CMS</h3>
-<p>以获取最短回收停顿时间为目标，采用“标记-清除”算法，分 4
-大步进行垃圾收集，其中初始标记和重新标记会 STW，JDK 1.5 时引入，JDK9
-被标记弃用，JDK14 被移除，详情可见 <a
-target="_blank" rel="noopener" href="https://openjdk.java.net/jeps/363">JEP 363open in new
-window</a>。</p>
-<p><strong>CMS（Concurrent Mark Sweep）垃圾收集器是第一个关注 GC
-停顿时间（STW
-的时间）的垃圾收集器</strong>。之前的垃圾收集器，要么是串行的垃圾回收方式，要么只关注系统吞吐量。</p>
-<p>CMS 垃圾收集器之所以能够实现对 GC
-停顿时间的控制，其本质来源于对「可达性分析算法」的改进，即三色标记算法。在
-CMS 出现之前，无论是 Serious 垃圾收集器，还是 ParNew 垃圾收集器，以及
-Parallel Scavenge 垃圾收集器，它们在进行垃圾回收的时候都需要 Stop the
-World，无法实现垃圾回收线程与用户线程的并发执行。</p>
-<p>CMS
-垃圾收集器通过三色标记算法，实现了垃圾回收线程与用户线程的并发执行，从而极大地降低了系统响应时间，提高了强交互应用程序的体验。它的运行过程分为
-4 个步骤，包括：</p>
+<p>关于一些老的收集器直接去看JavaGuide中的介绍：<a target="_blank" rel="noopener" href="https://javaguide.cn/java/jvm/jvm-garbage-collection.html#parallel-scavenge-%E6%94%B6%E9%9B%86%E5%99%A8">收集器</a></p>
+<h2 id="分代收集器"><a href="#分代收集器" class="headerlink" title="分代收集器"></a>分代收集器</h2><h3 id="CMS"><a href="#CMS" class="headerlink" title="CMS"></a>CMS</h3><p>以获取最短回收停顿时间为目标，采用“标记-清除”算法，分 4 大步进行垃圾收集，其中初始标记和重新标记会 STW，JDK 1.5 时引入，JDK9 被标记弃用，JDK14 被移除，详情可见  <a target="_blank" rel="noopener" href="https://openjdk.java.net/jeps/363">JEP 363open in new window</a>。</p>
+<p><strong>CMS（Concurrent Mark Sweep）垃圾收集器是第一个关注 GC 停顿时间（STW 的时间）的垃圾收集器</strong>。之前的垃圾收集器，要么是串行的垃圾回收方式，要么只关注系统吞吐量。</p>
+<p>CMS 垃圾收集器之所以能够实现对 GC 停顿时间的控制，其本质来源于对「可达性分析算法」的改进，即三色标记算法。在 CMS 出现之前，无论是 Serious 垃圾收集器，还是 ParNew 垃圾收集器，以及 Parallel Scavenge 垃圾收集器，它们在进行垃圾回收的时候都需要 Stop the World，无法实现垃圾回收线程与用户线程的并发执行。</p>
+<p>CMS 垃圾收集器通过三色标记算法，实现了垃圾回收线程与用户线程的并发执行，从而极大地降低了系统响应时间，提高了强交互应用程序的体验。它的运行过程分为 4 个步骤，包括：</p>
 <ul>
 <li>初始标记</li>
 <li>并发标记</li>
 <li>重新标记</li>
 <li>并发清除</li>
 </ul>
-<p><strong>初始标记</strong>，指的是寻找所有被 GCRoots
-引用的对象，该阶段需要「Stop the World」。这个步骤仅仅只是标记一下 GC
-Roots 能直接关联到的对象，并不需要做整个引用的扫描，因此速度很快。</p>
-<p><strong>并发标记</strong>，指的是对「初始标记阶段」标记的对象进行整个引用链的扫描，该阶段不需要「Stop
-the World」。
-对整个引用链做扫描需要花费非常多的时间，因此通过垃圾回收线程与用户线程并发执行，可以降低垃圾回收的时间。</p>
-<p>这也是 CMS 能极大降低 GC
-停顿时间的核心原因，但这也带来了一些问题，即：并发标记的时候，引用可能发生变化，因此可能发生漏标（本应该回收的垃圾没有被回收）和多标（本不应该回收的垃圾被回收）了。</p>
-<p><strong>重新标记</strong>，指的是对「并发标记」阶段出现的问题进行校正，该阶段需要「Stop
-the
-World」。正如并发标记阶段说到的，由于垃圾回收算法和用户线程并发执行，虽然能降低响应时间，但是会发生漏标和多标的问题。所以对于
-CMS 来说，它需要在这个阶段做一些校验，解决并发标记阶段发生的问题。</p>
-<p><strong>并发清除</strong>，指的是将标记为垃圾的对象进行清除，该阶段不需要「Stop
-the World」。
-在这个阶段，垃圾回收线程与用户线程可以并发执行，因此并不影响用户的响应时间。</p>
-<p><img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261345866.png" /></p>
+<p><strong>初始标记</strong>，指的是寻找所有被 GCRoots 引用的对象，该阶段需要「Stop the World」。这个步骤仅仅只是标记一下 GC Roots 能直接关联到的对象，并不需要做整个引用的扫描，因此速度很快。</p>
+<p><strong>并发标记</strong>，指的是对「初始标记阶段」标记的对象进行整个引用链的扫描，该阶段不需要「Stop the World」。 对整个引用链做扫描需要花费非常多的时间，因此通过垃圾回收线程与用户线程并发执行，可以降低垃圾回收的时间。</p>
+<p>这也是 CMS 能极大降低 GC 停顿时间的核心原因，但这也带来了一些问题，即：并发标记的时候，引用可能发生变化，因此可能发生漏标（本应该回收的垃圾没有被回收）和多标（本不应该回收的垃圾被回收）了。</p>
+<p><strong>重新标记</strong>，指的是对「并发标记」阶段出现的问题进行校正，该阶段需要「Stop the World」。正如并发标记阶段说到的，由于垃圾回收算法和用户线程并发执行，虽然能降低响应时间，但是会发生漏标和多标的问题。所以对于 CMS 来说，它需要在这个阶段做一些校验，解决并发标记阶段发生的问题。</p>
+<p><strong>并发清除</strong>，指的是将标记为垃圾的对象进行清除，该阶段不需要「Stop the World」。 在这个阶段，垃圾回收线程与用户线程可以并发执行，因此并不影响用户的响应时间。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261345866.png"></p>
 <p>CMS 的优点是：并发收集、低停顿。但缺点也很明显：</p>
-<p>1、对 CPU 资源非常敏感，因此在 CPU 资源紧张的情况下，CMS
-的性能会大打折扣。</p>
-<p>默认情况下，CMS
-启用的垃圾回收线程数是<code>（CPU数量 + 3)/4</code>，当 CPU
-数量很大时，启用的垃圾回收线程数占比就越小。但如果 CPU
-数量很小，例如只有 2 个 CPU，垃圾回收线程占用就达到了
-50%，这极大地降低系统的吞吐量，无法接受。</p>
-<p>2、CMS
-采用的是「标记-清除」算法，会产生大量的内存碎片，导致空间不连续，当出现大对象无法找到连续的内存空间时，就会触发一次
-Full GC，这会导致系统的停顿时间变长。</p>
-<p>3、CMS 无法处理浮动垃圾，当 CMS
-在进行垃圾回收的时候，应用程序还在不断地产生垃圾，这些垃圾会在 CMS
-垃圾回收结束之后产生，这些垃圾就是浮动垃圾，CMS
-无法处理这些浮动垃圾，只能在下一次 GC 时清理掉。</p>
-<p>4、可能出现并发模式失败。CMS的目标就是在回收老年代对象时与用户线程并发运行，如果垃圾回收时应用线程向老年代请求分配的空间超过预留空间，就会抛出"<code>concurrent mode failure</code>"（并发模式失败），此时CMS会暂停用户线程的执行，启用
-<code>Serial Old</code> 收集器来重新进行老年代的垃圾收集。</p>
-<h2 id="分区收集器">分区收集器</h2>
-<h3 id="g1">G1</h3>
-<p>G1（Garbage-First Garbage Collector）在 JDK 1.7 时引入，在 JDK 9
-时取代 CMS 成为了默认的垃圾收集器。G1
-有五个属性：分代、增量、并行、标记整理、STW。</p>
-<p>①、分代：上一讲中的年轻代和老年代，G1
-也是基于这个思想进行设计的。它将堆内存分为多个大小相等的区域（Region），每个区域都可以是
-Eden 区、Survivor 区或者 Old 区。</p>
-<p><img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261354107.png" /></p>
-<p>可以通过 <code>-XX:G1HeapRegionSize=n</code> 来设置 Region
-的大小，可以设定为 1M、2M、4M、8M、16M、32M（不能超过）。</p>
-<p>G1 有专门分配大对象的 Region 叫 Humongous
-区，而不是让大对象直接进入老年代的 Region 中。在 G1
-中，大对象的判定规则就是一个大对象超过了一个 Region 大小的 50%，比如每个
-Region 是 2M，只要一个对象超过了 1M，就会被放入 Humongous
-中，而且一个大对象如果太大，可能会横跨多个 Region 来存放。</p>
-<p>G1
-会根据各个区域的垃圾回收情况来决定下一次垃圾回收的区域，这样就避免了对整个堆内存进行垃圾回收，从而降低了垃圾回收的时间。</p>
-<p>②、增量：G1
-可以以增量方式执行垃圾回收，这意味着它不需要一次性回收整个堆空间，而是可以逐步、增量地清理。有助于控制停顿时间，尤其是在处理大型堆时。</p>
-<p>③、并行：G1 垃圾回收器可以并行回收垃圾，这意味着它可以利用多个 CPU
-来加速垃圾回收的速度，这一特性在年轻代的垃圾回收（Minor
-GC）中特别明显，因为年轻代的回收通常涉及较多的对象和较高的回收速率。</p>
-<p>④、标记整理：在进行老年代的垃圾回收时，G1
-使用标记-整理算法。这个过程分为两个阶段：标记存活的对象和整理（压缩）堆空间。通过整理，G1
-能够避免内存碎片化，提高内存利用率。</p>
-<p>年轻代的垃圾回收（Minor
-GC）使用复制算法，因为年轻代的对象通常是朝生夕死的。</p>
-<p><img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261355917.png" /></p>
-<p>⑤、STW：G1
-也是基于「标记-清除」算法，因此在进行垃圾回收的时候，仍然需要「Stop the
-World」。不过，G1
-在停顿时间上添加了预测机制，用户可以指定期望停顿时间。</p>
-<p><img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261355182.png" /></p>
+<p>1、对 CPU 资源非常敏感，因此在 CPU 资源紧张的情况下，CMS 的性能会大打折扣。</p>
+<p>默认情况下，CMS 启用的垃圾回收线程数是<code>（CPU数量 + 3)/4</code>，当 CPU 数量很大时，启用的垃圾回收线程数占比就越小。但如果 CPU 数量很小，例如只有 2 个 CPU，垃圾回收线程占用就达到了 50%，这极大地降低系统的吞吐量，无法接受。</p>
+<p>2、CMS 采用的是「标记-清除」算法，会产生大量的内存碎片，导致空间不连续，当出现大对象无法找到连续的内存空间时，就会触发一次 Full GC，这会导致系统的停顿时间变长。</p>
+<p>3、CMS 无法处理浮动垃圾，当 CMS 在进行垃圾回收的时候，应用程序还在不断地产生垃圾，这些垃圾会在 CMS 垃圾回收结束之后产生，这些垃圾就是浮动垃圾，CMS 无法处理这些浮动垃圾，只能在下一次 GC 时清理掉。</p>
+<p>4、可能出现并发模式失败。CMS的目标就是在回收老年代对象时与用户线程并发运行，如果垃圾回收时应用线程向老年代请求分配的空间超过预留空间，就会抛出”<code>concurrent mode failure</code>“（并发模式失败），此时CMS会暂停用户线程的执行，启用 <code>Serial Old</code> 收集器来重新进行老年代的垃圾收集。</p>
+<h2 id="分区收集器"><a href="#分区收集器" class="headerlink" title="分区收集器"></a>分区收集器</h2><h3 id="G1"><a href="#G1" class="headerlink" title="G1"></a>G1</h3><p>G1（Garbage-First Garbage Collector）在 JDK 1.7 时引入，在 JDK 9 时取代 CMS 成为了默认的垃圾收集器。G1 有五个属性：分代、增量、并行、标记整理、STW。</p>
+<p>①、分代：上一讲中的年轻代和老年代，G1 也是基于这个思想进行设计的。它将堆内存分为多个大小相等的区域（Region），每个区域都可以是 Eden 区、Survivor 区或者 Old 区。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261354107.png"></p>
+<p>可以通过 <code>-XX:G1HeapRegionSize=n</code> 来设置 Region 的大小，可以设定为 1M、2M、4M、8M、16M、32M（不能超过）。</p>
+<p>G1 有专门分配大对象的 Region 叫 Humongous 区，而不是让大对象直接进入老年代的 Region 中。在 G1 中，大对象的判定规则就是一个大对象超过了一个 Region 大小的 50%，比如每个 Region 是 2M，只要一个对象超过了 1M，就会被放入 Humongous 中，而且一个大对象如果太大，可能会横跨多个 Region 来存放。</p>
+<p>G1 会根据各个区域的垃圾回收情况来决定下一次垃圾回收的区域，这样就避免了对整个堆内存进行垃圾回收，从而降低了垃圾回收的时间。</p>
+<p>②、增量：G1 可以以增量方式执行垃圾回收，这意味着它不需要一次性回收整个堆空间，而是可以逐步、增量地清理。有助于控制停顿时间，尤其是在处理大型堆时。</p>
+<p>③、并行：G1 垃圾回收器可以并行回收垃圾，这意味着它可以利用多个 CPU 来加速垃圾回收的速度，这一特性在年轻代的垃圾回收（Minor GC）中特别明显，因为年轻代的回收通常涉及较多的对象和较高的回收速率。</p>
+<p>④、标记整理：在进行老年代的垃圾回收时，G1 使用标记-整理算法。这个过程分为两个阶段：标记存活的对象和整理（压缩）堆空间。通过整理，G1 能够避免内存碎片化，提高内存利用率。</p>
+<p>年轻代的垃圾回收（Minor GC）使用复制算法，因为年轻代的对象通常是朝生夕死的。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261355917.png"></p>
+<p>⑤、STW：G1 也是基于「标记-清除」算法，因此在进行垃圾回收的时候，仍然需要「Stop the World」。不过，G1 在停顿时间上添加了预测机制，用户可以指定期望停顿时间。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261355182.png"></p>
 <p>G1 中存在三种 GC 模式，分别是 Young GC、Mixed GC 和 Full GC。</p>
-<p><img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261355479.png" /></p>
-<p>当 Eden 区的内存空间无法支持新对象的内存分配时，G1 会触发 Young
-GC。</p>
-<p>当需要分配对象到 Humongous 区域或者堆内存的空间占比超过
-<code>-XX:G1HeapWastePercent</code> 设置的
-InitiatingHeapOccupancyPercent 值时，G1 会触发一次 concurrent
-marking，它的作用就是计算老年代中有多少空间需要被回收，当发现垃圾的占比达到
-<code>-XX:G1HeapWastePercent</code> 中所设置的 G1HeapWastePercent
-比例时，在下次 Young GC 后会触发一次 Mixed GC。</p>
-<p>Mixed GC 是指回收年轻代的 Region 以及一部分老年代中的 Region。Mixed
-GC 和 Young GC 一样，采用的也是复制算法。</p>
-<p>在 Mixed GC 过程中，如果发现老年代空间还是不足，此时如果
-G1HeapWastePercent 设定过低，可能引发 Full
-GC。<code>-XX:G1HeapWastePercent</code> 默认是 5，意味着只有 5%
-的堆是“浪费”的。如果浪费的堆的百分比大于 G1HeapWastePercent，则运行 Full
-GC。</p>
-<p>在以 Region 为最小管理单元以及所采用的 GC 模式的基础上，G1
-建立了停顿预测模型，即 Pause Prediction Model 。这也是 G1
-非常被人所称道的特性。</p>
-<p>我们可以借助 <code>-XX:MaxGCPauseMillis</code>
-来设置期望的停顿时间（默认 200ms），G1 会根据这个值来计算出一个合理的
-Young GC 的回收时间，然后根据这个时间来制定 Young GC 的回收计划。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403261355479.png"></p>
+<p>当 Eden 区的内存空间无法支持新对象的内存分配时，G1 会触发 Young GC。</p>
+<p>当需要分配对象到 Humongous 区域或者堆内存的空间占比超过 <code>-XX:G1HeapWastePercent</code> 设置的 InitiatingHeapOccupancyPercent 值时，G1 会触发一次 concurrent marking，它的作用就是计算老年代中有多少空间需要被回收，当发现垃圾的占比达到 <code>-XX:G1HeapWastePercent</code> 中所设置的 G1HeapWastePercent 比例时，在下次 Young GC 后会触发一次 Mixed GC。</p>
+<p>Mixed GC 是指回收年轻代的 Region 以及一部分老年代中的 Region。Mixed GC 和 Young GC 一样，采用的也是复制算法。</p>
+<p>在 Mixed GC 过程中，如果发现老年代空间还是不足，此时如果 G1HeapWastePercent 设定过低，可能引发 Full GC。<code>-XX:G1HeapWastePercent</code> 默认是 5，意味着只有 5% 的堆是“浪费”的。如果浪费的堆的百分比大于 G1HeapWastePercent，则运行 Full GC。</p>
+<p>在以 Region 为最小管理单元以及所采用的 GC 模式的基础上，G1 建立了停顿预测模型，即 Pause Prediction Model 。这也是 G1 非常被人所称道的特性。</p>
+<p>我们可以借助 <code>-XX:MaxGCPauseMillis</code> 来设置期望的停顿时间（默认 200ms），G1 会根据这个值来计算出一个合理的 Young GC 的回收时间，然后根据这个时间来制定 Young GC 的回收计划。</p>
 <p>G1 收集器的运作大致分为以下几个步骤：</p>
 <ul>
 <li><strong>初始标记</strong></li>
@@ -619,116 +451,74 @@ Young GC 的回收时间，然后根据这个时间来制定 Young GC 的回收�
 <li><strong>最终标记</strong></li>
 <li><strong>筛选回收</strong></li>
 </ul>
-<h3 id="zgc">ZGC</h3>
-<p>ZGC（The Z Garbage Collector）是 JDK11
-推出的一款低延迟垃圾收集器，适用于大内存低延迟服务的内存管理和回收，SPEC
-jbb 2015 基准测试，在 128G 的大堆下，最大停顿时间才 1.68
-ms，停顿时间远胜于 G1 和 CMS。</p>
+<h3 id="ZGC"><a href="#ZGC" class="headerlink" title="ZGC"></a>ZGC</h3><p>ZGC（The Z Garbage Collector）是 JDK11 推出的一款低延迟垃圾收集器，适用于大内存低延迟服务的内存管理和回收，SPEC jbb 2015 基准测试，在 128G 的大堆下，最大停顿时间才 1.68 ms，停顿时间远胜于 G1 和 CMS。</p>
 <p>ZGC 的设计目标是：</p>
 <ul>
 <li>停顿时间不超过 10ms；</li>
 <li>停顿时间不会随着堆的大小，或者活跃对象的大小而增加；</li>
 <li>支持 8MB~4TB 级别的堆，未来支持 16TB。</li>
 </ul>
-<p>与 G1 和 CMS 类似，ZGC 也采用了复制算法，只不过做了重大优化，ZGC
-在标记、转移和重定位阶段几乎都是并发的，这是 ZGC 实现停顿时间小于 10ms
-的关键所在。</p>
-<p><img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403271557685.png" /></p>
+<p>与 G1 和 CMS 类似，ZGC 也采用了复制算法，只不过做了重大优化，ZGC 在标记、转移和重定位阶段几乎都是并发的，这是 ZGC 实现停顿时间小于 10ms 的关键所在。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403271557685.png"></p>
 <p>ZGC 是怎么做到的呢？</p>
 <ul>
 <li>指针染色（Colored Pointer）：一种用于标记对象状态的技术。</li>
-<li>读屏障（Load
-Barrier）：一种在程序运行时插入到对象访问操作中的特殊检查，用于确保对象访问的正确性。</li>
+<li>读屏障（Load Barrier）：一种在程序运行时插入到对象访问操作中的特殊检查，用于确保对象访问的正确性。</li>
 </ul>
-<p>这两种技术可以让所有线程在并发的条件下就指针的颜色 (状态)
-达成一致，而不是对象地址。因此，ZGC 可以并发的复制对象，这大大的降低了
-GC 的停顿时间。</p>
-<h4 id="指针染色">指针染色</h4>
-<p>在一个指针中，除了存储对象的实际地址外，还有额外的位被用来存储关于该对象的元数据信息。这些信息可能包括：</p>
+<p>这两种技术可以让所有线程在并发的条件下就指针的颜色 (状态) 达成一致，而不是对象地址。因此，ZGC 可以并发的复制对象，这大大的降低了 GC 的停顿时间。</p>
+<h4 id="指针染色"><a href="#指针染色" class="headerlink" title="指针染色"></a>指针染色</h4><p>在一个指针中，除了存储对象的实际地址外，还有额外的位被用来存储关于该对象的元数据信息。这些信息可能包括：</p>
 <ul>
 <li>对象是否被移动了（即它是否在回收过程中被移动到了新的位置）。</li>
 <li>对象的存活状态。</li>
 <li>对象是否被锁定或有其他特殊状态。</li>
 </ul>
-<p>通过在指针中嵌入这些信息，ZGC
-在标记和转移阶段会更快，因为通过指针上的颜色就能区分出对象状态，不用额外做内存访问。</p>
+<p>通过在指针中嵌入这些信息，ZGC 在标记和转移阶段会更快，因为通过指针上的颜色就能区分出对象状态，不用额外做内存访问。</p>
 <p>ZGC仅支持64位系统，它把64位虚拟地址空间划分为多个子空间，如下图所示：</p>
-<p><img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403271557105.png" /></p>
-<p>其中，0-4TB 对应 Java 堆，4TB-8TB 被称为 M0 地址空间，8TB-12TB 被称为
-M1 地址空间，12TB-16TB 预留未使用，16TB-20TB 被称为 Remapped 空间。</p>
-<p>当创建对象时，首先在堆空间申请一个虚拟地址，该虚拟地址并不会映射到真正的物理地址。同时，ZGC
-会在 M0、M1、Remapped
-空间中为该对象分别申请一个虚拟地址，且三个虚拟地址都映射到同一个物理地址。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403271557105.png"></p>
+<p>其中，0-4TB 对应 Java 堆，4TB-8TB 被称为 M0 地址空间，8TB-12TB 被称为 M1 地址空间，12TB-16TB 预留未使用，16TB-20TB 被称为 Remapped 空间。</p>
+<p>当创建对象时，首先在堆空间申请一个虚拟地址，该虚拟地址并不会映射到真正的物理地址。同时，ZGC 会在 M0、M1、Remapped 空间中为该对象分别申请一个虚拟地址，且三个虚拟地址都映射到同一个物理地址。</p>
 <p>下图是虚拟地址的空间划分：</p>
-<p><img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403271557827.png" /></p>
-<p>不过，三个空间在同一时间只有一个空间有效。ZGC
-之所以设置这三个虚拟地址，是因为 ZGC 采用的是“空间换时间”的思想，去降低
-GC 的停顿时间。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403271557827.png"></p>
+<p>不过，三个空间在同一时间只有一个空间有效。ZGC 之所以设置这三个虚拟地址，是因为 ZGC 采用的是“空间换时间”的思想，去降低 GC 的停顿时间。</p>
 <p>与上述地址空间划分相对应，ZGC实际仅使用64位地址空间的第0-41位，而第42-45位存储元数据，第47-63位固定为0。</p>
-<p><img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403271557352.png" /></p>
-<p>由于仅用了第 0~43 位存储对象地址，244 = 16TB，所以 ZGC 最大支持 16TB
-的堆。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403271557352.png"></p>
+<p>由于仅用了第 0~43 位存储对象地址，244 &#x3D; 16TB，所以 ZGC 最大支持 16TB 的堆。</p>
 <p>至于对象的存活信息，则存储在42-45位中，这与传统的垃圾回收并将对象存活信息放在对象头中完全不同。</p>
-<h4 id="读屏障">读屏障</h4>
-<p>当程序尝试读取一个对象时，读屏障会触发以下操作：</p>
+<h4 id="读屏障"><a href="#读屏障" class="headerlink" title="读屏障"></a>读屏障</h4><p>当程序尝试读取一个对象时，读屏障会触发以下操作：</p>
 <ul>
 <li>检查指针染色：读屏障首先检查指向对象的指针的颜色信息。</li>
 <li>处理移动的对象：如果指针表示对象已经被移动（例如，在垃圾回收过程中），读屏障将确保返回对象的新位置。</li>
-<li>确保一致性：通过这种方式，ZGC
-能够在并发移动对象时保持内存访问的一致性，从而减少对应用程序停顿的需要。</li>
+<li>确保一致性：通过这种方式，ZGC 能够在并发移动对象时保持内存访问的一致性，从而减少对应用程序停顿的需要。</li>
 </ul>
 <p>ZGC读屏障如何实现呢？</p>
 <p>来看下面这段伪代码，涉及 JVM 的底层 C++ 代码：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 伪代码示例，展示读屏障的概念性实现</span></span><br><span class="line"><span class="function">Object* <span class="title">read_barrier</span><span class="params">(Object* ref)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">is_forwarded</span>(ref)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">get_forwarded_address</span>(ref); <span class="comment">// 获取对象的新地址</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ref; <span class="comment">// 对象未移动，返回原始引用</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>read_barrier 代表读屏障。</li>
 <li>如果对象已被移动（is_forwarded(ref)），方法返回对象的新地址（get_forwarded_address(ref)）。</li>
 <li>如果对象未被移动，方法返回原始的对象引用。</li>
 </ul>
-<p>读屏障可能被GC线程和业务线程触发，并且只会在访问堆内对象时触发，访问的对象位于GC
-Roots时不会触发，这也是扫描GC Roots时需要STW的原因。</p>
+<p>读屏障可能被GC线程和业务线程触发，并且只会在访问堆内对象时触发，访问的对象位于GC Roots时不会触发，这也是扫描GC Roots时需要STW的原因。</p>
 <p>下面是一个简化的示例代码，展示了读屏障的触发时机。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Object o = obj.FieldA   <span class="comment">// 从堆中读取引用，需要加入屏障</span></span><br><span class="line">&lt;Load barrier&gt;</span><br><span class="line">Object p = o  <span class="comment">// 无需加入屏障，因为不是从堆中读取引用</span></span><br><span class="line">o.<span class="built_in">dosomething</span>() <span class="comment">// 无需加入屏障，因为不是从堆中读取引用</span></span><br><span class="line"><span class="type">int</span> i =  obj.FieldB  <span class="comment">//无需加入屏障，因为不是对象引用</span></span><br></pre></td></tr></table></figure>
-<h4 id="zgc-的工作过程">ZGC 的工作过程</h4>
-<p>ZGC 周期由三个 STW 暂停和四个并发阶段组成：标记/重新映射( M/R
-)、并发引用处理( RP )、并发转移准备( EC ) 和并发转移( RE )。</p>
-<p><img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403271600752.png" /></p>
-<h5 id="stop-the-world-暂停阶段">Stop-The-World 暂停阶段</h5>
-<ol type="1">
-<li><strong>标记开始（Mark Start）STW 暂停</strong>：这是 ZGC
-的开始，进行 GC Roots 的初始标记。在这个短暂的停顿期间，ZGC 标记所有从
-GC Root 直接可达的对象。</li>
-<li><strong>重新映射开始（Relocation Start）STW
-暂停</strong>：在并发阶段之后，这个 STW
-暂停是为了准备对象的重定位。在这个阶段，ZGC
-选择将要清理的内存区域，并建立必要的数据结构以进行对象移动。</li>
-<li><strong>暂停结束（Pause End）STW 暂停</strong>：ZGC
-结束。在这个短暂的停顿中，完成所有与该 GC 周期相关的最终清理工作。</li>
+
+<h4 id="ZGC-的工作过程"><a href="#ZGC-的工作过程" class="headerlink" title="ZGC 的工作过程"></a>ZGC 的工作过程</h4><p>ZGC 周期由三个 STW 暂停和四个并发阶段组成：标记&#x2F;重新映射( M&#x2F;R )、并发引用处理( RP )、并发转移准备( EC ) 和并发转移( RE )。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403271600752.png"></p>
+<h5 id="Stop-The-World-暂停阶段"><a href="#Stop-The-World-暂停阶段" class="headerlink" title="Stop-The-World 暂停阶段"></a>Stop-The-World 暂停阶段</h5><ol>
+<li><strong>标记开始（Mark Start）STW 暂停</strong>：这是 ZGC 的开始，进行 GC Roots 的初始标记。在这个短暂的停顿期间，ZGC 标记所有从 GC Root 直接可达的对象。</li>
+<li><strong>重新映射开始（Relocation Start）STW 暂停</strong>：在并发阶段之后，这个 STW 暂停是为了准备对象的重定位。在这个阶段，ZGC 选择将要清理的内存区域，并建立必要的数据结构以进行对象移动。</li>
+<li><strong>暂停结束（Pause End）STW 暂停</strong>：ZGC 结束。在这个短暂的停顿中，完成所有与该 GC 周期相关的最终清理工作。</li>
 </ol>
-<h5 id="并发阶段">并发阶段</h5>
-<ol type="1">
-<li><strong>并发标记/重新映射 (M/R)</strong>
-：这个阶段包括并发标记和并发重新映射。在并发标记中，ZGC
-遍历对象图，标记所有可达的对象。然后，在并发重新映射中，ZGC
-更新指向移动对象的所有引用。</li>
-<li><strong>并发引用处理 (RP)</strong> ：在这个阶段，ZGC
-处理各种引用类型（如软引用、弱引用、虚引用和幽灵引用）。这些引用的处理通常需要特殊的考虑，因为它们与对象的可达性和生命周期密切相关。</li>
-<li><strong>并发转移准备 (EC)</strong> ：这是为对象转移做准备的阶段。ZGC
-确定哪些内存区域将被清理，并准备相关的数据结构。</li>
-<li><strong>并发转移 (RE)</strong> ：在这个阶段，ZGC
-将存活的对象从旧位置移动到新位置。由于这一过程是并发执行的，因此应用程序可以在大多数垃圾回收工作进行时继续运行。</li>
+<h5 id="并发阶段"><a href="#并发阶段" class="headerlink" title="并发阶段"></a>并发阶段</h5><ol>
+<li><strong>并发标记&#x2F;重新映射 (M&#x2F;R)</strong> ：这个阶段包括并发标记和并发重新映射。在并发标记中，ZGC 遍历对象图，标记所有可达的对象。然后，在并发重新映射中，ZGC 更新指向移动对象的所有引用。</li>
+<li><strong>并发引用处理 (RP)</strong> ：在这个阶段，ZGC 处理各种引用类型（如软引用、弱引用、虚引用和幽灵引用）。这些引用的处理通常需要特殊的考虑，因为它们与对象的可达性和生命周期密切相关。</li>
+<li><strong>并发转移准备 (EC)</strong> ：这是为对象转移做准备的阶段。ZGC 确定哪些内存区域将被清理，并准备相关的数据结构。</li>
+<li><strong>并发转移 (RE)</strong> ：在这个阶段，ZGC 将存活的对象从旧位置移动到新位置。由于这一过程是并发执行的，因此应用程序可以在大多数垃圾回收工作进行时继续运行。</li>
 </ol>
-<p><img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403271600601.png" /></p>
-<p>ZGC
-的两个关键技术：指针染色和读屏障，不仅应用在并发转移阶段，还应用在并发标记阶段：将对象设置为已标记，传统的垃圾回收器需要进行一次内存访问，并将对象存活信息放在对象头中；而在ZGC中，只需要设置指针地址的第42-45位即可，并且因为是寄存器访问，所以速度比访问内存更快。</p>
-<p><img
-src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403271600269.png" /></p>
+<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403271600601.png"></p>
+<p>ZGC 的两个关键技术：指针染色和读屏障，不仅应用在并发转移阶段，还应用在并发标记阶段：将对象设置为已标记，传统的垃圾回收器需要进行一次内存访问，并将对象存活信息放在对象头中；而在ZGC中，只需要设置指针地址的第42-45位即可，并且因为是寄存器访问，所以速度比访问内存更快。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403271600269.png"></p>
 
     </div>
 

@@ -182,7 +182,7 @@
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -299,133 +299,90 @@
 <p>15种锁！</p>
 </blockquote>
 <span id="more"></span>
-<h1 id="乐观锁">乐观锁</h1>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232110652.png" alt="image-20240323210351234" style="zoom: 67%;" /></p>
+
+<h1 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h1><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232110652.png" alt="image-20240323210351234" style="zoom: 67%;" />
+
 <p><strong>乐观锁是一种乐观思想</strong>，假定当前环境是读多写少，遇到并发写的概率比较低，读数据时认为别的线程不会正在进行修改（所以没有上锁）。写数据时，判断当前与期望值是否相同，如果相同则进行更新（更新期间加锁，保证是原子性的）。</p>
 <p>即假设数据修改不会造成冲突，在数据提交更新时才进行冲突检测。</p>
-<p><strong>Java中的乐观锁：</strong>
-CAS，比较并替换，比较当前值（主内存中的值），与预期值（当前线程中的值，主内存中值的一份拷贝）是否一样，一样则更新，否则继续进行CAS操作。</p>
+<p><strong>Java中的乐观锁：</strong> CAS，比较并替换，比较当前值（主内存中的值），与预期值（当前线程中的值，主内存中值的一份拷贝）是否一样，一样则更新，否则继续进行CAS操作。</p>
 <p>如上图所示，可以同时进行读操作，读的时候其他线程不能进行写操作。</p>
-<h1 id="悲观锁">悲观锁</h1>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232110830.png" alt="image-20240323210903997" style="zoom: 67%;" /></p>
+<h1 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h1><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232110830.png" alt="image-20240323210903997" style="zoom: 67%;" />
+
 <p><strong>悲观锁是一种悲观思想</strong>，即认为写多读少，遇到并发写的可能性高，每次去拿数据的时候都认为其他线程会修改，所以每次读写数据都会认为其他线程会修改，所以每次读写数据时都会上锁。其他线程想要读写这个数据时，会被这个线程block，直到这个线程释放锁然后其他线程获取到锁。</p>
 <p>即数据修改前，假设一定会发生冲突，先尝试为它加锁。</p>
-<p><strong>Java中的悲观锁：</strong>
-synchronized修饰的方法和方法块、ReentrantLock。</p>
+<p><strong>Java中的悲观锁：</strong> synchronized修饰的方法和方法块、ReentrantLock。</p>
 <p>如上图所示，只能有一个线程进行读操作或者写操作，其他线程的读写操作均不能进行。</p>
-<h1 id="自旋锁">自旋锁</h1>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232110895.png" alt="image-20240323211029664" style="zoom: 67%;" /></p>
-<p><strong>自旋锁是一种技术：</strong>
-为了让线程等待，我们只须让线程执行一个忙循环（自旋）。</p>
+<h1 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h1><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232110895.png" alt="image-20240323211029664" style="zoom: 67%;" />
+
+<p><strong>自旋锁是一种技术：</strong> 为了让线程等待，我们只须让线程执行一个忙循环（自旋）。</p>
 <p>现在绝大多数的个人电脑和服务器都是多路（核）处理器系统，如果物理机器有一个以上的处理器或者处理器核心，能让两个或以上的线程同时并行执行，就可以让后面请求锁的那个线程“稍等一会”，但不放弃处理器的执行时间，看看持有锁的线程是否很快就会释放锁。</p>
-<p><strong>自旋锁的优点：</strong>
-避免了线程切换的开销。挂起线程和恢复线程的操作都需要转入内核态中完成，这些操作给Java虚拟机的并发性能带来了很大的压力。</p>
-<p><strong>自旋锁的缺点：</strong>
-占用处理器的时间，如果占用的时间很长，会白白消耗处理器资源，而不会做任何有价值的工作，带来性能的浪费。因此自旋等待的时间必须有一定的限度，如果自旋超过了限定的次数仍然没有成功获得锁，就应当使用传统的方式去挂起线程。</p>
+<p><strong>自旋锁的优点：</strong> 避免了线程切换的开销。挂起线程和恢复线程的操作都需要转入内核态中完成，这些操作给Java虚拟机的并发性能带来了很大的压力。</p>
+<p><strong>自旋锁的缺点：</strong> 占用处理器的时间，如果占用的时间很长，会白白消耗处理器资源，而不会做任何有价值的工作，带来性能的浪费。因此自旋等待的时间必须有一定的限度，如果自旋超过了限定的次数仍然没有成功获得锁，就应当使用传统的方式去挂起线程。</p>
 <p>自旋次数默认值：10次，可以使用参数<code>-XX:PreBlockSpin</code>来自行更改。</p>
-<p><strong>自适应自旋：</strong>
-自适应意味着自旋的时间不再是固定的，而是由前一次在同一个锁上的自旋时间及锁的拥有者的状态来决定的。有了自适应自旋，随着程序运行时间的增长及性能监控信息的不断完善，虚拟机对程序锁的状态预测就会越来越精准。</p>
-<p><strong>Java中的自旋锁：</strong>
-CAS操作中的比较操作失败后的自旋等待。</p>
-<h1 id="可重入锁">可重入锁</h1>
-<p><strong>可重入锁是一种技术：</strong>
-任意线程在获取到锁之后能够再次获取该锁而不会被锁所阻塞。</p>
+<p><strong>自适应自旋：</strong> 自适应意味着自旋的时间不再是固定的，而是由前一次在同一个锁上的自旋时间及锁的拥有者的状态来决定的。有了自适应自旋，随着程序运行时间的增长及性能监控信息的不断完善，虚拟机对程序锁的状态预测就会越来越精准。</p>
+<p><strong>Java中的自旋锁：</strong> CAS操作中的比较操作失败后的自旋等待。</p>
+<h1 id="可重入锁"><a href="#可重入锁" class="headerlink" title="可重入锁"></a>可重入锁</h1><p><strong>可重入锁是一种技术：</strong> 任意线程在获取到锁之后能够再次获取该锁而不会被锁所阻塞。</p>
 <p><strong>可重入锁的原理：</strong> 为每个锁关联一个计数器。</p>
 <ul>
 <li>首次获取锁：计数器置为1.</li>
 <li>再次获取锁：计数器加1</li>
 <li>释放锁：释放锁时，进行计数自减。计数器为0则代表锁被当前线程释放。</li>
 </ul>
-<p><strong>Java中的可重入锁：</strong>
-ReentrantLock、synchronized修饰的方法或代码段。</p>
+<p><strong>Java中的可重入锁：</strong> ReentrantLock、synchronized修饰的方法或代码段。</p>
 <p><strong>可重入锁的作用：</strong> 避免死锁。</p>
-<p><strong>面试题1：</strong>
-可重入锁如果加了两把，但是只释放了一把会出现什么问题？</p>
+<p><strong>面试题1：</strong> 可重入锁如果加了两把，但是只释放了一把会出现什么问题？</p>
 <p>答：程序卡死，线程不能出来，也就是说我们申请了几把锁，就需要释放几把锁。</p>
-<p><strong>面试题2：</strong>
-如果只加了一把锁，释放两次会出现什么问题？</p>
+<p><strong>面试题2：</strong> 如果只加了一把锁，释放两次会出现什么问题？</p>
 <p>答：会报错，java.lang.IllegalMonitorStateException。</p>
-<h1 id="读写锁">读写锁</h1>
-<p><strong>读写锁是一种技术：</strong>
-通过ReentrantReadWriteLock类来实现。为了提高性能， Java
-提供了读写锁，在读的地方使用读锁，在写的地方使用写锁，灵活控制，如果没有写锁的情况下，读是无阻塞的，在一定程度上提高了程序的执行效率。读写锁分为读锁和写锁，多个读锁不互斥，读锁与写锁互斥，这是由
-jvm 自己控制的。</p>
-<p><strong>读锁：</strong>
-允许多个线程获取读锁，同时访问同一个资源。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232116006.png" alt="image-20240323211616975" style="zoom:67%;" /></p>
-<p><strong>写锁：</strong>
-只允许一个线程获取写锁，不允许同时访问同一个资源。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232116455.png" alt="image-20240323211655063" style="zoom:67%;" /></p>
+<h1 id="读写锁"><a href="#读写锁" class="headerlink" title="读写锁"></a>读写锁</h1><p><strong>读写锁是一种技术：</strong> 通过ReentrantReadWriteLock类来实现。为了提高性能， Java 提供了读写锁，在读的地方使用读锁，在写的地方使用写锁，灵活控制，如果没有写锁的情况下，读是无阻塞的，在一定程度上提高了程序的执行效率。读写锁分为读锁和写锁，多个读锁不互斥，读锁与写锁互斥，这是由 jvm 自己控制的。</p>
+<p><strong>读锁：</strong> 允许多个线程获取读锁，同时访问同一个资源。</p>
+<img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232116006.png" alt="image-20240323211616975" style="zoom:67%;" />
+
+<p><strong>写锁：</strong> 只允许一个线程获取写锁，不允许同时访问同一个资源。</p>
+<img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232116455.png" alt="image-20240323211655063" style="zoom:67%;" />
+
 <p><strong>Java中的读写锁：</strong>ReentrantReadWriteLock</p>
-<h1 id="公平锁">公平锁</h1>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232120587.png" alt="image-20240323211822932" style="zoom:67%;" /></p>
-<p><strong>公平锁是一种思想：</strong>
-多个线程竞争锁时直接进入队列排队，按照申请锁的顺序来获取锁，先到先得。在并发环境中，每个线程会先查看此锁维护的等待队列，如果当前等待队列为空，则占有锁，如果等待队列不为空，则加入到等待队列的末尾，按照FIFO的原则从队列中拿到线程，然后占有锁。</p>
-<h1 id="非公平锁">非公平锁</h1>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232121397.png" alt="image-20240323212125844" style="zoom:67%;" /></p>
-<p><strong>非公平锁是一种思想：</strong>
-多个线程竞争锁时，线程先尝试获取锁，如果获取不到，则再采用公平锁的方式，进入等待队列。多个线程获取锁的顺序，不是按照先到先得的顺序，有可能后申请锁的线程比先申请的线程优先获取锁。</p>
+<h1 id="公平锁"><a href="#公平锁" class="headerlink" title="公平锁"></a>公平锁</h1><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232120587.png" alt="image-20240323211822932" style="zoom:67%;" />
+
+<p><strong>公平锁是一种思想：</strong> 多个线程竞争锁时直接进入队列排队，按照申请锁的顺序来获取锁，先到先得。在并发环境中，每个线程会先查看此锁维护的等待队列，如果当前等待队列为空，则占有锁，如果等待队列不为空，则加入到等待队列的末尾，按照FIFO的原则从队列中拿到线程，然后占有锁。</p>
+<h1 id="非公平锁"><a href="#非公平锁" class="headerlink" title="非公平锁"></a>非公平锁</h1><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232121397.png" alt="image-20240323212125844" style="zoom:67%;" />
+
+<p><strong>非公平锁是一种思想：</strong> 多个线程竞争锁时，线程先尝试获取锁，如果获取不到，则再采用公平锁的方式，进入等待队列。多个线程获取锁的顺序，不是按照先到先得的顺序，有可能后申请锁的线程比先申请的线程优先获取锁。</p>
 <p><strong>优点：</strong> 非公平锁的性能高于公平锁。</p>
-<p><strong>缺点：</strong>
-有可能造成线程饥饿（某个线程很长一段时间获取不到锁）</p>
+<p><strong>缺点：</strong> 有可能造成线程饥饿（某个线程很长一段时间获取不到锁）</p>
 <p><strong>Java中的非公平锁：</strong>synchronized是非公平锁，ReentrantLock通过构造函数指定该锁是公平的还是非公平的，默认是非公平的。</p>
-<h1 id="共享锁">共享锁</h1>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232122441.png" alt="image-20240323212253082" style="zoom:67%;" /></p>
-<p><strong>共享锁是一种思想：</strong>
-可以有多个线程获取读锁，以共享的方式持有锁。和乐观锁、读写锁同义。</p>
+<h1 id="共享锁"><a href="#共享锁" class="headerlink" title="共享锁"></a>共享锁</h1><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232122441.png" alt="image-20240323212253082" style="zoom:67%;" />
+
+<p><strong>共享锁是一种思想：</strong> 可以有多个线程获取读锁，以共享的方式持有锁。和乐观锁、读写锁同义。</p>
 <p><strong>Java中用到的共享锁：</strong> ReentrantReadWriteLock。</p>
-<h1 id="独占锁">独占锁</h1>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232123222.png" alt="image-20240323212332680" style="zoom:67%;" /></p>
-<p><strong>独占锁是一种思想：</strong>
-只能有一个线程获取锁，以独占的方式持有锁。和悲观锁、互斥锁同义。</p>
+<h1 id="独占锁"><a href="#独占锁" class="headerlink" title="独占锁"></a>独占锁</h1><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232123222.png" alt="image-20240323212332680" style="zoom:67%;" />
+
+<p><strong>独占锁是一种思想：</strong> 只能有一个线程获取锁，以独占的方式持有锁。和悲观锁、互斥锁同义。</p>
 <p><strong>Java中用到的独占锁：</strong> synchronized，ReentrantLock</p>
-<h1 id="重量级锁">重量级锁</h1>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232124347.png" alt="image-20240323212424987" style="zoom:67%;" /></p>
-<p><strong>重量级锁是一种称谓：</strong>
-synchronized是通过对象内部的一个叫做监视器锁（monitor）来实现的，监视器锁本身依赖底层的操作系统的
-Mutex
-Lock来实现。操作系统实现线程的切换需要从用户态切换到核心态，成本非常高。这种依赖于操作系统
-Mutex
-Lock来实现的锁称为重量级锁。为了优化synchonized，引入了轻量级锁，偏向锁。</p>
+<h1 id="重量级锁"><a href="#重量级锁" class="headerlink" title="重量级锁"></a>重量级锁</h1><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232124347.png" alt="image-20240323212424987" style="zoom:67%;" />
+
+<p><strong>重量级锁是一种称谓：</strong> synchronized是通过对象内部的一个叫做监视器锁（monitor）来实现的，监视器锁本身依赖底层的操作系统的 Mutex Lock来实现。操作系统实现线程的切换需要从用户态切换到核心态，成本非常高。这种依赖于操作系统 Mutex Lock来实现的锁称为重量级锁。为了优化synchonized，引入了轻量级锁，偏向锁。</p>
 <p><strong>Java中的重量级锁：</strong> synchronized</p>
-<h1 id="轻量级锁">轻量级锁</h1>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232125738.png" alt="image-20240323212543336" style="zoom:67%;" /></p>
-<p><strong>轻量级锁是JDK6时加入的一种锁优化机制：</strong>
-轻量级锁是在无竞争的情况下使用CAS操作去消除同步使用的互斥量。轻量级是相对于使用操作系统互斥量来实现的重量级锁而言的。轻量级锁在没有多线程竞争的前提下，减少传统的重量级锁使用操作系统互斥量产生的性能消耗。如果出现两条以上的线程争用同一个锁的情况，那轻量级锁将不会有效，必须膨胀为重量级锁。</p>
-<p><strong>优点：</strong>
-如果没有竞争，通过CAS操作成功避免了使用互斥量的开销。</p>
-<p><strong>缺点：</strong>
-如果存在竞争，除了互斥量本身的开销外，还额外产生了CAS操作的开销，因此在有竞争的情况下，轻量级锁比传统的重量级锁更慢。</p>
-<h1 id="偏向锁">偏向锁</h1>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232127632.png" alt="image-20240323212744980" style="zoom:67%;" /></p>
-<p><strong>偏向锁是JDK6时加入的一种锁优化机制：</strong>
-在无竞争的情况下把整个同步都消除掉，连CAS操作都不去做了。偏是指偏心，它的意思是这个锁会偏向于第一个获得它的线程，如果在接下来的执行过程中，该锁一直没有被其他的线程获取，则持有偏向锁的线程将永远不需要再进行同步。持有偏向锁的线程以后每次进入这个锁相关的同步块时，虚拟机都可以不再进行任何同步操作（例如加锁、解锁及对Mark
-Word的更新操作等）。</p>
-<p><strong>优点：</strong>
-把整个同步都消除掉，连CAS操作都不去做了，优于轻量级锁。</p>
-<p><strong>缺点：</strong>
-如果程序中大多数的锁都总是被多个不同的线程访问，那偏向锁就是多余的。</p>
-<h1 id="分段锁">分段锁</h1>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232129274.png" alt="image-20240323212928660" style="zoom:67%;" /></p>
-<p><strong>分段锁是一种机制：</strong>
-最好的例子来说明分段锁是ConcurrentHashMap。<strong>ConcurrentHashMap原理：</strong>它内部细分了若干个小的
-HashMap，称之为段(Segment)。默认情况下一个 ConcurrentHashMap
-被进一步细分为 16 个段，既就是锁的并发度。如果需要在 ConcurrentHashMap
-添加一项key-value，并不是将整个 HashMap 加锁，而是首先根据 hashcode
-得到该key-value应该存放在哪个段中，然后对该段加锁，并完成 put
-操作。在多线程环境中，如果多个线程同时进行put操作，只要被加入的key-value不存放在同一个段中，则线程间可以做到真正的并行。</p>
-<p><strong>线程安全：</strong>ConcurrentHashMap 是一个 Segment 数组，
-Segment 通过继承ReentrantLock
-来进行加锁，所以每次需要加锁的操作锁住的是一个 segment，这样只要保证每个
-Segment 是线程安全的，也就实现了全局的线程安全</p>
-<h1 id="锁粗化">锁粗化</h1>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232135180.png" alt="image-20240323213547009" style="zoom:67%;" /></p>
-<p><strong>锁粗化是一种优化技术：</strong>
-如果一系列的连续操作都对同一个对象反复加锁和解锁，甚至加锁操作都是出现在循环体体之中，就算真的没有线程竞争，频繁地进行互斥同步操作将会导致不必要的性能损耗，所以就采取了一种方案：把加锁的范围扩展（粗化）到整个操作序列的外部，这样加锁解锁的频率就会大大降低，从而减少了性能损耗。</p>
-<h2 id="锁消除">锁消除</h2>
-<p><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232136997.png" alt="image-20240323213626287" style="zoom:67%;" /></p>
-<p><strong>锁消除是一种优化技术：</strong>
-就是把锁干掉。当Java虚拟机运行时发现有些共享数据不会被线程竞争时就可以进行锁消除。</p>
+<h1 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h1><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232125738.png" alt="image-20240323212543336" style="zoom:67%;" />
+
+<p><strong>轻量级锁是JDK6时加入的一种锁优化机制：</strong> 轻量级锁是在无竞争的情况下使用CAS操作去消除同步使用的互斥量。轻量级是相对于使用操作系统互斥量来实现的重量级锁而言的。轻量级锁在没有多线程竞争的前提下，减少传统的重量级锁使用操作系统互斥量产生的性能消耗。如果出现两条以上的线程争用同一个锁的情况，那轻量级锁将不会有效，必须膨胀为重量级锁。</p>
+<p><strong>优点：</strong> 如果没有竞争，通过CAS操作成功避免了使用互斥量的开销。</p>
+<p><strong>缺点：</strong> 如果存在竞争，除了互斥量本身的开销外，还额外产生了CAS操作的开销，因此在有竞争的情况下，轻量级锁比传统的重量级锁更慢。</p>
+<h1 id="偏向锁"><a href="#偏向锁" class="headerlink" title="偏向锁"></a>偏向锁</h1><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232127632.png" alt="image-20240323212744980" style="zoom:67%;" />
+
+<p><strong>偏向锁是JDK6时加入的一种锁优化机制：</strong> 在无竞争的情况下把整个同步都消除掉，连CAS操作都不去做了。偏是指偏心，它的意思是这个锁会偏向于第一个获得它的线程，如果在接下来的执行过程中，该锁一直没有被其他的线程获取，则持有偏向锁的线程将永远不需要再进行同步。持有偏向锁的线程以后每次进入这个锁相关的同步块时，虚拟机都可以不再进行任何同步操作（例如加锁、解锁及对Mark Word的更新操作等）。</p>
+<p><strong>优点：</strong> 把整个同步都消除掉，连CAS操作都不去做了，优于轻量级锁。</p>
+<p><strong>缺点：</strong> 如果程序中大多数的锁都总是被多个不同的线程访问，那偏向锁就是多余的。</p>
+<h1 id="分段锁"><a href="#分段锁" class="headerlink" title="分段锁"></a>分段锁</h1><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232129274.png" alt="image-20240323212928660" style="zoom:67%;" />
+
+<p><strong>分段锁是一种机制：</strong> 最好的例子来说明分段锁是ConcurrentHashMap。<strong>ConcurrentHashMap原理：</strong>它内部细分了若干个小的 HashMap，称之为段(Segment)。默认情况下一个 ConcurrentHashMap 被进一步细分为 16 个段，既就是锁的并发度。如果需要在 ConcurrentHashMap 添加一项key-value，并不是将整个 HashMap 加锁，而是首先根据 hashcode 得到该key-value应该存放在哪个段中，然后对该段加锁，并完成 put 操作。在多线程环境中，如果多个线程同时进行put操作，只要被加入的key-value不存放在同一个段中，则线程间可以做到真正的并行。</p>
+<p><strong>线程安全：</strong>ConcurrentHashMap 是一个 Segment 数组， Segment 通过继承ReentrantLock 来进行加锁，所以每次需要加锁的操作锁住的是一个 segment，这样只要保证每个 Segment 是线程安全的，也就实现了全局的线程安全</p>
+<h1 id="锁粗化"><a href="#锁粗化" class="headerlink" title="锁粗化"></a>锁粗化</h1><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232135180.png" alt="image-20240323213547009" style="zoom:67%;" />
+
+<p><strong>锁粗化是一种优化技术：</strong> 如果一系列的连续操作都对同一个对象反复加锁和解锁，甚至加锁操作都是出现在循环体体之中，就算真的没有线程竞争，频繁地进行互斥同步操作将会导致不必要的性能损耗，所以就采取了一种方案：把加锁的范围扩展（粗化）到整个操作序列的外部，这样加锁解锁的频率就会大大降低，从而减少了性能损耗。</p>
+<h2 id="锁消除"><a href="#锁消除" class="headerlink" title="锁消除"></a>锁消除</h2><img src="https://cdn.jsdelivr.net/gh/JUSTINAYA/My-ImgHost@main/img/202403232136997.png" alt="image-20240323213626287" style="zoom:67%;" />
+
+<p><strong>锁消除是一种优化技术：</strong> 就是把锁干掉。当Java虚拟机运行时发现有些共享数据不会被线程竞争时就可以进行锁消除。</p>
 <p>那如何判断共享数据不会被线程竞争？</p>
 <p>利用逃逸分析技术：分析对象的作用域，如果对象在A方法中定义后，被作为参数传递到B方法中，则称为方法逃逸；如果被其他线程访问，则称为线程逃逸。</p>
 <p>在堆上的某个数据不会逃逸出去被其他线程访问到，就可以把它当作栈上数据对待，认为它是线程私有的，同步加锁就不需要了。</p>
