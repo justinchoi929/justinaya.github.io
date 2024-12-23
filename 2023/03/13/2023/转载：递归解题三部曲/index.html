@@ -26,16 +26,12 @@
 <meta property="og:site_name" content="文文的短发">
 <meta property="og:description" content="转载">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://z3.ax1x.com/2021/09/05/hWr1UK.png">
-<meta property="og:image" content="https://z3.ax1x.com/2021/09/05/hWr724.png">
-<meta property="og:image" content="https://z3.ax1x.com/2021/09/05/hWrva6.png">
 <meta property="article:published_time" content="2023-03-13T15:06:16.000Z">
 <meta property="article:modified_time" content="2023-09-03T13:11:29.192Z">
 <meta property="article:author" content="文文的短发">
 <meta property="article:tag" content="刷题">
 <meta property="article:tag" content="解题技巧">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://z3.ax1x.com/2021/09/05/hWr1UK.png">
 
 
 <link rel="canonical" href="http://www.justinchoi.top/2023/03/13/2023/%E8%BD%AC%E8%BD%BD%EF%BC%9A%E9%80%92%E5%BD%92%E8%A7%A3%E9%A2%98%E4%B8%89%E9%83%A8%E6%9B%B2/">
@@ -148,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B1%EF%BC%9A%E6%B1%82%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6"><span class="nav-text">例1：求二叉树的最大深度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B2%EF%BC%9A%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9"><span class="nav-text">例2：两两交换链表中的节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B3%EF%BC%9A%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-text">例3：平衡二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%8F%AF%E4%BB%A5%E7%94%A8%E8%BF%99%E4%B8%AA%E5%A5%97%E8%B7%AF%E8%A7%A3%E5%86%B3%E7%9A%84%E9%A2%98"><span class="nav-text">一些可以用这个套路解决的题</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B1%E6%B1%82%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6"><span class="nav-text">例1：求二叉树的最大深度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B2%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9"><span class="nav-text">例2：两两交换链表中的节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B3%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-text">例3：平衡二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%8F%AF%E4%BB%A5%E7%94%A8%E8%BF%99%E4%B8%AA%E5%A5%97%E8%B7%AF%E8%A7%A3%E5%86%B3%E7%9A%84%E9%A2%98"><span class="nav-text">一些可以用这个套路解决的题</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -163,7 +159,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -174,7 +170,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -291,80 +287,108 @@
     <div class="post-body" itemprop="articleBody"><blockquote>
 <p>转载</p>
 </blockquote>
-<span id="more"></span>**递归解题三部曲**
-
+<span id="more"></span>
+<p><strong>递归解题三部曲</strong></p>
 <p>何为递归？程序反复调用自身即是递归。</p>
 <p>我自己在刚开始解决递归问题的时候，总是会去纠结这一层函数做了什么，它调用自身后的下一层函数又做了什么…然后就会觉得实现一个递归解法十分复杂，根本就无从下手。</p>
 <p>相信很多初学者和我一样，这是一个思维误区，一定要走出来。既然递归是一个反复调用自身的过程，这就说明它每一级的功能都是一样的，<strong>因此我们只需要关注一级递归的解决过程即可。</strong></p>
-<p><a target="_blank" rel="noopener" href="https://z3.ax1x.com/2021/09/05/hWr1UK.png"><img src="https://z3.ax1x.com/2021/09/05/hWr1UK.png" alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://z3.ax1x.com/2021/09/05/hWr1UK.png"><img
+src="https://z3.ax1x.com/2021/09/05/hWr1UK.png" alt="img" /></a></p>
 <p>如上图所示，我们需要关心的主要是以下三点：</p>
-<ol>
+<ol type="1">
 <li>整个递归的终止条件。</li>
 <li>一级递归需要做什么？</li>
 <li>应该返回给上一级的返回值是什么？</li>
 </ol>
 <p><strong>因此，也就有了我们解递归题的三部曲：</strong></p>
-<ol>
+<ol type="1">
 <li><strong>找整个递归的终止条件：递归应该在什么时候结束？</strong></li>
 <li><strong>找返回值：应该给上一级返回什么信息？</strong></li>
 <li><strong>本级递归应该做什么：在这一级递归中，应该完成什么任务？</strong></li>
 </ol>
 <p>一定要理解这3步，这就是以后递归秒杀算法题的依据和思路。</p>
 <p>但这么说好像很空，我们来以题目作为例子，看看怎么套这个模版，相信3道题下来，你就能慢慢理解这个模版。之后再解这种套路递归题都能直接秒了。</p>
-<h2 id="例1：求二叉树的最大深度"><a href="#例1：求二叉树的最大深度" class="headerlink" title="例1：求二叉树的最大深度"></a><strong>例1：求二叉树的最大深度</strong></h2><p>先看一道简单的Leetcode题目： <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/">Leetcode 104. 二叉树的最大深度</a></p>
+<h2
+id="例1求二叉树的最大深度"><strong>例1：求二叉树的最大深度</strong></h2>
+<p>先看一道简单的Leetcode题目： <a
+target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/">Leetcode
+104. 二叉树的最大深度</a></p>
 <p>题目很简单，求二叉树的最大深度，那么直接套递归解题三部曲模版：</p>
-<ol>
-<li><strong>找终止条件。</strong> 什么情况下递归结束？当然是树为空的时候，此时树的深度为0，递归就结束了。</li>
-<li><strong>找返回值。</strong> 应该返回什么？题目求的是树的最大深度，我们需要从每一级得到的信息自然是当前这一级对应的树的最大深度，因此我们的返回值应该是当前树的最大深度，这一步可以结合第三步来看。</li>
-<li><strong>本级递归应该做什么。</strong> 首先，还是强调要走出之前的思维误区，递归后我们眼里的树一定是这个样子的，看下图。此时就三个节点：root、root.left、root.right，其中根据第二步，root.left和root.right分别记录的是root的左右子树的最大深度。那么本级递归应该做什么就很明确了，自然就是在root的左右子树中选择较大的一个，再加上1就是以root为根的子树的最大深度了，然后再返回这个深度即可。</li>
+<ol type="1">
+<li><strong>找终止条件。</strong>
+什么情况下递归结束？当然是树为空的时候，此时树的深度为0，递归就结束了。</li>
+<li><strong>找返回值。</strong>
+应该返回什么？题目求的是树的最大深度，我们需要从每一级得到的信息自然是当前这一级对应的树的最大深度，因此我们的返回值应该是当前树的最大深度，这一步可以结合第三步来看。</li>
+<li><strong>本级递归应该做什么。</strong>
+首先，还是强调要走出之前的思维误区，递归后我们眼里的树一定是这个样子的，看下图。此时就三个节点：root、root.left、root.right，其中根据第二步，root.left和root.right分别记录的是root的左右子树的最大深度。那么本级递归应该做什么就很明确了，自然就是在root的左右子树中选择较大的一个，再加上1就是以root为根的子树的最大深度了，然后再返回这个深度即可。</li>
 </ol>
-<p><a target="_blank" rel="noopener" href="https://z3.ax1x.com/2021/09/05/hWr724.png"><img src="https://z3.ax1x.com/2021/09/05/hWr724.png" alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://z3.ax1x.com/2021/09/05/hWr724.png"><img
+src="https://z3.ax1x.com/2021/09/05/hWr724.png" alt="img" /></a></p>
 <p>具体Java代码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxDepth</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        <span class="comment">//终止条件：当树为空时结束递归，并返回当前深度0</span></span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//root的左、右子树的最大深度</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">leftDepth</span> <span class="operator">=</span> maxDepth(root.left);</span><br><span class="line">        <span class="type">int</span> <span class="variable">rightDepth</span> <span class="operator">=</span> maxDepth(root.right);</span><br><span class="line">        <span class="comment">//返回的是左右子树的最大深度+1</span></span><br><span class="line">        <span class="keyword">return</span> Math.max(leftDepth, rightDepth) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>当足够熟练后，也可以和Leetcode评论区一样，很骚的几行代码搞定问题，让之后的新手看的一脸懵逼(这道题也是我第一次一行代码搞定一道Leetcode题)：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxDepth</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> root == <span class="literal">null</span> ? <span class="number">0</span> : Math.max(maxDepth(root.left), maxDepth(root.right)) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="例2：两两交换链表中的节点"><a href="#例2：两两交换链表中的节点" class="headerlink" title="例2：两两交换链表中的节点"></a>例2：两两交换链表中的节点</h2><p>看了一道递归套路解决二叉树的问题后，有点套路搞定递归的感觉了吗？我们再来看一道Leetcode中等难度的链表的问题，掌握套路后这种中等难度的问题真的就是秒：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/swap-nodes-in-pairs/">Leetcode 24. 两两交换链表中的节点</a></p>
+<h2 id="例2两两交换链表中的节点">例2：两两交换链表中的节点</h2>
+<p>看了一道递归套路解决二叉树的问题后，有点套路搞定递归的感觉了吗？我们再来看一道Leetcode中等难度的链表的问题，掌握套路后这种中等难度的问题真的就是秒：<a
+target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/swap-nodes-in-pairs/">Leetcode
+24. 两两交换链表中的节点</a></p>
 <p>直接上三部曲模版：</p>
-<ol>
-<li><strong>找终止条件。</strong> 什么情况下递归终止？没得交换的时候，递归就终止了呗。因此当链表只剩一个节点或者没有节点的时候，自然递归就终止了。</li>
-<li><strong>找返回值。</strong> 我们希望向上一级递归返回什么信息？由于我们的目的是两两交换链表中相邻的节点，因此自然希望交换给上一级递归的是已经完成交换处理，即已经处理好的链表。</li>
-<li><strong>本级递归应该做什么。</strong> 结合第二步，看下图！由于只考虑本级递归，所以这个链表在我们眼里其实也就三个节点：head、head.next、已处理完的链表部分。而本级递归的任务也就是交换这3个节点中的前两个节点，就很easy了。</li>
+<ol type="1">
+<li><strong>找终止条件。</strong>
+什么情况下递归终止？没得交换的时候，递归就终止了呗。因此当链表只剩一个节点或者没有节点的时候，自然递归就终止了。</li>
+<li><strong>找返回值。</strong>
+我们希望向上一级递归返回什么信息？由于我们的目的是两两交换链表中相邻的节点，因此自然希望交换给上一级递归的是已经完成交换处理，即已经处理好的链表。</li>
+<li><strong>本级递归应该做什么。</strong>
+结合第二步，看下图！由于只考虑本级递归，所以这个链表在我们眼里其实也就三个节点：head、head.next、已处理完的链表部分。而本级递归的任务也就是交换这3个节点中的前两个节点，就很easy了。</li>
 </ol>
-<p><a target="_blank" rel="noopener" href="https://z3.ax1x.com/2021/09/05/hWrva6.png"><img src="https://z3.ax1x.com/2021/09/05/hWrva6.png" alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://z3.ax1x.com/2021/09/05/hWrva6.png"><img
+src="https://z3.ax1x.com/2021/09/05/hWrva6.png" alt="img" /></a></p>
 <p>附上Java代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">swapPairs</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">      	<span class="comment">//终止条件：链表只剩一个节点或者没节点了，没得交换了。返回的是已经处理好的链表</span></span><br><span class="line">        <span class="keyword">if</span>(head == <span class="literal">null</span> || head.next == <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        &#125;</span><br><span class="line">      	<span class="comment">//一共三个节点:head, next, swapPairs(next.next)</span></span><br><span class="line">      	<span class="comment">//下面的任务便是交换这3个节点中的前两个节点</span></span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">next</span> <span class="operator">=</span> head.next;</span><br><span class="line">        head.next = swapPairs(next.next);</span><br><span class="line">        next.next = head;</span><br><span class="line">      	<span class="comment">//根据第二步：返回给上一级的是当前已经完成交换后，即处理好了的链表部分</span></span><br><span class="line">        <span class="keyword">return</span> next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="例3：平衡二叉树"><a href="#例3：平衡二叉树" class="headerlink" title="例3：平衡二叉树"></a>例3：平衡二叉树</h2><p>相信经过以上2道题，你已经大概理解了这个模版的解题流程了。</p>
-<p>那么请你先不看以下部分，尝试解决一下这道easy难度的Leetcode题（个人觉得此题比上面的medium难度要难）：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/balanced-binary-tree/comments/">Leetcode 110. 平衡二叉树</a></p>
+<h2 id="例3平衡二叉树">例3：平衡二叉树</h2>
+<p>相信经过以上2道题，你已经大概理解了这个模版的解题流程了。</p>
+<p>那么请你先不看以下部分，尝试解决一下这道easy难度的Leetcode题（个人觉得此题比上面的medium难度要难）：<a
+target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/balanced-binary-tree/comments/">Leetcode
+110. 平衡二叉树</a></p>
 <p>我觉得这个题真的是集合了模版的精髓所在，下面套三部曲模版：</p>
-<ol>
-<li><p><strong>找终止条件。</strong> 什么情况下递归应该终止？自然是子树为空的时候，空树自然是平衡二叉树了。</p>
-</li>
+<ol type="1">
+<li><p><strong>找终止条件。</strong>
+什么情况下递归应该终止？自然是子树为空的时候，空树自然是平衡二叉树了。</p></li>
 <li><p><strong>应该返回什么信息：</strong></p>
 <p>为什么我说这个题是集合了模版精髓？正是因为此题的返回值。要知道我们搞这么多花里胡哨的，都是为了能写出正确的递归函数，因此在解这个题的时候，我们就需要思考，我们到底希望返回什么值？</p>
 <p>何为平衡二叉树？平衡二叉树即左右两棵子树高度差不大于1的二叉树。而对于一颗树，它是一个平衡二叉树需要满足三个条件：<strong>它的左子树是平衡二叉树，它的右子树是平衡二叉树，它的左右子树的高度差不大于1</strong>。换句话说：如果它的左子树或右子树不是平衡二叉树，或者它的左右子树高度差大于1，那么它就不是平衡二叉树。</p>
 <p>而在我们眼里，这颗二叉树就3个节点：root、left、right。那么我们应该返回什么呢？如果返回一个当前树是否是平衡二叉树的boolean类型的值，那么我只知道left和right这两棵树是否是平衡二叉树，无法得出left和right的高度差是否不大于1，自然也就无法得出root这棵树是否是平衡二叉树了。而如果我返回的是一个平衡二叉树的高度的int类型的值，那么我就只知道两棵树的高度，但无法知道这两棵树是不是平衡二叉树，自然也就没法判断root这棵树是不是平衡二叉树了。</p>
 <p>因此，这里我们返回的信息应该是既包含子树的深度的int类型的值，又包含子树是否是平衡二叉树的boolean类型的值。可以单独定义一个ReturnNode类，如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ReturnNode</span>&#123;</span><br><span class="line">  <span class="type">boolean</span> isB;</span><br><span class="line">  <span class="type">int</span> depth;</span><br><span class="line">  <span class="comment">//构造方法</span></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">ReturnNode</span><span class="params">(<span class="type">boolean</span> isB, <span class="type">int</span> depth)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.isB = isB;</span><br><span class="line">    <span class="built_in">this</span>.depth = depth;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>本级递归应该做什么。</strong> 知道了第二步的返回值后，这一步就很简单了。目前树有三个节点：root，left，right。我们首先判断left子树和right子树是否是平衡二叉树，如果不是则直接返回false。再判断两树高度差是否不大于1，如果大于1也直接返回false。否则说明以root为节点的子树是平衡二叉树，那么就返回true和它的高度。</p>
-</li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ReturnNode</span>&#123;</span><br><span class="line">  <span class="type">boolean</span> isB;</span><br><span class="line">  <span class="type">int</span> depth;</span><br><span class="line">  <span class="comment">//构造方法</span></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">ReturnNode</span><span class="params">(<span class="type">boolean</span> isB, <span class="type">int</span> depth)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.isB = isB;</span><br><span class="line">    <span class="built_in">this</span>.depth = depth;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>本级递归应该做什么。</strong>
+知道了第二步的返回值后，这一步就很简单了。目前树有三个节点：root，left，right。我们首先判断left子树和right子树是否是平衡二叉树，如果不是则直接返回false。再判断两树高度差是否不大于1，如果大于1也直接返回false。否则说明以root为节点的子树是平衡二叉树，那么就返回true和它的高度。</p></li>
 </ol>
 <p>具体的Java代码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="comment">//这个ReturnNode是参考我描述的递归套路的第二步：思考返回值是什么</span></span><br><span class="line">    <span class="comment">//一棵树是BST等价于它的左、右俩子树都是BST且俩子树高度差不超过1</span></span><br><span class="line">    <span class="comment">//因此我认为返回值应该包含当前树是否是BST和当前树的高度这两个信息</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">class</span> <span class="title class_">ReturnNode</span>&#123;</span><br><span class="line">        <span class="type">boolean</span> isB;</span><br><span class="line">        <span class="type">int</span> depth;</span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">ReturnNode</span><span class="params">(<span class="type">int</span> depth, <span class="type">boolean</span> isB)</span>&#123;</span><br><span class="line">            <span class="built_in">this</span>.isB = isB;</span><br><span class="line">            <span class="built_in">this</span>.depth = depth;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//主函数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isBalanced</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> isBST(root).isB;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//参考递归套路的第三部：描述单次执行过程是什么样的</span></span><br><span class="line">    <span class="comment">//这里的单次执行过程具体如下：</span></span><br><span class="line">    <span class="comment">//是否终止?-&gt;没终止的话，判断是否满足不平衡的三个条件-&gt;返回值</span></span><br><span class="line">    <span class="keyword">public</span> ReturnNode <span class="title function_">isBST</span><span class="params">(TreeNode root)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ReturnNode</span>(<span class="number">0</span>, <span class="literal">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//不平衡的情况有3种：左树不平衡、右树不平衡、左树和右树差的绝对值大于1</span></span><br><span class="line">        <span class="type">ReturnNode</span> <span class="variable">left</span> <span class="operator">=</span> isBST(root.left);</span><br><span class="line">        <span class="type">ReturnNode</span> <span class="variable">right</span> <span class="operator">=</span> isBST(root.right);</span><br><span class="line">        <span class="keyword">if</span>(left.isB == <span class="literal">false</span> || right.isB == <span class="literal">false</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ReturnNode</span>(<span class="number">0</span>, <span class="literal">false</span>); </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(Math.abs(left.depth - right.depth) &gt; <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ReturnNode</span>(<span class="number">0</span>, <span class="literal">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//不满足上面3种情况，说明平衡了，树的深度为左右俩子树最大深度+1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ReturnNode</span>(Math.max(left.depth, right.depth) + <span class="number">1</span>, <span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="一些可以用这个套路解决的题"><a href="#一些可以用这个套路解决的题" class="headerlink" title="一些可以用这个套路解决的题"></a>一些可以用这个套路解决的题</h2><p>暂时就写这么多啦，作为一个高考语文及格分，大学又学了工科的人，表述能力实在差因此啰啰嗦嗦写了一大堆，希望大家能理解这个很好用的套路。</p>
+<h2 id="一些可以用这个套路解决的题">一些可以用这个套路解决的题</h2>
+<p>暂时就写这么多啦，作为一个高考语文及格分，大学又学了工科的人，表述能力实在差因此啰啰嗦嗦写了一大堆，希望大家能理解这个很好用的套路。</p>
 <p>下面我再列举几道我在刷题过程中遇到的也是用这个套路秒的题，真的太多了，大部分链表和树的递归题都能这么秒，因为树和链表天生就是适合递归的结构。</p>
 <p>我会随时补充，正好大家可以看了上面三个题后可以拿这些题来练练手，看看自己是否能独立快速准确的写出递归解法了。</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/symmetric-tree/comments/">Leetcode 101. 对称二叉树</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/">Leetcode 111. 二叉树的最小深度</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/invert-binary-tree/">Leetcode 226. 翻转二叉树</a>：这个题的备注是最骚的。Mac OS下载神器homebrew的大佬作者去面试谷歌，没做出来这道算法题，然后被谷歌面试官怼了：”我们90％的工程师使用您编写的软件(Homebrew)，但是您却无法在面试时在白板上写出翻转二叉树这道题，这太糟糕了。”</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/merge-two-binary-trees/">Leetcode 617. 合并二叉树</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-binary-tree/">Leetcode 654. 最大二叉树</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/">Leetcode 83. 删除排序链表中的重复元素</a></p>
-<p>来自：<a target="_blank" rel="noopener" href="https://lyl0724.github.io/2020/01/25/1/">https://lyl0724.github.io/2020/01/25/1/</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/symmetric-tree/comments/">Leetcode
+101. 对称二叉树</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/">Leetcode
+111. 二叉树的最小深度</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/invert-binary-tree/">Leetcode
+226. 翻转二叉树</a>：这个题的备注是最骚的。Mac
+OS下载神器homebrew的大佬作者去面试谷歌，没做出来这道算法题，然后被谷歌面试官怼了：”我们90％的工程师使用您编写的软件(Homebrew)，但是您却无法在面试时在白板上写出翻转二叉树这道题，这太糟糕了。”</p>
+<p><a
+target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/merge-two-binary-trees/">Leetcode
+617. 合并二叉树</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-binary-tree/">Leetcode
+654. 最大二叉树</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/">Leetcode
+83. 删除排序链表中的重复元素</a></p>
+<p>来自：https://lyl0724.github.io/2020/01/25/1/</p>
 
     </div>
 
