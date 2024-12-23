@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代码格式化工具</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 10px;
+            font-family: monospace;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #output {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            white-space: pre-wrap;
+            position: relative;
+        }
+        #copyButton {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>zjy专属的代码格式化工具</h1>
+    <textarea id="inputCode" placeholder="在此处粘贴独属于zjy的代码...bakabaka"></textarea>
+    <button onclick="formatCode()">格式化代码</button>
+    <div id="output"></div>
+    <button id="copyButton" onclick="copyToClipboard()">复制代码</button>
+
+    <script>
+        function formatCode() {
+            const input = document.getElementById('inputCode').value;
+            const lines = input.split('\n');
+            let formattedCode = '';
+
+            lines.forEach(line => {
+                // 去除每行的前后空格
+                let trimmedLine = line.trim();
+
+                // 删除 // 注释后的空格
+                if (trimmedLine.includes('//')) {
+                    const parts = trimmedLine.split('//');
+                    trimmedLine = parts[0].trim() + '//' + parts[1].replace(/^\s+/, '');
+                }
+
+                // 将 { 和 } 分别放在单独一行
+                trimmedLine = trimmedLine.replace(/\{/, '\n{\n').replace(/\}/, '\n}\n');
+
+                // 去除所有缩进
+                trimmedLine = trimmedLine.replace(/^\s+/, '');
+
+                formattedCode += trimmedLine + '\n';
+            });
+
+            // 清理多余的空行
+            formattedCode = formattedCode.replace(/\n+/g, '\n').trim();
+
+            const outputElement = document.getElementById('output');
+            outputElement.textContent = formattedCode;
+
+            // 显示复制按钮
+            document.getElementById('copyButton').style.display = 'inline-block';
+        }
+
+        function copyToClipboard() {
+            const outputElement = document.getElementById('output');
+            navigator.clipboard.writeText(outputElement.textContent)
+                .then(() => {
+                    alert('格式化后的代码已复制到剪贴板！');
+                })
+                .catch(err => {
+                    alert('复制失败：' + err);
+                });
+        }
+    </script>
+</body>
+</html>

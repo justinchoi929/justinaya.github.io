@@ -93,7 +93,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-工具"><a href="/tools/index.html" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -144,8 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#threadlocal%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8"><span class="nav-text">ThreadLocal有什么用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#threadlocal-%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B"><span class="nav-text">ThreadLocal
-内存泄露是怎么回事</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ThreadLocal%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8"><span class="nav-text">ThreadLocal有什么用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ThreadLocal-%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2%E6%98%AF%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B"><span class="nav-text">ThreadLocal 内存泄露是怎么回事</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -289,37 +288,20 @@
 <p>ThreadLocal相关</p>
 </blockquote>
 <span id="more"></span>
-<h1 id="threadlocal有什么用">ThreadLocal有什么用</h1>
-<p><code>ThreadLocal</code>为每个使用该变量的线程提供一个副本，每个线程都可以独立修改自己的副本，而不会与其他线程的副本产生冲突。</p>
+
+<h1 id="ThreadLocal有什么用"><a href="#ThreadLocal有什么用" class="headerlink" title="ThreadLocal有什么用"></a>ThreadLocal有什么用</h1><p><code>ThreadLocal</code>为每个使用该变量的线程提供一个副本，每个线程都可以独立修改自己的副本，而不会与其他线程的副本产生冲突。</p>
 <p>通常情况下，我们创建的变量是可以被任何一个线程访问并修改的。<strong>如果想实现每一个线程都有自己的专属本地变量该如何解决呢？</strong></p>
-<p>JDK 中自带的<code>ThreadLocal</code>类正是为了解决这样的问题。
-<strong><code>ThreadLocal</code>类主要解决的就是让每个线程绑定自己的值，可以将<code>ThreadLocal</code>类形象的比喻成存放数据的盒子，盒子中可以存储每个线程的私有数据。</strong></p>
-<p>如果你创建了一个<code>ThreadLocal</code>变量，那么访问这个变量的每个线程都会有这个变量的本地副本，这也是<code>ThreadLocal</code>变量名的由来。他们可以使用
-<code>get()</code> 和 <code>set()</code>
-方法来获取默认值或将其值更改为当前线程所存的副本的值，从而避免了线程安全问题。</p>
-<p>再举个简单的例子：两个人去宝屋收集宝物，这两个共用一个袋子的话肯定会产生争执，但是给他们两个人每个人分配一个袋子的话就不会出现这样的问题。如果把这两个人比作线程的话，那么
-ThreadLocal 就是用来避免这两个线程竞争的。</p>
-<h1 id="threadlocal-内存泄露是怎么回事">ThreadLocal
-内存泄露是怎么回事</h1>
-<p><code>ThreadLocalMap</code> 中使用的 key 为 <code>ThreadLocal</code>
-的弱引用，而 value 是强引用。所以，如果 <code>ThreadLocal</code>
-没有被外部强引用的情况下，在垃圾回收的时候，key 会被清理掉，而 value
-不会被清理掉。</p>
-<p>这样一来，<code>ThreadLocalMap</code> 中就会出现 key 为 null 的
-Entry。假如我们不做任何措施的话，value 永远无法被 GC
-回收，这个时候就可能会产生内存泄露。<code>ThreadLocalMap</code>
-实现中已经考虑了这种情况，在调用
-<code>set()</code>、<code>get()</code>、<code>remove()</code>
-方法的时候，会清理掉 key 为 null 的记录。使用完
-<code>ThreadLocal</code>方法后最好手动调用<code>remove()</code>方法</p>
+<p>JDK 中自带的<code>ThreadLocal</code>类正是为了解决这样的问题。 <strong><code>ThreadLocal</code>类主要解决的就是让每个线程绑定自己的值，可以将<code>ThreadLocal</code>类形象的比喻成存放数据的盒子，盒子中可以存储每个线程的私有数据。</strong></p>
+<p>如果你创建了一个<code>ThreadLocal</code>变量，那么访问这个变量的每个线程都会有这个变量的本地副本，这也是<code>ThreadLocal</code>变量名的由来。他们可以使用 <code>get()</code> 和 <code>set()</code> 方法来获取默认值或将其值更改为当前线程所存的副本的值，从而避免了线程安全问题。</p>
+<p>再举个简单的例子：两个人去宝屋收集宝物，这两个共用一个袋子的话肯定会产生争执，但是给他们两个人每个人分配一个袋子的话就不会出现这样的问题。如果把这两个人比作线程的话，那么 ThreadLocal 就是用来避免这两个线程竞争的。</p>
+<h1 id="ThreadLocal-内存泄露是怎么回事"><a href="#ThreadLocal-内存泄露是怎么回事" class="headerlink" title="ThreadLocal 内存泄露是怎么回事"></a>ThreadLocal 内存泄露是怎么回事</h1><p><code>ThreadLocalMap</code> 中使用的 key 为 <code>ThreadLocal</code> 的弱引用，而 value 是强引用。所以，如果 <code>ThreadLocal</code> 没有被外部强引用的情况下，在垃圾回收的时候，key 会被清理掉，而 value 不会被清理掉。</p>
+<p>这样一来，<code>ThreadLocalMap</code> 中就会出现 key 为 null 的 Entry。假如我们不做任何措施的话，value 永远无法被 GC 回收，这个时候就可能会产生内存泄露。<code>ThreadLocalMap</code> 实现中已经考虑了这种情况，在调用 <code>set()</code>、<code>get()</code>、<code>remove()</code> 方法的时候，会清理掉 key 为 null 的记录。使用完 <code>ThreadLocal</code>方法后最好手动调用<code>remove()</code>方法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Entry</span> <span class="keyword">extends</span> <span class="title class_">WeakReference</span>&lt;ThreadLocal&lt;?&gt;&gt; &#123;</span><br><span class="line">    <span class="comment">/** The value associated with this ThreadLocal. */</span></span><br><span class="line">    Object value;</span><br><span class="line"></span><br><span class="line">    Entry(ThreadLocal&lt;?&gt; k, Object v) &#123;</span><br><span class="line">        <span class="built_in">super</span>(k);</span><br><span class="line">        value = v;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>弱引用介绍：</strong></p>
 <blockquote>
-<p>如果一个对象只具有弱引用，那就类似于<strong>可有可无的生活用品</strong>。弱引用与软引用的区别在于：只具有弱引用的对象拥有更短暂的生命周期。在垃圾回收器线程扫描它
-所管辖的内存区域的过程中，一旦发现了只具有弱引用的对象，不管当前内存空间足够与否，都会回收它的内存。不过，由于垃圾回收器是一个优先级很低的线程，
-因此不一定会很快发现那些只具有弱引用的对象。</p>
-<p>弱引用可以和一个引用队列（ReferenceQueue）联合使用，如果弱引用所引用的对象被垃圾回收，Java
-虚拟机就会把这个弱引用加入到与之关联的引用队列中。</p>
+<p>如果一个对象只具有弱引用，那就类似于<strong>可有可无的生活用品</strong>。弱引用与软引用的区别在于：只具有弱引用的对象拥有更短暂的生命周期。在垃圾回收器线程扫描它 所管辖的内存区域的过程中，一旦发现了只具有弱引用的对象，不管当前内存空间足够与否，都会回收它的内存。不过，由于垃圾回收器是一个优先级很低的线程， 因此不一定会很快发现那些只具有弱引用的对象。</p>
+<p>弱引用可以和一个引用队列（ReferenceQueue）联合使用，如果弱引用所引用的对象被垃圾回收，Java 虚拟机就会把这个弱引用加入到与之关联的引用队列中。</p>
 </blockquote>
 
     </div>

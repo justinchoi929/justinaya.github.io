@@ -92,7 +92,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-工具"><a href="/tools/index.html" rel="section"><i class="fa fa-wrench fa-fw"></i>工具</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -277,41 +277,34 @@
 <p>一些实用的技术</p>
 </blockquote>
 <span id="more"></span>
-<h1 id="前言">前言</h1>
-<blockquote>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
 <p>最近在想写博客的时候发现我不太会用latex公式，就准备学一学</p>
 <p>网上有太多教程了，我就不重复劳动了，把一些重要的常用的copy下来，其他的转载</p>
 </blockquote>
-<h1 id="如何插入公式">如何插入公式</h1>
-<p><code>𝐿𝐴𝑇𝐸𝑋</code>
-的数学公式有两种：行中公式和独立公式（行间公式）。行中公式放在文中与其它文字混编，独立公式单独成行。</p>
+<h1 id="如何插入公式"><a href="#如何插入公式" class="headerlink" title="如何插入公式"></a>如何插入公式</h1><p><code>𝐿𝐴𝑇𝐸𝑋</code> 的数学公式有两种：行中公式和独立公式（行间公式）。行中公式放在文中与其它文字混编，独立公式单独成行。</p>
 <p>行中公式可以用如下方法表示：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ 数学公式 $</span><br></pre></td></tr></table></figure>
+
 <p>独立公式可以用如下方法表示：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$ 数学公式 $$</span><br></pre></td></tr></table></figure>
-<h3 id="标准函数">标准函数<a
-target="_blank" rel="noopener" href="https://www.cnblogs.com/1024th/p/11623258.html#2083047927">#</a></h3>
-<p>指数</p>
+
+<h3 id="标准函数"><a href="#标准函数" class="headerlink" title="标准函数#"></a>标准函数<a target="_blank" rel="noopener" href="https://www.cnblogs.com/1024th/p/11623258.html#2083047927">#</a></h3><p>指数</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\exp_a b = a^b, \exp b = e^b, 10^m</span><br></pre></td></tr></table></figure>
-<p><span class="math display">\[
-\exp_a b = a^b, \exp b = e^b, 10^m
-\]</span></p>
+
+<p>$$<br>\exp_a b &#x3D; a^b, \exp b &#x3D; e^b, 10^m<br>$$</p>
 <p>对数</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\ln c, \lg d = \log e, \log_&#123;10&#125; f</span><br></pre></td></tr></table></figure>
-<p><span class="math display">\[
-\ln c, \lg d = \log e, \log_{10} f
-\]</span></p>
+
+<p>$$<br>\ln c, \lg d &#x3D; \log e, \log_{10} f<br>$$</p>
 <p>三角函数</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\sin a, \cos b, \tan c, \cot d, \sec e, \csc f</span><br></pre></td></tr></table></figure>
-<p><span class="math display">\[
-\sin a, \cos b, \tan c, \cot d, \sec e, \csc f
-\]</span></p>
+
+<p>$$<br>\sin a, \cos b, \tan c, \cot d, \sec e, \csc f<br>$$</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\arcsin a, \arccos b, \arctan c</span><br></pre></td></tr></table></figure>
-<p><span class="math display">\[
-\arcsin a, \arccos b, \arctan c
-\]</span></p>
-<p>其余请看这篇博文<a
-target="_blank" rel="noopener" href="https://www.cnblogs.com/1024th/p/11623258.html">LaTeX公式手册(全网最全)</a></p>
+
+<p>$$<br>\arcsin a, \arccos b, \arctan c<br>$$</p>
+<p>其余请看这篇博文<a target="_blank" rel="noopener" href="https://www.cnblogs.com/1024th/p/11623258.html">LaTeX公式手册(全网最全) </a></p>
 
     </div>
 
